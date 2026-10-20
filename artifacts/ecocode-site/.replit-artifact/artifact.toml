@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "EcoCode"
+description = "EcoCode LLC introduces connected environmental infrastructure across waste, emissions, water, mobility, public assets, green space and energy, built around shared sensing, networks, cloud telemetry and analytics."
+version = "1.0.0"
+id = "artifacts/ecocode-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23002
+
+[services.development]
+run = "pnpm --filter @workspace/ecocode-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ecocode-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ecocode-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23002"
+BASE_PATH = "/"

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://etienne0101-lab.github.io/EcoCode/sitemap.xml

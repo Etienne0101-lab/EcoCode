@@ -1,0 +1,1 @@
+- [EcoCode claim boundaries](site-claim-boundaries.md) — keep product claims aspirational unless substantiated; never imply NYC Testbed readiness, OTI endorsement, or live deployment.
