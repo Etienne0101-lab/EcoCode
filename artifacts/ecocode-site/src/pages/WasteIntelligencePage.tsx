@@ -307,7 +307,7 @@ export default function WasteIntelligencePage() {
         </section>
       </main>
       <footer className="wi-footer">
-        <div className="wi-wrap wi-footer-main"><div><Wordmark /><p>Environmental technology for connected public systems.</p></div><div className="wi-footer-links"><span className="wi-eyebrow">ON THIS PAGE</span><a href="#wi-purpose">Urban waste context</a><a href="#wi-architecture">Architecture</a><a href="#wi-capabilities">Analysis capabilities</a></div><div className="wi-footer-note"><span className="wi-eyebrow">PLATFORM APPROACH</span><p>Modular sensing, connectivity and analytics adapt to the signals, sites and operational questions that matter.</p></div></div>
+        <div className="wi-wrap wi-footer-main"><div><Wordmark /><p>Environmental technology for connected public systems.</p></div><div className="wi-footer-links"><span className="wi-eyebrow">ON THIS PAGE</span><a href="#wi-purpose">Urban waste context</a><a href="#wi-architecture">Architecture</a><a href="#wi-capabilities">Analysis capabilities</a><Link href="/knowledge-graph">Knowledge Graph engine</Link></div><div className="wi-footer-note"><span className="wi-eyebrow">PLATFORM APPROACH</span><p>Modular sensing, connectivity and analytics adapt to the signals, sites and operational questions that matter.</p></div></div>
         <div className="wi-wrap wi-footer-bottom"><span>© {new Date().getFullYear()} EcoCode LLC</span><span>Connected field operations, made legible.</span><a href="#wi-top" data-testid="link-wi-back-top">Back to top <ArrowUpRight size={12} /></a></div>
       </footer>
     </div>
