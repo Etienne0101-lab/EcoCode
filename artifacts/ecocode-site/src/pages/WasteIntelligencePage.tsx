@@ -8,6 +8,7 @@ import { Link } from 'wouter';
 import './WasteIntelligencePage.css';
 
 const REPO_URL = 'https://github.com/EcoCode-Smart-City-Infrastructure/waste-intelligence-platform';
+const WEB_APP_URL = 'https://ecocode-smart-city-infrastructure.github.io/waste-intelligence-platform/';
 
 const scales = [
   {
@@ -293,7 +294,7 @@ export default function WasteIntelligencePage() {
         <section className="wi-collaborate" id="wi-collaborate">
           <div className="wi-collab-grid" aria-hidden="true" />
           <div className="wi-wrap wi-collab-layout">
-            <div className="wi-collab-copy"><span className="wi-eyebrow">06 / OPEN PROJECT & COLLABORATION</span><h2>Start with a shared<br /><em>field question.</em></h2><p>EcoCode’s public GitHub project is a starting point for collaboration around connected waste intelligence and urban operations.</p><p>Municipal and building operators, sustainability teams, researchers and civic technologists can explore the architecture, exchange context and identify useful next questions.</p><a className="wi-button wi-button-light" href={REPO_URL} target="_blank" rel="noopener noreferrer" data-testid="link-wi-github">Open the public GitHub project <Github size={16} /><ArrowUpRight size={14} /></a></div>
+            <div className="wi-collab-copy"><span className="wi-eyebrow">06 / OPEN PROJECT & COLLABORATION</span><h2>Start with a shared<br /><em>field question.</em></h2><p>EcoCode’s public GitHub project is a starting point for collaboration around connected waste intelligence and urban operations.</p><p>Municipal and building operators, sustainability teams, researchers and civic technologists can explore the architecture, exchange context and identify useful next questions.</p><div className="wi-collab-actions"><a className="wi-button wi-button-light" href={REPO_URL} target="_blank" rel="noopener noreferrer" data-testid="link-wi-github">Open the public GitHub project <Github size={16} /><ArrowUpRight size={14} /></a><a className="wi-button wi-button-light" href={WEB_APP_URL} target="_blank" rel="noopener noreferrer" data-testid="link-wi-live-web-app">Launch the live web app <ArrowUpRight size={14} /></a></div></div>
             <aside className="wi-repo-card" data-testid="card-wi-project">
               <div className="wi-repo-head"><span><Github size={16} /></span><span className="wi-mono">PUBLIC PROJECT / STARTING POINT</span><ArrowUpRight size={15} /></div>
               <div className="wi-repo-name">waste-intelligence-<br />platform</div>

@@ -544,3 +544,11 @@
 .wi-page .wi-architecture .wi-stack-line > span { color: #5d7066 !important; }
 .wi-page .wi-architecture .wi-stack-line > span.current { color: #14573f !important; }
 .wi-page .wi-architecture .wi-architecture-footnote { color: #5e7268 !important; }
+
+/* ---- Place-list legibility (content unchanged) ----
+   The district place list was the faintest/smallest text in the panel.
+   Near-white, bold, 12px — readable without straining, on the dark panel. */
+.wi-page .wi-scale-copy li { color: #f2f7ef !important; font-size: 12px !important; font-weight: 600; }
+.wi-page .wi-scale-copy li svg { color: #4bf08a !important; }
+.wi-collab-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 23px; }
+.wi-collab-actions .wi-button-light { margin-top: 0; }
