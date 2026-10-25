@@ -458,46 +458,54 @@
 }
 .pt-page #pt-who {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.14), transparent 70%),
-    linear-gradient(180deg, #04140f 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.14), transparent 70%),
+    linear-gradient(180deg, #04140f 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-why {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
-    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-joint {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
-    linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-vision {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
-    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-collab {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
-    linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-partner {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
-    linear-gradient(180deg, #f5f2e8 0, #04140f 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #04140f 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 @media (prefers-reduced-motion: reduce) {
   .pt-page section { animation: none !important; }
 }
+/* ---- Contrast audit fixes (content unchanged) ----
+   Light joint section: neon-green dark-theme link left on light cream.
+   Dark model section: ochre labels left too dark for the dark board. */
+.pt-page .pt-section .pt-inline-link { color: #14573f !important; }
+.pt-page .pt-section .pt-inline-link:hover { color: #7a5a2e !important; }
+.pt-page .pt-step-detail-top { color: #c9a86f !important; }
+.pt-page .pt-step-detail-top svg { color: #4bf08a !important; }
+.pt-page .pt-mapping .pt-eyebrow { color: #c9a86f !important; }

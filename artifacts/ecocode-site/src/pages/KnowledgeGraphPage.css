@@ -443,53 +443,61 @@
 }
 .kg-page #kg-inspiration {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.14), transparent 70%),
-    linear-gradient(180deg, #04140f 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.14), transparent 70%),
+    linear-gradient(180deg, #04140f 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page #kg-model {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
-    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page #kg-why {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
-    linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page .kg-section.kg-lashie {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
-    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page #kg-platform {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
-    linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page .kg-beyond {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
-    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page #kg-collaborate {
   background:
-    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
-    linear-gradient(180deg, #0a231a 0, #04140f 95px) !important;
-  background-size: 100% 240px, 100% 100%;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #04140f 52px) !important;
+  background-size: 100% 160px, 100% 100%;
   animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 @media (prefers-reduced-motion: reduce) {
   .kg-page section { animation: none !important; }
 }
+/* ---- Contrast audit fixes (content unchanged) ----
+   Light platform section: neon-green dark-theme link left on light cream.
+   Dark model section: ochre labels left too dark for the dark board. */
+.kg-page .kg-section .kg-inline-link { color: #14573f !important; }
+.kg-page .kg-section .kg-inline-link:hover { color: #7a5a2e !important; }
+.kg-page .kg-step-detail-top { color: #c9a86f !important; }
+.kg-page .kg-step-detail-top svg { color: #4bf08a !important; }
+.kg-page .kg-mapping .kg-eyebrow { color: #c9a86f !important; }

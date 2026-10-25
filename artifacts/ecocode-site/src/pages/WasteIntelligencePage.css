@@ -490,29 +490,57 @@
   to { background-position: 50% 30px, 0 0; }
 }
 .wi-page #wi-purpose {
-  background: radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.14), transparent 70%), linear-gradient(180deg, #04140f 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.14), transparent 70%), linear-gradient(180deg, #04140f 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
 .wi-page #wi-scale {
-  background: radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
-  background-size: 100% 240px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
 .wi-page #wi-architecture {
-  background: radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%), linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%), linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
 .wi-page #wi-capabilities {
-  background: radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.10), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #f5f2e8 95px) !important;
-  background-size: 100% 240px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.10), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
 .wi-page .wi-outcomes {
-  background: radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.10), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #f3f1e7 95px) !important;
-  background-size: 100% 240px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.10), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #f3f1e7 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
 .wi-page #wi-collaborate {
-  background: radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%), linear-gradient(180deg, #f3f1e7 0, #04140f 95px) !important;
-  background-size: 100% 240px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%), linear-gradient(180deg, #f3f1e7 0, #04140f 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
 @media (prefers-reduced-motion: reduce) {
   .wi-page section { animation: none !important; }
 }
+
+/* ---- Contrast audit fixes (content unchanged) ----
+   Dark scale section: copy/tabs were never re-coloured for the dark
+   background, so dark-green text sat on dark green (the screenshot case).
+   Light capabilities/outcomes: neon-green dark-theme links and mid-tone
+   cards were left on light backgrounds. */
+.wi-page .wi-scale-heading > p { color: #a9c0b0 !important; }
+.wi-page .wi-scale-tabs button > .wi-mono { color: #c9a86f !important; }
+.wi-page .wi-scale-tabs button b { color: #d8e8da !important; }
+.wi-page .wi-scale-tabs button small { color: #a9c0b0 !important; }
+.wi-page .wi-scale-copy .wi-eyebrow { color: #c9a86f !important; }
+.wi-page .wi-scale-copy h3 { color: #f2f7ef !important; }
+.wi-page .wi-scale-copy p { color: #a9c0b0 !important; }
+.wi-page .wi-scale-copy li { color: #b9d2bd !important; }
+.wi-page .wi-scale-copy li svg { color: #4bf08a !important; }
+.wi-page .wi-capabilities .wi-capability { background: #eef0e6 !important; border-color: #cbd3c6 !important; }
+.wi-page .wi-capabilities .wi-capability h3 { color: #31564b !important; }
+.wi-page .wi-capabilities .wi-capability p { color: #6e7b71 !important; }
+.wi-page .wi-capabilities .wi-capability > .wi-eyebrow { color: #8b7652 !important; }
+.wi-page .wi-capabilities .wi-cap-icon { background: #e6ebe0 !important; border-color: #cbd5c8 !important; color: #377462 !important; }
+.wi-page .wi-capabilities .wi-capability > small { color: #9b8561 !important; }
+.wi-page .wi-capabilities .wi-capability-caveat { background: #e8e9dd !important; }
+.wi-page .wi-capabilities .wi-capability-caveat p { color: #69786d !important; }
+.wi-page .wi-outcomes .wi-inline-link { color: #14573f !important; }
+.wi-page .wi-outcomes .wi-inline-link:hover { color: #7a5a2e !important; }
+.wi-page .wi-architecture .wi-stack-line > span { color: #5d7066 !important; }
+.wi-page .wi-architecture .wi-stack-line > span.current { color: #14573f !important; }
+.wi-page .wi-architecture .wi-architecture-footnote { color: #5e7268 !important; }
