@@ -83,7 +83,7 @@ export default function PartnersPage() {
           <a href={ECOGREEN_URL} target="_blank" rel="noopener noreferrer" data-testid="link-pt-top-ecogreen">Visit EcoGreen Biotech <ArrowUpRight size={13} /></a>
         </div>
       </div>
-      <SiteNav current="partners" sections={[['Who they are', '#pt-who'], ['Why they matter', '#pt-why'], ['Joint innovations', '#pt-joint'], ['Shared vision', '#pt-vision'], ['Collaborations', '#pt-collab'], ['Partner with us', '#pt-partner']]} onHome={false} />
+      <SiteNav current="partners" sections={[['Who they are', '#pt-who'], ['Why they matter', '#pt-why'], ['Joint innovations', '#pt-joint'], ['Shared vision', '#pt-vision'], ['Collaborations', '#pt-collab'], ['Partner with us', '#pt-partner']]} />
 
       <main id="main-content" tabIndex={-1}>
         <section className="pt-hero" aria-labelledby="pt-title">
@@ -233,7 +233,7 @@ export default function PartnersPage() {
           </div>
         </section>
       </main>
-      <SiteFooter onHome={false} topHref="#pt-top" />
+      <SiteFooter topHref="#pt-top" />
     </div>
   );
 }

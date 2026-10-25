@@ -13,12 +13,15 @@ import './SiteNav.css';
  *   2. On this page: the current page's sections, so every titled section
  *      is reachable without scrolling or hunting through the footer.
  *
- * On the homepage, section links are plain in-page anchors. On subpages
- * they are wouter Links to "/#section", which land on the homepage and
- * scroll to the section on mount (the homepage already scrolls to the
- * URL hash when it loads). The mobile panel carries both tiers, labelled,
- * and closes on link click or Escape. A skip link targets #main-content,
- * which every page's <main> now carries.
+ * "On this page" links are ALWAYS plain in-page anchors, on every page:
+ * the sections listed are the current page's own sections, so routing
+ * them anywhere else (e.g. "/#wi-scale") would land on the homepage
+ * instead of the section. The "/#section" cross-page pattern belongs
+ * only to the footer's Explore column, which links back to homepage
+ * sections from subpages (the homepage scrolls to the URL hash on load).
+ * The mobile panel carries both tiers, labelled, and closes on link
+ * click or Escape. A skip link targets #main-content, which every
+ * page's <main> now carries.
  */
 
 export const REPO_URL = 'https://github.com/EcoCode-Smart-City-Infrastructure/waste-intelligence-platform';
@@ -52,20 +55,17 @@ export function SiteWordmark({ light = false }: { light?: boolean }) {
   );
 }
 
-function SectionLink({ label, href, onHome, onClick, testPrefix }: {
-  label: string; href: string; onHome: boolean; onClick?: () => void; testPrefix: string;
+function SectionLink({ label, href, onClick, testPrefix }: {
+  label: string; href: string; onClick?: () => void; testPrefix: string;
 }) {
   const testId = `${testPrefix}-${label.toLowerCase().replace(/\s+/g, '-')}`;
-  if (onHome) {
-    return <a href={href} data-testid={testId} onClick={onClick}>{label}</a>;
-  }
-  return <Link href={`/${href}`} data-testid={testId} onClick={onClick}>{label}</Link>;
+  // Plain in-page anchor on purpose — see the header comment above.
+  return <a href={href} data-testid={testId} onClick={onClick}>{label}</a>;
 }
 
-export default function SiteNav({ current, sections, onHome }: {
+export default function SiteNav({ current, sections }: {
   current: SitePageId;
   sections: ReadonlyArray<readonly [string, string]>;
-  onHome: boolean;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
@@ -106,7 +106,7 @@ export default function SiteNav({ current, sections, onHome }: {
           <span className="sn-sections-label" aria-hidden="true">On this page</span>
           <nav className="sn-sections-nav" aria-label="On this page">
             {sections.map(([label, href]) => (
-              <SectionLink key={href} label={label} href={href} onHome={onHome} testPrefix="link-nav-section" />
+              <SectionLink key={href} label={label} href={href} testPrefix="link-nav-section" />
             ))}
           </nav>
         </div>
@@ -126,7 +126,7 @@ export default function SiteNav({ current, sections, onHome }: {
             </a>
             <span className="sn-mobile-group-label">On this page</span>
             {sections.map(([label, href]) => (
-              <SectionLink key={href} label={label} href={href} onHome={onHome} onClick={closeMenu} testPrefix="link-mobile-section" />
+              <SectionLink key={href} label={label} href={href} onClick={closeMenu} testPrefix="link-mobile-section" />
             ))}
           </nav>
         )}

@@ -133,7 +133,7 @@ function HomePage() {
           <a href="#pilot" className="topline-link" data-testid="link-topline-nyc-pilot">Explore the NYC pilot <ArrowRight size={13} /></a>
         </div>
       </div>
-      <SiteNav current="home" sections={HOME_SECTIONS} onHome />
+      <SiteNav current="home" sections={HOME_SECTIONS} />
 
       <main id="main-content" tabIndex={-1}>
         <section className="hero" aria-labelledby="hero-title">

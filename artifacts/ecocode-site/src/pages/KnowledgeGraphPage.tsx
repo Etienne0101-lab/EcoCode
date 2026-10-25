@@ -103,7 +103,7 @@ export default function KnowledgeGraphPage() {
           <a href={REPO_URL} target="_blank" rel="noopener noreferrer" data-testid="link-kg-top-project">Public project <ArrowUpRight size={13} /></a>
         </div>
       </div>
-      <SiteNav current="knowledge" sections={[['Inspiration', '#kg-inspiration'], ['The model', '#kg-model'], ['Why it matters', '#kg-why'], ['Lashie pilot', '#kg-lashie'], ['In the platform', '#kg-platform'], ['Beyond', '#kg-beyond'], ['Collaborate', '#kg-collaborate']]} onHome={false} />
+      <SiteNav current="knowledge" sections={[['Inspiration', '#kg-inspiration'], ['The model', '#kg-model'], ['Why it matters', '#kg-why'], ['Lashie pilot', '#kg-lashie'], ['In the platform', '#kg-platform'], ['Beyond', '#kg-beyond'], ['Collaborate', '#kg-collaborate']]} />
 
       <main id="main-content" tabIndex={-1}>
         <section className="kg-hero" aria-labelledby="kg-title">
@@ -285,7 +285,7 @@ export default function KnowledgeGraphPage() {
           </div>
         </section>
       </main>
-      <SiteFooter onHome={false} topHref="#kg-top" />
+      <SiteFooter topHref="#kg-top" />
     </div>
   );
 }
