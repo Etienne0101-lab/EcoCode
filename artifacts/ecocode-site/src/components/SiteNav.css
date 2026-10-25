@@ -1,0 +1,49 @@
+/* Integrated site navigation: one sticky header on every page.
+   Dark bar (matches the site's dark theme) with a radiant glow spilling
+   from its bottom edge into the hero below, so the bar itself joins the
+   site's dynamic shading language instead of cutting it off. */
+.sn-skip { position: absolute; left: -9999px; top: 0; z-index: 100; padding: 10px 16px; background: #2ee06f; color: #04140f; font-weight: 700; font-size: 13px; text-decoration: none; }
+.sn-skip:focus { left: 12px; top: 12px; }
+.sn-header { position: sticky; top: 0; z-index: 50; background: rgba(6, 19, 14, .96); border-bottom: 1px solid rgba(180, 220, 190, .16); backdrop-filter: blur(14px); }
+.sn-header::after { content: ''; position: absolute; left: 0; right: 0; bottom: -14px; height: 14px; pointer-events: none; background: radial-gradient(ellipse 90% 22px at 50% 0, rgba(46, 224, 111, .20), transparent 70%); animation: sn-radiant 11s ease-in-out infinite alternate; }
+@keyframes sn-radiant { from { opacity: .55; } to { opacity: 1; } }
+.sn-wrap { max-width: 1240px; margin: 0 auto; padding-inline: 32px; }
+.sn-main-row { display: flex; align-items: center; gap: 24px; min-height: 62px; }
+.sn-wordmark { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; flex: none; }
+.sn-brand-mark { display: inline-flex; gap: 3px; }
+.sn-brand-mark span { width: 7px; height: 7px; border-radius: 50%; background: #2ee06f; }
+.sn-brand-mark span:nth-child(2) { background: #d3a96c; }
+.sn-brand-mark span:nth-child(3) { background: #f5f2e8; }
+.sn-brand-name { font-weight: 800; letter-spacing: -.02em; color: #f2f7ef; font-size: 19px; }
+.sn-brand-name span { color: #2ee06f; }
+.sn-brand-llc { font-size: 10px; letter-spacing: .12em; color: #a9c0b0; margin-left: 2px; }
+.sn-site-nav { display: flex; gap: 26px; margin-left: auto; }
+.sn-site-nav a { color: #cfe0d2; text-decoration: none; font-size: 12.5px; font-weight: 600; padding: 6px 2px; border-bottom: 2px solid transparent; }
+.sn-site-nav a:hover { color: #4bf08a; }
+.sn-site-nav a[aria-current="page"] { color: #4bf08a; border-bottom-color: #2ee06f; }
+.sn-cta { display: inline-flex; align-items: center; gap: 7px; flex: none; padding: 9px 15px; background: #2ee06f; color: #062015; text-decoration: none; font-size: 11.5px; font-weight: 700; border-radius: 999px; }
+.sn-cta:hover { background: #4bf08a; }
+.sn-toggle { display: none; margin-left: auto; width: 40px; height: 40px; place-items: center; background: transparent; border: 1px solid rgba(180, 220, 190, .35); color: #f2f7ef; cursor: pointer; border-radius: 6px; }
+.sn-sections-row { display: flex; align-items: center; gap: 14px; min-height: 38px; border-top: 1px solid rgba(180, 220, 190, .12); }
+.sn-sections-label { flex: none; font: 500 9px/1 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #c9a86f; }
+.sn-sections-nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.sn-sections-nav a { color: #a9c0b0; text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 0; }
+.sn-sections-nav a:hover { color: #f2f7ef; }
+.sn-mobile-nav { display: none; }
+.sn-header a:focus-visible, .sn-toggle:focus-visible, .sn-skip:focus-visible { outline: 2px solid #4bf08a; outline-offset: 3px; }
+@media (max-width: 900px) {
+  .sn-site-nav, .sn-cta, .sn-sections-row { display: none; }
+  .sn-toggle { display: grid; }
+  .sn-mobile-nav { position: absolute; left: 0; right: 0; top: 100%; display: flex; flex-direction: column; padding: 10px 24px 18px; background: #071a14; border-bottom: 1px solid rgba(180, 220, 190, .2); box-shadow: 0 18px 30px rgba(0, 0, 0, .35); max-height: calc(100vh - 62px); overflow-y: auto; }
+  .sn-mobile-nav a { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; color: #d8e8da; text-decoration: none; font-size: 14px; font-weight: 600; border-bottom: 1px solid rgba(180, 220, 190, .12); }
+  .sn-mobile-nav a[aria-current="page"] { color: #4bf08a; }
+  .sn-mobile-nav a:last-child { border-bottom: 0; }
+  .sn-mobile-group-label { padding-top: 14px; font: 500 9px/1 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #c9a86f; }
+  .sn-mobile-group-label:first-child { padding-top: 4px; }
+}
+@media (max-width: 640px) {
+  .sn-wrap { padding-inline: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sn-header::after { animation: none; opacity: .8; }
+}

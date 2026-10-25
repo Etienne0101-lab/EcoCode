@@ -513,3 +513,10 @@
   background-size: 100% 160px, 100% 100%;
   animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
+
+/* ---- Radiant strip on the interactive model board (content unchanged) ----
+   30px drifting green glow at the board's top edge, joining it to the
+   section transitions. Absolutely positioned, so the board grid is
+   untouched. */
+.kg-page .kg-model-board { position: relative; overflow: hidden; }
+.kg-radiant-strip { position: absolute; top: 0; left: 0; right: 0; height: 30px; z-index: 2; pointer-events: none; background: radial-gradient(ellipse 90% 60px at 50% 0, rgba(46, 224, 111, .22), transparent 70%); animation: kg-radiant-flow 11s ease-in-out infinite alternate; }

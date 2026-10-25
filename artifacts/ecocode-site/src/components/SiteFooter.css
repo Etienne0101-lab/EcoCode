@@ -1,0 +1,29 @@
+/* Shared site footer: dark, with the same dynamic radiant top as the
+   other footers (52px fade through a green mid-tone + drifting ochre
+   glow), so the footer is part of the shading flow, not a hard stop. */
+.sn-footer { position: relative; background: radial-gradient(ellipse 90% 180px at 50% 0, rgba(211, 169, 108, .14), transparent 70%), linear-gradient(180deg, #04140f 0, #0a231a 26px, #04100c 52px) !important; background-size: 100% 140px, 100% 100%; animation: sn-footer-radiant 10s ease-in-out infinite alternate; color: #f2f7ef; }
+/* Homepage only: the section above the footer is light, so the fade
+   starts light and lands dark — same 45px radiant language, correct
+   colours for that boundary. Subpages keep the dark-to-dark fade. */
+.sn-footer-light-above { background: radial-gradient(ellipse 90% 180px at 50% 0, rgba(211, 169, 108, .14), transparent 70%), linear-gradient(180deg, #dce5da 0, #04100c 45px) !important; }
+@keyframes sn-footer-radiant { from { background-position: 50% -30px, 0 0; } to { background-position: 50% 30px, 0 0; } }
+.sn-footer-main { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr 1.2fr; gap: 28px; padding-top: 72px; padding-bottom: 36px; }
+.sn-footer-brand p { margin: 14px 0 0; font-size: 13px; line-height: 1.7; color: #a9c0b0; }
+.sn-footer-col { display: flex; flex-direction: column; gap: 10px; }
+.sn-footer-col a { color: #cfe0d2; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; width: fit-content; }
+.sn-footer-col a:hover { color: #4bf08a; }
+.sn-footer-eyebrow { font: 500 9px/1.4 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #c9a86f; margin-bottom: 4px; }
+.sn-footer-note p { margin: 0; font-size: 13px; line-height: 1.7; color: #a9c0b0; }
+.sn-footer-bottom { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; align-items: center; padding-top: 20px; padding-bottom: 26px; border-top: 1px solid rgba(180, 220, 190, .14); font-size: 12px; color: #a9c0b0; }
+.sn-footer-bottom a { color: #cfe0d2; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+.sn-footer-bottom a:hover { color: #4bf08a; }
+.sn-footer a:focus-visible { outline: 2px solid #4bf08a; outline-offset: 3px; }
+@media (max-width: 900px) {
+  .sn-footer-main { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .sn-footer-main { grid-template-columns: 1fr; padding-top: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sn-footer { animation: none; }
+}

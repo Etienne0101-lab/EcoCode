@@ -41,3 +41,14 @@
 @media (prefers-reduced-motion: reduce) {
   .eco-info-pulse { animation: none; background: #2ee06f; }
 }
+
+/* ---- Radiant transition into the infographic panel (content unchanged) ----
+   The panel sits in a dark section, so its top now fades from that dark
+   section colour into the cream panel over 34px, with the same slowly
+   drifting green glow as the section transitions. Panel padding-top is
+   raised to match, so all text still sits on solid cream. */
+@keyframes eco-info-radiant { from { background-position: 50% -20px, 0 0; } to { background-position: 50% 20px, 0 0; } }
+.eco-info { padding-top: 34px; background: radial-gradient(ellipse 90% 120px at 50% 0, rgba(46, 224, 111, .18), transparent 70%), linear-gradient(180deg, #0a231a 0, #123528 17px, #f5f2e8 34px) !important; background-size: 100% 130px, 100% 100%; animation: eco-info-radiant 11s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) {
+  .eco-info { animation: none; }
+}

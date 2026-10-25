@@ -502,7 +502,7 @@
   background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
 .wi-page #wi-capabilities {
-  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.10), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #f5f2e8 52px) !important;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.10), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #eef0e6 26px, #f5f2e8 52px) !important;
   background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
 .wi-page .wi-outcomes {
@@ -561,3 +561,11 @@
   background-size: 100% 160px, 100% 100%;
   animation: wi-radiant-flow 11s ease-in-out infinite alternate;
 }
+
+/* ---- Radiant strip on the interactive explorer boards (content unchanged) ----
+   The scale explorer and architecture board are contrast panels inside
+   their sections; a 30px drifting green glow at each board's top edge
+   joins them to the section transitions. The strip is absolutely
+   positioned, so the boards' grid layouts are untouched. */
+.wi-page .wi-scale-explorer, .wi-page .wi-architecture-board { position: relative; overflow: hidden; }
+.wi-radiant-strip { position: absolute; top: 0; left: 0; right: 0; height: 30px; z-index: 2; pointer-events: none; background: radial-gradient(ellipse 90% 60px at 50% 0, rgba(46, 224, 111, .22), transparent 70%); animation: wi-radiant-flow 11s ease-in-out infinite alternate; }

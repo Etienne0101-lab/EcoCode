@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import {
   Activity, ArrowDown, ArrowRight, ArrowUpRight, BarChart3, Building2,
-  Check, ChevronRight, Github, Layers3, Menu, Recycle, Route,
-  ShieldCheck, Signal, Sprout, Wind, X, Zap,
+  Check, ChevronRight, Github, Layers3, Recycle, Route,
+  ShieldCheck, Signal, Sprout, Wind, Zap,
 } from 'lucide-react';
 import { Link } from 'wouter';
+import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 import './KnowledgeGraphPage.css';
 
 const REPO_URL = 'https://github.com/EcoCode-Smart-City-Infrastructure/waste-intelligence-platform';
@@ -88,19 +90,8 @@ const platformUses = [
   { index: '05', icon: BarChart3, title: 'Policy simulation', text: 'Lets cities test new organics mandates, facility expansions, route redesigns, local processing hubs and carbon strategies against the graph before committing.' },
 ];
 
-function Wordmark() {
-  return (
-    <Link className="kg-wordmark" href="/" aria-label="EcoCode home" data-testid="link-kg-home">
-      <span className="kg-brand-mark" aria-hidden="true"><i /><i /><i /></span>
-      <span className="kg-brand-name">eco<span>code</span></span>
-      <span className="kg-brand-llc">LLC</span>
-    </Link>
-  );
-}
-
 export default function KnowledgeGraphPage() {
   const [stepId, setStepId] = useState<(typeof steps)[number]['id']>('waste');
-  const [menuOpen, setMenuOpen] = useState(false);
   const step = steps.find((item) => item.id === stepId) ?? steps[0];
   const ActiveStepIcon = step.icon;
 
@@ -112,24 +103,9 @@ export default function KnowledgeGraphPage() {
           <a href={REPO_URL} target="_blank" rel="noopener noreferrer" data-testid="link-kg-top-project">Public project <ArrowUpRight size={13} /></a>
         </div>
       </div>
-      <header className="kg-header">
-        <div className="kg-wrap kg-header-inner">
-          <Wordmark />
-          <nav className="kg-nav" aria-label="Page navigation">
-            <a href="#kg-inspiration" data-testid="link-kg-nav-inspiration">Inspiration</a><a href="#kg-model" data-testid="link-kg-nav-model">The model</a><a href="#kg-why" data-testid="link-kg-nav-why">Why it matters</a><a href="#kg-platform" data-testid="link-kg-nav-platform">In the platform</a><a href="#kg-collaborate" data-testid="link-kg-nav-collaborate">Collaborate</a>
-          </nav>
-          <Link className="kg-header-cta" href="/waste-intelligence" data-testid="link-kg-header-waste">Waste Intelligence <ArrowUpRight size={14} /></Link>
-          <button className="kg-menu-button" type="button" aria-expanded={menuOpen} aria-controls="kg-mobile-nav" aria-label={menuOpen ? 'Close page navigation' : 'Open page navigation'} onClick={() => setMenuOpen((open) => !open)} data-testid="button-kg-menu">
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-        {menuOpen && <nav id="kg-mobile-nav" className="kg-mobile-nav" aria-label="Mobile page navigation">
-          {[['Inspiration', '#kg-inspiration'], ['The model', '#kg-model'], ['Why it matters', '#kg-why'], ['In the platform', '#kg-platform'], ['Collaborate', '#kg-collaborate']].map(([label, href]) => <a key={href} href={href} data-testid={`link-kg-mobile-${label.toLowerCase().replace(/\s+/g, '-')}`} onClick={() => setMenuOpen(false)}>{label}<ArrowRight size={14} /></a>)}
-          <Link href="/waste-intelligence" data-testid="link-kg-mobile-waste" onClick={() => setMenuOpen(false)}>Waste Intelligence platform<ArrowUpRight size={14} /></Link>
-        </nav>}
-      </header>
+      <SiteNav current="knowledge" sections={['Inspiration', '#kg-inspiration'], ['The model', '#kg-model'], ['Why it matters', '#kg-why'], ['Lashie pilot', '#kg-lashie'], ['In the platform', '#kg-platform'], ['Beyond', '#kg-beyond'], ['Collaborate', '#kg-collaborate']} onHome={false} />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="kg-hero" aria-labelledby="kg-title">
           <div className="kg-hero-map" aria-hidden="true" />
           <div className="kg-wrap kg-hero-layout">
@@ -193,6 +169,7 @@ export default function KnowledgeGraphPage() {
               <p>The graph is built from five kinds of relationship. Select any mapping to see what it connects — and what it makes possible.</p>
             </div>
             <div className="kg-model-board">
+              <div className="kg-radiant-strip" aria-hidden="true" />
               <div className="kg-step-list" role="group" aria-label="Choose a graph mapping" data-testid="group-kg-steps">
                 {steps.map((item) => {
                   const Icon = item.icon;
@@ -231,7 +208,7 @@ export default function KnowledgeGraphPage() {
           </div>
         </section>
 
-        <section className="kg-section kg-lashie">
+        <section className="kg-section kg-lashie" id="kg-lashie">
           <div className="kg-wrap">
             <div className="kg-section-intro">
               <div><span className="kg-eyebrow kg-section-index">04 / INTEGRATION WITH LASHIE SYSTEM</span><h2>Source data in.<br /><em>Intelligence out.</em></h2></div>
@@ -269,7 +246,7 @@ export default function KnowledgeGraphPage() {
           </div>
         </section>
 
-        <section className="kg-beyond kg-section">
+        <section className="kg-beyond kg-section" id="kg-beyond">
           <div className="kg-wrap">
             <div className="kg-section-intro">
               <div><span className="kg-eyebrow kg-section-index">06 / BEYOND WASTE: THE URBAN OS</span><h2>Not just a waste tool.<br /><em>A city intelligence engine.</em></h2></div>
@@ -308,10 +285,7 @@ export default function KnowledgeGraphPage() {
           </div>
         </section>
       </main>
-      <footer className="kg-footer">
-        <div className="kg-wrap kg-footer-main"><div><Wordmark /><p>Environmental technology for connected public systems.</p></div><div className="kg-footer-links"><span className="kg-eyebrow">ON THIS PAGE</span><a href="#kg-inspiration">Scientific inspiration</a><a href="#kg-model">How the graph works</a><a href="#kg-why">Why it matters</a></div><div className="kg-footer-links"><span className="kg-eyebrow">PLATFORM</span><Link href="/waste-intelligence">Waste Intelligence page</Link><Link href="/partners">Partners page</Link><Link href="/">EcoCode home</Link></div><div className="kg-footer-note"><span className="kg-eyebrow">THE ENGINE</span><p>Waste types, processes, resources, facilities, constraints and demand — one graph, oriented toward circularity.</p></div></div>
-        <div className="kg-wrap kg-footer-bottom"><span>© {new Date().getFullYear()} EcoCode LLC</span><span>Every material, a pathway.</span><a href="#kg-top" data-testid="link-kg-back-top">Back to top <ArrowUpRight size={12} /></a></div>
-      </footer>
+      <SiteFooter onHome={false} topHref="#kg-top" />
     </div>
   );
 }

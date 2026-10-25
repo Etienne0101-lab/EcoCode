@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import {
   Activity, ArrowDown, ArrowRight, ArrowUpRight, Beaker, Building2,
-  Check, ChevronRight, FlaskConical, Handshake, Leaf, Menu, Microscope,
-  Recycle, Route, Sprout, Wind, X, Zap,
+  Check, ChevronRight, FlaskConical, Handshake, Leaf, Microscope,
+  Recycle, Route, Sprout, Wind, Zap,
 } from 'lucide-react';
 import { Link } from 'wouter';
+import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 import './PartnersPage.css';
 
 const ECOGREEN_URL = 'https://ecogreenbiotech.com/';
@@ -66,20 +68,9 @@ const visionOutcomes = ['Reduce waste', 'Lower emissions', 'Improve public healt
 const activeProjects = ['Waste Intelligence Platform', 'Organics diversion analytics', 'Construction emissions monitoring', 'Smart bin and sensor prototyping', 'Environmental validation studies', 'Circular-economy modelling'];
 const upcomingProjects = ['NYC Smart City Testbed pilots', 'Hyper-local organics processing hubs', 'AI-driven environmental forecasting', 'Multi-domain environmental digital twins', 'Community environmental dashboards', 'Climate-positive building intelligence systems'];
 
-function Wordmark() {
-  return (
-    <Link className="pt-wordmark" href="/" aria-label="EcoCode home" data-testid="link-pt-home">
-      <span className="pt-brand-mark" aria-hidden="true"><i /><i /><i /></span>
-      <span className="pt-brand-name">eco<span>code</span></span>
-      <span className="pt-brand-llc">LLC</span>
-    </Link>
-  );
-}
-
 export default function PartnersPage() {
   const [pillarId, setPillarId] = useState<(typeof pillars)[number]['id']>('science');
   const [collabTab, setCollabTab] = useState<'active' | 'upcoming'>('active');
-  const [menuOpen, setMenuOpen] = useState(false);
   const pillar = pillars.find((item) => item.id === pillarId) ?? pillars[0];
   const ActivePillarIcon = pillar.icon;
   const collabItems = collabTab === 'active' ? activeProjects : upcomingProjects;
@@ -92,24 +83,9 @@ export default function PartnersPage() {
           <a href={ECOGREEN_URL} target="_blank" rel="noopener noreferrer" data-testid="link-pt-top-ecogreen">Visit EcoGreen Biotech <ArrowUpRight size={13} /></a>
         </div>
       </div>
-      <header className="pt-header">
-        <div className="pt-wrap pt-header-inner">
-          <Wordmark />
-          <nav className="pt-nav" aria-label="Page navigation">
-            <a href="#pt-who" data-testid="link-pt-nav-who">Who they are</a><a href="#pt-why" data-testid="link-pt-nav-why">Why they matter</a><a href="#pt-joint" data-testid="link-pt-nav-joint">Joint innovations</a><a href="#pt-vision" data-testid="link-pt-nav-vision">Shared vision</a><a href="#pt-collab" data-testid="link-pt-nav-collab">Collaborations</a>
-          </nav>
-          <Link className="pt-header-cta" href="/knowledge-graph" data-testid="link-pt-header-graph">Knowledge Graph <ArrowUpRight size={14} /></Link>
-          <button className="pt-menu-button" type="button" aria-expanded={menuOpen} aria-controls="pt-mobile-nav" aria-label={menuOpen ? 'Close page navigation' : 'Open page navigation'} onClick={() => setMenuOpen((open) => !open)} data-testid="button-pt-menu">
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-        {menuOpen && <nav id="pt-mobile-nav" className="pt-mobile-nav" aria-label="Mobile page navigation">
-          {[['Who they are', '#pt-who'], ['Why they matter', '#pt-why'], ['Joint innovations', '#pt-joint'], ['Shared vision', '#pt-vision'], ['Collaborations', '#pt-collab']].map(([label, href]) => <a key={href} href={href} data-testid={`link-pt-mobile-${label.toLowerCase().replace(/\s+/g, '-')}`} onClick={() => setMenuOpen(false)}>{label}<ArrowRight size={14} /></a>)}
-          <Link href="/knowledge-graph" data-testid="link-pt-mobile-graph" onClick={() => setMenuOpen(false)}>Knowledge Graph engine<ArrowUpRight size={14} /></Link>
-        </nav>}
-      </header>
+      <SiteNav current="partners" sections={['Who they are', '#pt-who'], ['Why they matter', '#pt-why'], ['Joint innovations', '#pt-joint'], ['Shared vision', '#pt-vision'], ['Collaborations', '#pt-collab'], ['Partner with us', '#pt-partner']} onHome={false} />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="pt-hero" aria-labelledby="pt-title">
           <div className="pt-hero-map" aria-hidden="true" />
           <div className="pt-wrap pt-hero-layout">
@@ -168,6 +144,7 @@ export default function PartnersPage() {
               <p>Select a pillar to see how EcoGreen Biotech\u2019s expertise flows into EcoCode\u2019s Smart City systems.</p>
             </div>
             <div className="pt-model-board">
+              <div className="pt-radiant-strip" aria-hidden="true" />
               <div className="pt-step-list" role="group" aria-label="Choose a partnership pillar" data-testid="group-pt-pillars">
                 {pillars.map((item) => {
                   const Icon = item.icon;
@@ -256,10 +233,7 @@ export default function PartnersPage() {
           </div>
         </section>
       </main>
-      <footer className="pt-footer">
-        <div className="pt-wrap pt-footer-main"><div><Wordmark /><p>Environmental technology for connected public systems.</p></div><div className="pt-footer-links"><span className="pt-eyebrow">ON THIS PAGE</span><a href="#pt-who">Who EcoGreen Biotech is</a><a href="#pt-why">Why they matter</a><a href="#pt-joint">Joint innovations</a><a href="#pt-collab">Collaborations</a></div><div className="pt-footer-links"><span className="pt-eyebrow">PLATFORM</span><Link href="/waste-intelligence">Waste Intelligence page</Link><Link href="/knowledge-graph">Knowledge Graph engine</Link><Link href="/">EcoCode home</Link></div><div className="pt-footer-note"><span className="pt-eyebrow">THE PARTNERSHIP</span><p>Biotechnology and environmental science, joined to connected sensing \u2014 for smarter, cleaner, circular cities.</p></div></div>
-        <div className="pt-wrap pt-footer-bottom"><span>© {new Date().getFullYear()} EcoCode LLC</span><span>Deep science. Smarter cities.</span><a href="#pt-top" data-testid="link-pt-back-top">Back to top <ArrowUpRight size={12} /></a></div>
-      </footer>
+      <SiteFooter onHome={false} topHref="#pt-top" />
     </div>
   );
 }

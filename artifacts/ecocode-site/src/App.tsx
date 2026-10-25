@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   Activity, ArrowDownRight, ArrowRight, ArrowUpRight, BarChart3, Building2,
-  Check, ChevronUp, Cloud, Code2, Github, Layers3, Leaf, Menu,
-  Radio, Route, ShieldCheck, Signal, Sprout, Waves, Wind, X, Zap,
+  Check, Cloud, Code2, Github, Layers3, Leaf,
+  Radio, Route, ShieldCheck, Signal, Sprout, Waves, Wind, Zap,
 } from 'lucide-react';
-import { Link, Route as WouterRoute, Router, Switch, useLocation } from 'wouter';
+import { Route as WouterRoute, Router, Switch, useLocation } from 'wouter';
 import NotFound from './pages/not-found';
 import WasteIntelligencePage from './pages/WasteIntelligencePage';
 import EcoArchitectureInfographic from './components/EcoArchitectureInfographic';
-import PilotLoopInteractive from './components/PilotLoopInteractive';
+import LowerManhattanModel from './components/LowerManhattanModel';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 import PartnersPage from './pages/PartnersPage';
+import SiteNav, { HOME_SECTIONS } from './components/SiteNav';
+import SiteFooter from './components/SiteFooter';
 
 const REPO_URL = 'https://github.com/EcoCode-Smart-City-Infrastructure/waste-intelligence-platform';
 const SITE_ORIGIN = 'https://etienne0101-lab.github.io/EcoCode';
@@ -30,13 +32,8 @@ const partnersMetadata = {
   title: 'Partners: EcoGreen Biotech | EcoCode LLC',
   description: 'EcoGreen Biotech brings biotechnology, sustainable materials, environmental engineering and regenerative systems design to EcoCode’s Smart City platform.',
 };
-const navItems = [
-  ['Approach', '#approach'],
-  ['Architecture', '#architecture'],
-  ['Applications', '#applications'],
-  ['NYC pilot', '#pilot'],
-  ['About', '#about'],
-] as const;
+/* Homepage sections now live in SiteNav (HOME_SECTIONS), shared with the
+   footer, so the header, mobile menu and footer can never drift apart. */
 
 const foundations = [
   { icon: Layers3, index: 'CORE 01', title: 'Waste Intelligence Platform', description: 'A connected foundation for waste-service visibility: fill-level signals, collection activity, and operational context in one place.', tags: ['Fill levels', 'Service patterns', 'Fleet context'] },
@@ -87,18 +84,7 @@ const pilotSteps = [
   { number: '03', title: 'Improve planning', text: 'Use service patterns and operating data to inform route planning and resource allocation.' },
 ];
 
-function Wordmark({ light = false }: { light?: boolean }) {
-  return (
-    <a href="#top" className={`wordmark ${light ? 'wordmark-light' : ''}`} aria-label="EcoCode home" data-testid={light ? 'link-footer-home' : 'link-header-home'}>
-      <span className="brand-mark" aria-hidden="true"><span /><span /><span /></span>
-      <span className="brand-name">eco<span>code</span></span><span className="brand-llc">LLC</span>
-    </a>
-  );
-}
-
 function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const closeMenu = () => setMenuOpen(false);
 
   // Homepage dark pilot only: fade sections in as they scroll into view.
   // No content is hidden by this — every section is rendered in full and
@@ -147,22 +133,9 @@ function HomePage() {
           <a href="#pilot" className="topline-link" data-testid="link-topline-nyc-pilot">Explore the NYC pilot <ArrowRight size={13} /></a>
         </div>
       </div>
-      <header className="site-header">
-        <div className="wrap header-inner">
-          <Wordmark />
-          <nav className="desktop-nav" aria-label="Main navigation">{navItems.map(([label, href]) => <a key={href} className="nav-link" href={href} data-testid={`link-desktop-nav-${label.toLowerCase().replace(/\s+/g, '-')}`}>{label}</a>)}</nav>
-          <Link className="header-cta" href="/waste-intelligence" data-testid="link-header-waste-intelligence">Explore Waste Intelligence <ArrowUpRight size={15} /></Link>
-          <button className="mobile-toggle" type="button" aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={menuOpen} aria-controls="mobile-navigation" data-testid="button-toggle-navigation" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X size={21} /> : <Menu size={21} />}
-          </button>
-        </div>
-        {menuOpen && <nav id="mobile-navigation" className="mobile-nav menu-panel" aria-label="Mobile navigation">
-          {navItems.map(([label, href]) => <a key={href} href={href} data-testid={`link-mobile-nav-${label.toLowerCase().replace(/\s+/g, '-')}`} onClick={closeMenu}>{label}<ArrowRight size={15} /></a>)}
-          <Link href="/waste-intelligence" data-testid="link-mobile-waste-intelligence" onClick={closeMenu}>Explore Waste Intelligence<ArrowUpRight size={15} /></Link>
-        </nav>}
-      </header>
+      <SiteNav current="home" sections={HOME_SECTIONS} onHome />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-art grid-lines" aria-hidden="true" />
           <div className="wrap hero-layout">
@@ -271,11 +244,11 @@ function HomePage() {
             <div className="pilot-target" data-testid="status-pilot-operational-target"><span className="target-icon"><Activity size={19} /></span><span className="eyebrow">OPERATIONAL TARGET</span><strong>November 2026</strong><span className="target-note">Target milestone</span></div>
             <div className="pilot-steps">{pilotSteps.map(step => <article className="pilot-step" key={step.number} data-testid={`row-pilot-workflow-${step.number}`}><span className="step-num mono">{step.number}</span><div><h3>{step.title}</h3><p>{step.text}</p></div><ArrowDownRight className="step-arrow" size={17} /></article>)}</div>
             <div className="pilot-outcomes" data-testid="card-pilot-outcomes"><div className="outcome-intro"><span className="eyebrow">INTENDED OPERATING OUTCOMES</span><h3>Signals that support<br />day-to-day decisions.</h3></div><div className="outcome-item" data-testid="text-pilot-outcome-collection-visibility"><span className="outcome-index mono">A</span><div><b>Collection visibility</b><small>Surface bin status and service patterns for operational review.</small></div></div><div className="outcome-item" data-testid="text-pilot-outcome-coordinated-response"><span className="outcome-index mono">B</span><div><b>Coordinated response</b><small>Bring field alerts and fleet context into a shared view.</small></div></div><div className="outcome-item" data-testid="text-pilot-outcome-planning"><span className="outcome-index mono">C</span><div><b>Evidence for planning</b><small>Use accumulated signals to inform future service planning.</small></div></div></div>
-            <PilotLoopInteractive />
+            <LowerManhattanModel />
           </div>
         </section>
 
-        <section className="repo-section">
+        <section className="repo-section" id="project">
           <div className="wrap repo-layout">
             <div className="repo-copy"><div className="eyebrow section-kicker"><span>05</span> / OPEN PROJECT</div><h2 className="display">Build across<br /><em>connected systems.</em></h2>
               <p>The EcoCode Smart-City Infrastructure project brings together an open, modular approach to connected waste intelligence and wider urban operations.</p>
@@ -298,15 +271,7 @@ function HomePage() {
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="wrap footer-main">
-          <div className="footer-brand"><Wordmark light /><p>Connected intelligence for environmental<br />and infrastructure operations.</p></div>
-          <div className="footer-col"><span className="eyebrow">EXPLORE</span>{navItems.map(([label, href]) => <a key={href} href={href} data-testid={`link-footer-nav-${label.toLowerCase().replace(/\s+/g, '-')}`}>{label}</a>)}</div>
-          <div className="footer-col"><span className="eyebrow">PROJECT</span><Link href="/waste-intelligence" data-testid="link-footer-waste-intelligence">Waste Intelligence page <ArrowRight size={12} /></Link><Link href="/knowledge-graph" data-testid="link-footer-knowledge-graph">Knowledge Graph page <ArrowRight size={12} /></Link><Link href="/partners" data-testid="link-footer-partners">Partners page <ArrowRight size={12} /></Link><a href={REPO_URL} target="_blank" rel="noreferrer" data-testid="link-footer-github">GitHub project <ArrowUpRight size={12} /></a><a href="#architecture" data-testid="link-footer-architecture">Shared architecture <ArrowRight size={12} /></a><a href="#applications" data-testid="link-footer-applications">Application concepts <ArrowRight size={12} /></a></div>
-          <div className="footer-note"><span className="eyebrow">ABOUT THIS PLATFORM</span><p>EcoCode brings common sensing, connectivity and analytics building blocks to diverse city and environmental systems.</p></div>
-        </div>
-        <div className="wrap footer-bottom"><span data-testid="text-copyright">© {new Date().getFullYear()} EcoCode LLC</span><span>Connected systems. Clearer decisions.</span><a href="#top" data-testid="link-back-to-top">Back to top <ChevronUp size={13} /></a></div>
-      </footer>
+      <SiteFooter onHome topHref="#top" lightAbove />
     </div>
   );
 }

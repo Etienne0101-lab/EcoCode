@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import {
   Activity, ArrowDown, ArrowRight, ArrowUpRight, BarChart3, Building2,
-  Check, ChevronRight, Cloud, Github, Layers3, Map, Menu, Radio,
-  Recycle, Route, Signal, Truck, Waves, X,
+  Check, ChevronRight, Cloud, Github, Layers3, Map, Radio,
+  Recycle, Route, Signal, Truck, Waves,
 } from 'lucide-react';
 import { Link } from 'wouter';
+import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 import './WasteIntelligencePage.css';
 
 const REPO_URL = 'https://github.com/EcoCode-Smart-City-Infrastructure/waste-intelligence-platform';
@@ -82,20 +84,9 @@ const outcomes = [
   { index: 'D', title: 'Public understanding', icon: Waves, text: 'Make neighborhood-level waste context easier to explain and discuss.' },
 ];
 
-function Wordmark() {
-  return (
-    <Link className="wi-wordmark" href="/" aria-label="EcoCode home" data-testid="link-wi-home">
-      <span className="wi-brand-mark" aria-hidden="true"><i /><i /><i /></span>
-      <span className="wi-brand-name">eco<span>code</span></span>
-      <span className="wi-brand-llc">LLC</span>
-    </Link>
-  );
-}
-
 export default function WasteIntelligencePage() {
   const [scaleId, setScaleId] = useState<(typeof scales)[number]['id']>('district');
   const [layerId, setLayerId] = useState<(typeof layers)[number]['id']>('field');
-  const [menuOpen, setMenuOpen] = useState(false);
   const scale = scales.find((item) => item.id === scaleId) ?? scales[1];
   const layer = layers.find((item) => item.id === layerId) ?? layers[0];
   const ActiveLayerIcon = layer.icon;
@@ -108,24 +99,9 @@ export default function WasteIntelligencePage() {
           <a href={REPO_URL} target="_blank" rel="noopener noreferrer" data-testid="link-wi-top-project">Public project <ArrowUpRight size={13} /></a>
         </div>
       </div>
-      <header className="wi-header">
-        <div className="wi-wrap wi-header-inner">
-          <Wordmark />
-            <nav className="wi-nav" aria-label="Page navigation">
-              <a href="#wi-purpose" data-testid="link-wi-nav-purpose">Purpose</a><a href="#wi-architecture" data-testid="link-wi-nav-architecture">Architecture</a><a href="#wi-capabilities" data-testid="link-wi-nav-capabilities">Capabilities</a><a href="#wi-collaborate" data-testid="link-wi-nav-collaborate">Collaborate</a>
-          </nav>
-            <a className="wi-header-cta" href={REPO_URL} target="_blank" rel="noopener noreferrer" data-testid="link-wi-header-github">Explore on GitHub <ArrowUpRight size={14} /></a>
-          <button className="wi-menu-button" type="button" aria-expanded={menuOpen} aria-controls="wi-mobile-nav" aria-label={menuOpen ? 'Close page navigation' : 'Open page navigation'} onClick={() => setMenuOpen((open) => !open)} data-testid="button-wi-menu">
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-        {menuOpen && <nav id="wi-mobile-nav" className="wi-mobile-nav" aria-label="Mobile page navigation">
-          {[['Purpose', '#wi-purpose'], ['Architecture', '#wi-architecture'], ['Capabilities', '#wi-capabilities'], ['Collaborate', '#wi-collaborate']].map(([label, href]) => <a key={href} href={href} data-testid={`link-wi-mobile-${label.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{label}<ArrowRight size={14} /></a>)}
-          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" data-testid="link-wi-mobile-github" onClick={() => setMenuOpen(false)}>Public GitHub project<ArrowUpRight size={14} /></a>
-        </nav>}
-      </header>
+      <SiteNav current="waste" sections={['Purpose', '#wi-purpose'], ['Scale', '#wi-scale'], ['Architecture', '#wi-architecture'], ['Capabilities', '#wi-capabilities'], ['Outcomes', '#wi-outcomes'], ['Collaborate', '#wi-collaborate']} onHome={false} />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="wi-hero" aria-labelledby="wi-title">
           <div className="wi-hero-map" aria-hidden="true" />
           <div className="wi-wrap wi-hero-layout">
@@ -185,6 +161,7 @@ export default function WasteIntelligencePage() {
               <p>Choose a context to see how the same modular idea shifts from a close-up operating view to broader spatial coordination.</p>
             </div>
             <div className="wi-scale-explorer">
+              <div className="wi-radiant-strip" aria-hidden="true" />
               <div className="wi-scale-side">
                 <div className="wi-scale-tabs" role="group" aria-label="Choose deployment scale" data-testid="group-wi-scale">
                   {scales.map((item, index) => <button key={item.id} type="button" className={scaleId === item.id ? 'is-active' : ''} aria-pressed={scaleId === item.id} onClick={() => setScaleId(item.id)} data-testid={`button-wi-scale-${item.id}`}>
@@ -225,6 +202,7 @@ export default function WasteIntelligencePage() {
               <p>Four connected layers describe the intended system shape. Select any layer to inspect its role and design considerations.</p>
             </div>
             <div className="wi-architecture-board">
+              <div className="wi-radiant-strip" aria-hidden="true" />
               <div className="wi-layer-list" role="group" aria-label="Choose an architecture layer" data-testid="group-wi-architecture">
                 {layers.map((item) => {
                   const Icon = item.icon;
@@ -268,7 +246,7 @@ export default function WasteIntelligencePage() {
           </div>
         </section>
 
-        <section className="wi-outcomes wi-section">
+        <section className="wi-outcomes wi-section" id="wi-outcomes">
           <div className="wi-wrap wi-outcomes-layout">
             <div className="wi-outcomes-intro"><span className="wi-eyebrow wi-section-index">05 / AREAS OF OPPORTUNITY</span><h2>Better context.<br /><em>Better questions.</em></h2><p>A shared operating view can inform service planning, material recovery, facility coordination and public understanding.</p><a href="#wi-collaborate" className="wi-inline-link" data-testid="link-wi-outcomes-collaborate">Discuss the project direction <ArrowRight size={14} /></a></div>
             <div className="wi-outcomes-list">
@@ -307,10 +285,7 @@ export default function WasteIntelligencePage() {
           </div>
         </section>
       </main>
-      <footer className="wi-footer">
-        <div className="wi-wrap wi-footer-main"><div><Wordmark /><p>Environmental technology for connected public systems.</p></div><div className="wi-footer-links"><span className="wi-eyebrow">ON THIS PAGE</span><a href="#wi-purpose">Urban waste context</a><a href="#wi-architecture">Architecture</a><a href="#wi-capabilities">Analysis capabilities</a><Link href="/knowledge-graph">Knowledge Graph engine</Link><Link href="/partners">Partners page</Link></div><div className="wi-footer-note"><span className="wi-eyebrow">PLATFORM APPROACH</span><p>Modular sensing, connectivity and analytics adapt to the signals, sites and operational questions that matter.</p></div></div>
-        <div className="wi-wrap wi-footer-bottom"><span>© {new Date().getFullYear()} EcoCode LLC</span><span>Connected field operations, made legible.</span><a href="#wi-top" data-testid="link-wi-back-top">Back to top <ArrowUpRight size={12} /></a></div>
-      </footer>
+      <SiteFooter onHome={false} topHref="#wi-top" />
     </div>
   );
 }
