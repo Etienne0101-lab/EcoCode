@@ -559,7 +559,7 @@ a { color: inherit; }
 /* Hero: deepest shade, vivid accent, stronger diagram glow */
 .home-dark .hero { background: #04140f; }
 .home-dark .hero::before { background: linear-gradient(105deg, rgba(4,20,15,.99) 0%, rgba(7,30,21,.94) 48%, rgba(6,26,18,.78) 100%); }
-.home-dark .hero-art { opacity: .42; animation: home-dark-breathe 9s ease-in-out infinite; }
+.home-dark .hero-art { opacity: .42; /* static: the breathing animation flickered on phones */ }
 @keyframes home-dark-breathe { 0%, 100% { opacity: .34; } 50% { opacity: .5; } }
 .home-dark .hero h1.display { color: #f6faf3; }
 .home-dark .hero h1 em { color: #8fd6a8; }
@@ -753,59 +753,59 @@ a { color: inherit; }
 }
 .home-dark .approach {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.14), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.07), transparent 70%),
     linear-gradient(180deg, #04140f 0, #123528 26px, #f5f2e8 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: radiant-flow 10s ease-in-out infinite alternate;
+  animation: none;
 }
 .home-dark .infrastructure {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%),
     linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: radiant-flow 11s ease-in-out infinite alternate;
+  animation: none;
 }
 .home-dark .applications {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%),
     linear-gradient(180deg, #0a231a 0, #9db8a4 26px, #f2f0e6 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: radiant-flow 10s ease-in-out infinite alternate;
+  animation: none;
 }
 .home-dark .pilot {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%),
     linear-gradient(180deg, #f2f0e6 0, #0a231a 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: radiant-flow 12s ease-in-out infinite alternate;
+  animation: none;
 }
 .home-dark .repo-section {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%),
     linear-gradient(180deg, #0a231a 0, #04140f 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: radiant-flow 11s ease-in-out infinite alternate;
+  animation: none;
 }
 .home-dark .about {
   background:
     radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.14), transparent 70%),
     linear-gradient(180deg, #04140f 0, #f6f4eb 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: radiant-flow 10s ease-in-out infinite alternate;
+  animation: none;
 }
 .home-dark .closing {
   background:
-    radial-gradient(ellipse 90% 180px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    radial-gradient(ellipse 90% 180px at 50% 0, rgba(46,224,111,.06), transparent 70%),
     linear-gradient(180deg, #f6f4eb 0, #dce5da 45px) !important;
   background-size: 100% 140px, 100% 100%;
-  animation: radiant-flow 9s ease-in-out infinite alternate;
+  animation: none;
 }
 .home-dark .footer {
   background:
     radial-gradient(ellipse 90% 180px at 50% 0, rgba(211,169,108,.14), transparent 70%),
     linear-gradient(180deg, #dce5da 0, #04100c 45px) !important;
   background-size: 100% 140px, 100% 100%;
-  animation: radiant-flow 10s ease-in-out infinite alternate;
+  animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .home-dark .approach, .home-dark .infrastructure, .home-dark .applications, .home-dark .pilot, .home-dark .repo-section, .home-dark .about, .home-dark .closing, .home-dark .footer { animation: none !important; }

@@ -490,28 +490,28 @@
   to { background-position: 50% 30px, 0 0; }
 }
 .wi-page #wi-purpose {
-  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.14), transparent 70%), linear-gradient(180deg, #04140f 0, #f5f2e8 52px) !important;
-  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.07), transparent 70%), linear-gradient(180deg, #04140f 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: none;
 }
 .wi-page #wi-scale {
-  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
-  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: none;
 }
 .wi-page #wi-architecture {
-  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%), linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
-  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%), linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: none;
 }
 .wi-page #wi-capabilities {
   background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.10), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #f5f2e8 52px) !important;
-  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background-size: 100% 160px, 100% 100%; animation: none;
 }
 .wi-page .wi-outcomes {
-  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.10), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #f3f1e7 52px) !important;
-  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.05), transparent 70%), linear-gradient(180deg, #f5f2e8 0, #f3f1e7 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: none;
 }
 .wi-page #wi-collaborate {
-  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%), linear-gradient(180deg, #f3f1e7 0, #04140f 52px) !important;
-  background-size: 100% 160px, 100% 100%; animation: wi-radiant-flow 11s ease-in-out infinite alternate;
+  background: radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%), linear-gradient(180deg, #f3f1e7 0, #04140f 52px) !important;
+  background-size: 100% 160px, 100% 100%; animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .wi-page section { animation: none !important; }

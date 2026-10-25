@@ -121,7 +121,10 @@ function HomePage() {
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     targets.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    // Safety net: never leave a whole section invisible because an observer
+    // misfired — reveal everything after 2s regardless.
+    const fallback = window.setTimeout(() => targets.forEach((el) => el.classList.add('dark-in')), 2000);
+    return () => { window.clearTimeout(fallback); observer.disconnect(); };
   }, []);
 
   useEffect(() => {
