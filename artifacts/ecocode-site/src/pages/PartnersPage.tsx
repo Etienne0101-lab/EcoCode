@@ -83,7 +83,7 @@ export default function PartnersPage() {
           <a href={ECOGREEN_URL} target="_blank" rel="noopener noreferrer" data-testid="link-pt-top-ecogreen">Visit EcoGreen Biotech <ArrowUpRight size={13} /></a>
         </div>
       </div>
-      <SiteNav current="partners" sections={['Who they are', '#pt-who'], ['Why they matter', '#pt-why'], ['Joint innovations', '#pt-joint'], ['Shared vision', '#pt-vision'], ['Collaborations', '#pt-collab'], ['Partner with us', '#pt-partner']} onHome={false} />
+      <SiteNav current="partners" sections={[['Who they are', '#pt-who'], ['Why they matter', '#pt-why'], ['Joint innovations', '#pt-joint'], ['Shared vision', '#pt-vision'], ['Collaborations', '#pt-collab'], ['Partner with us', '#pt-partner']]} onHome={false} />
 
       <main id="main-content" tabIndex={-1}>
         <section className="pt-hero" aria-labelledby="pt-title">
@@ -92,7 +92,7 @@ export default function PartnersPage() {
             <div className="pt-hero-copy">
               <div className="pt-kicker"><span /> PARTNERS / ECOGREEN BIOTECH</div>
               <h1 id="pt-title">Deep science.<br /><em>Smarter cities.</em></h1>
-              <p className="pt-hero-lede">EcoGreen Biotech brings deep expertise in biotechnology, sustainable materials, environmental engineering and regenerative systems design \u2014 a core pillar of EcoCode\u2019s mission to build smarter, cleaner and more resilient cities.</p>
+              <p className="pt-hero-lede">EcoGreen Biotech brings deep expertise in biotechnology, sustainable materials, environmental engineering and regenerative systems design — a core pillar of EcoCode’s mission to build smarter, cleaner and more resilient cities.</p>
               <div className="pt-hero-actions">
                 <a className="pt-button pt-button-ochre" href="#pt-why" data-testid="link-pt-hero-why">Why the partnership matters <ArrowRight size={15} /></a>
                 <a className="pt-text-link" href={ECOGREEN_URL} target="_blank" rel="noopener noreferrer" data-testid="link-pt-hero-ecogreen">Visit EcoGreen Biotech <ArrowDown size={14} /></a>
@@ -125,15 +125,15 @@ export default function PartnersPage() {
             <div className="pt-section-intro">
               <div><span className="pt-eyebrow pt-section-index">01 / WHO ECOGREEN BIOTECH IS</span><h2>A sustainability-driven<br /><em>biotechnology company.</em></h2></div>
               <div className="pt-intro-aside">
-                <p>EcoGreen Biotech\u2019s work spans multiple sectors \u2014 from municipal waste systems to industrial manufacturing \u2014 always with a focus on reducing environmental impact and unlocking new forms of regenerative value.</p>
-                <p className="pt-aside-emphasis">Its leadership, including CEO Charles Craun, has played a pivotal role in shaping EcoCode\u2019s vision and technical roadmap.</p>
+                <p>EcoGreen Biotech’s work spans multiple sectors — from municipal waste systems to industrial manufacturing — always with a focus on reducing environmental impact and unlocking new forms of regenerative value.</p>
+                <p className="pt-aside-emphasis">Its leadership, including CEO Charles Craun, has played a pivotal role in shaping EcoCode’s vision and technical roadmap.</p>
               </div>
             </div>
             <div className="pt-signal-strip" data-testid="text-pt-focus">
               <div className="pt-signal-lead"><span className="pt-mono">FOCUS AREAS</span><strong>Five fields,<br />one direction.</strong></div>
               {focusAreas.map((area) => <div key={area.index}><span className="pt-small-index">{area.index}</span><h3>{area.title}</h3><p>{area.text}</p></div>)}
             </div>
-            <p className="pt-inspiration-note">EcoCode LLC was founded by EcoGreen Biotech LLC, led by CEO Charles Craun, in collaboration with NGHI \u2014 the partnership on this page is foundational, not decorative.</p>
+            <p className="pt-inspiration-note">EcoCode LLC was founded by EcoGreen Biotech LLC, led by CEO Charles Craun, in collaboration with NGHI — the partnership on this page is foundational, not decorative.</p>
           </div>
         </section>
 
@@ -141,7 +141,7 @@ export default function PartnersPage() {
           <div className="pt-wrap">
             <div className="pt-model-heading">
               <div><span className="pt-eyebrow pt-section-index">02 / WHY ECOGREEN BIOTECH MATTERS TO ECOCODE</span><h2>Three ways the science<br /><em>strengthens the platform.</em></h2></div>
-              <p>Select a pillar to see how EcoGreen Biotech\u2019s expertise flows into EcoCode\u2019s Smart City systems.</p>
+              <p>Select a pillar to see how EcoGreen Biotech’s expertise flows into EcoCode’s Smart City systems.</p>
             </div>
             <div className="pt-model-board">
               <div className="pt-radiant-strip" aria-hidden="true" />
@@ -173,7 +173,7 @@ export default function PartnersPage() {
           <div className="pt-wrap">
             <div className="pt-why-head">
               <div><span className="pt-eyebrow pt-section-index">03 / JOINT INNOVATIONS</span><h2>Built together.<br /><em>Designed for cities.</em></h2></div>
-              <div className="pt-why-caveat"><span className="pt-caveat-mark">i</span><p>Joint work is described here as designed and intended. Capabilities depend on the data, facilities and partners in place, and pilot plans are plans \u2014 not claims of an approved or live deployment.</p></div>
+              <div className="pt-why-caveat"><span className="pt-caveat-mark">i</span><p>Joint work is described here as designed and intended. Capabilities depend on the data, facilities and partners in place, and pilot plans are plans — not claims of an approved or live deployment.</p></div>
             </div>
             <div className="pt-benefit-grid">
               {innovations.map(({ index, title, icon: Icon, text, link, linkLabel }) => <article className="pt-benefit" key={index} data-testid={`card-pt-innovation-${index}`}>
@@ -203,7 +203,7 @@ export default function PartnersPage() {
 
         <section className="pt-platform pt-section" id="pt-collab">
           <div className="pt-wrap pt-platform-layout">
-            <div className="pt-platform-intro"><span className="pt-eyebrow pt-section-index">05 / CURRENT &amp; FUTURE COLLABORATIONS</span><h2>Now, and<br /><em>next.</em></h2><p>Switch between work underway and initiatives planned for the future. Upcoming items are planned directions, including proposed NYC Smart City Testbed pilots \u2014 not a claim of testbed readiness or endorsement.</p>
+            <div className="pt-platform-intro"><span className="pt-eyebrow pt-section-index">05 / CURRENT &amp; FUTURE COLLABORATIONS</span><h2>Now, and<br /><em>next.</em></h2><p>Switch between work underway and initiatives planned for the future. Upcoming items are planned directions, including proposed NYC Smart City Testbed pilots — not a claim of testbed readiness or endorsement.</p>
               <div className="pt-tabs" role="group" aria-label="Choose collaboration timeframe" data-testid="group-pt-collab-tabs">
                 <button type="button" aria-pressed={collabTab === 'active'} className={collabTab === 'active' ? 'is-active' : ''} onClick={() => setCollabTab('active')} data-testid="button-pt-collab-active">Active projects</button>
                 <button type="button" aria-pressed={collabTab === 'upcoming'} className={collabTab === 'upcoming' ? 'is-active' : ''} onClick={() => setCollabTab('upcoming')} data-testid="button-pt-collab-upcoming">Upcoming initiatives</button>
@@ -224,7 +224,7 @@ export default function PartnersPage() {
             <aside className="pt-repo-card" data-testid="card-pt-partner">
               <div className="pt-repo-head"><span><Handshake size={16} /></span><span className="pt-mono">PARTNER / ECOGREEN BIOTECH</span><ArrowUpRight size={15} /></div>
               <div className="pt-repo-name">EcoGreen<br />Biotech</div>
-              <p>Biotechnology, sustainable materials, environmental engineering and regenerative systems design \u2014 the scientific foundation behind EcoCode\u2019s Smart City systems.</p>
+              <p>Biotechnology, sustainable materials, environmental engineering and regenerative systems design — the scientific foundation behind EcoCode’s Smart City systems.</p>
               <div className="pt-repo-rule" />
               <div className="pt-repo-detail"><span>Founded by</span><b>ECOGREEN BIOTECH LLC</b></div>
               <div className="pt-repo-detail"><span>Leadership</span><b>CEO CHARLES CRAUN</b></div>

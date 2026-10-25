@@ -99,7 +99,7 @@ export default function WasteIntelligencePage() {
           <a href={REPO_URL} target="_blank" rel="noopener noreferrer" data-testid="link-wi-top-project">Public project <ArrowUpRight size={13} /></a>
         </div>
       </div>
-      <SiteNav current="waste" sections={['Purpose', '#wi-purpose'], ['Scale', '#wi-scale'], ['Architecture', '#wi-architecture'], ['Capabilities', '#wi-capabilities'], ['Outcomes', '#wi-outcomes'], ['Collaborate', '#wi-collaborate']} onHome={false} />
+      <SiteNav current="waste" sections={[['Purpose', '#wi-purpose'], ['Scale', '#wi-scale'], ['Architecture', '#wi-architecture'], ['Capabilities', '#wi-capabilities'], ['Areas of opportunity', '#wi-outcomes'], ['Collaborate', '#wi-collaborate']]} onHome={false} />
 
       <main id="main-content" tabIndex={-1}>
         <section className="wi-hero" aria-labelledby="wi-title">
