@@ -739,3 +739,74 @@ a { color: inherit; }
 @media (max-width: 760px) {
   .home-dark .principle + .principle { border-top-color: #cfd5c8 !important; }
 }
+
+/* ---- Dynamic radiant transitions (content unchanged) ----
+   Each section's top 90px (60px for closing/footer) fades from the previous
+   section's colour into its own, so dark/light boundaries flow instead of
+   cutting. A soft radial glow at the top of each band slowly drifts
+   (radiant-flow), giving a living, radiant edge. Content starts below the
+   fade (section padding >= 100px, closing/footer use a shorter fade), so
+   text always sits on its own solid colour. */
+@keyframes radiant-flow {
+  from { background-position: 50% -30px, 0 0; }
+  to { background-position: 50% 30px, 0 0; }
+}
+.home-dark .approach {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.14), transparent 70%),
+    linear-gradient(180deg, #04140f 0, #123528 45px, #f5f2e8 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: radiant-flow 10s ease-in-out infinite alternate;
+}
+.home-dark .infrastructure {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: radiant-flow 11s ease-in-out infinite alternate;
+}
+.home-dark .applications {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #9db8a4 45px, #f2f0e6 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: radiant-flow 10s ease-in-out infinite alternate;
+}
+.home-dark .pilot {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f2f0e6 0, #0a231a 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: radiant-flow 12s ease-in-out infinite alternate;
+}
+.home-dark .repo-section {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #04140f 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: radiant-flow 11s ease-in-out infinite alternate;
+}
+.home-dark .about {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.14), transparent 70%),
+    linear-gradient(180deg, #04140f 0, #f6f4eb 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: radiant-flow 10s ease-in-out infinite alternate;
+}
+.home-dark .closing {
+  background:
+    radial-gradient(ellipse 90% 180px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #f6f4eb 0, #dce5da 65px) !important;
+  background-size: 100% 200px, 100% 100%;
+  animation: radiant-flow 9s ease-in-out infinite alternate;
+}
+.home-dark .footer {
+  background:
+    radial-gradient(ellipse 90% 180px at 50% 0, rgba(211,169,108,.14), transparent 70%),
+    linear-gradient(180deg, #dce5da 0, #04100c 70px) !important;
+  background-size: 100% 200px, 100% 100%;
+  animation: radiant-flow 10s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-dark .approach, .home-dark .infrastructure, .home-dark .applications, .home-dark .pilot, .home-dark .repo-section, .home-dark .about, .home-dark .closing, .home-dark .footer { animation: none !important; }
+}

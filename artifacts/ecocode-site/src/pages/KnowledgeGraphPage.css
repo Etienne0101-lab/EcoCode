@@ -433,3 +433,63 @@
 .kg-page .kg-beyond .kg-answer-row li { color: #d8e8da !important; }
 /* Light/dark section bands get a thin ochre rule for separation */
 .kg-page .kg-model-section, .kg-page .kg-lashie { border-top: 3px solid #d3a96c; }
+
+/* ---- Dynamic radiant transitions (content unchanged) ----
+   Top 90px of each section fades from the previous section's colour into
+   its own, with a slowly drifting radial glow. Content sits below the fade. */
+@keyframes kg-radiant-flow {
+  from { background-position: 50% -30px, 0 0; }
+  to { background-position: 50% 30px, 0 0; }
+}
+.kg-page #kg-inspiration {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.14), transparent 70%),
+    linear-gradient(180deg, #04140f 0, #f5f2e8 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
+}
+.kg-page #kg-model {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
+}
+.kg-page #kg-why {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
+}
+.kg-page .kg-section.kg-lashie {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
+}
+.kg-page #kg-platform {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
+}
+.kg-page .kg-beyond {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
+}
+.kg-page #kg-collaborate {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #04140f 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kg-page section { animation: none !important; }
+}

@@ -448,3 +448,56 @@
 /* Blend fix: collaboration tabs sit in a light section, so they need dark text */
 .pt-page .pt-section .pt-tabs button { color: #506158 !important; border-color: #cbd3c6 !important; background: transparent !important; }
 .pt-page .pt-section .pt-tabs button.is-active { background: #2ee06f !important; color: #062015 !important; border-color: #2ee06f !important; }
+
+/* ---- Dynamic radiant transitions (content unchanged) ----
+   Top 90px of each section fades from the previous section's colour into
+   its own, with a slowly drifting radial glow. Content sits below the fade. */
+@keyframes pt-radiant-flow {
+  from { background-position: 50% -30px, 0 0; }
+  to { background-position: 50% 30px, 0 0; }
+}
+.pt-page #pt-who {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.14), transparent 70%),
+    linear-gradient(180deg, #04140f 0, #f5f2e8 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
+}
+.pt-page #pt-why {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
+}
+.pt-page #pt-joint {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
+}
+.pt-page #pt-vision {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #0a231a 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
+}
+.pt-page #pt-collab {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #f5f2e8 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
+}
+.pt-page #pt-partner {
+  background:
+    radial-gradient(ellipse 90% 220px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #f5f2e8 0, #04140f 95px) !important;
+  background-size: 100% 240px, 100% 100%;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pt-page section { animation: none !important; }
+}
