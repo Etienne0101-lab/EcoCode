@@ -232,8 +232,11 @@
 .wi-city-target { display: flex; flex-direction: column; gap: 5px; padding-left: 21px; border-left: 1px solid #c8d2c5; }
 .wi-city-target strong { color: #315d50; font: 600 19px 'Manrope', sans-serif; letter-spacing: -.035em; white-space: nowrap; }
 .wi-city-target > span:last-child { color: #818a7e; font-size: 8px; }
-.wi-city-link { display: inline-flex; align-items: center; gap: 7px; color: #14573f; font-size: 9px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-.wi-city-link:hover { color: #7a5a2e; }
+/* Higher specificity than .wi-page a { color: inherit; }, which was overriding
+   the link's own colour and leaving it pale. Dark pill, cream text, larger
+   type — unmistakable on the pale callout panel, hover or not. */
+.wi-page .wi-city-link { display: inline-flex; align-items: center; gap: 7px; color: #f5f2e8 !important; background: #0a231a !important; border-radius: 999px; padding: 7px 13px; font-size: 11px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.wi-page .wi-city-link:hover { color: #f5f2e8 !important; background: #14573f !important; }
 .wi-collaborate { position: relative; isolation: isolate; padding-block: 94px; overflow: hidden; color: #f1efe3; background: #264a44; }
 .wi-collab-grid { position: absolute; inset: 0; z-index: -1; opacity: .14; background: url('/ecocode-grid.png') center 52% / cover; mix-blend-mode: screen; }
 .wi-collab-layout { display: grid; grid-template-columns: 1fr .78fr; align-items: center; gap: 100px; }
