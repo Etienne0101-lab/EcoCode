@@ -58,7 +58,7 @@ export default function LowerManhattanModel() {
       if (paused) return;
       elapsedRef.current = (elapsedRef.current + 100) % 5000;
       const t = elapsedRef.current;
-      setPhase(t < 1000 ? 0 : t < 3000 ? 1 : t < 4000 ? 2 : 3);
+      setPhase(t < 1000 ? 0 : t < 3000 ? 1 : t < 4500 ? 2 : 3);  // aligned with CSS: bone holds 75–90% (3.75–4.5s), reset is 4.5–5s
     }, 100);
     return () => window.clearInterval(id);
   }, [paused]);
@@ -95,7 +95,7 @@ export default function LowerManhattanModel() {
     const w = tileW / 2;
     const d = tileH / 2;
     return {
-      top: poly([[cx, cy - d], [cx + w, cy], [cx, cy + d], [cx - w, cy]]),
+      top: poly([[cx, cy - d - h], [cx + w, cy - h], [cx, cy + d - h], [cx - w, cy - h]]),  // roof cap at full height (was the ground diamond, so buildings looked open/dark inside)
       left: poly([[cx - w, cy], [cx, cy + d], [cx, cy + d - h], [cx - w, cy - h]]),
       right: poly([[cx, cy + d], [cx + w, cy], [cx + w, cy - h], [cx, cy + d - h]]),
       footprint: poly([[cx, cy - d], [cx + w, cy], [cx, cy + d], [cx - w, cy]]),
@@ -175,8 +175,8 @@ export default function LowerManhattanModel() {
             <span>{i + 1}</span> {label}
             {i === 0 && ' · 0–1s'}
             {i === 1 && ' · 1–3s'}
-            {i === 2 && ' · 3–4s'}
-            {i === 3 && ' · 4–5s'}
+            {i === 2 && ' · 3–4.5s'}
+            {i === 3 && ' · 4.5–5s'}
           </li>
         ))}
       </ol>
