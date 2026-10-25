@@ -8,6 +8,7 @@ import { Link, Route as WouterRoute, Router, Switch, useLocation } from 'wouter'
 import NotFound from './pages/not-found';
 import WasteIntelligencePage from './pages/WasteIntelligencePage';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
+import PartnersPage from './pages/PartnersPage';
 
 const REPO_URL = 'https://github.com/EcoCode-Smart-City-Infrastructure/waste-intelligence-platform';
 const SITE_ORIGIN = 'https://etienne0101-lab.github.io/EcoCode';
@@ -22,6 +23,10 @@ const wasteMetadata = {
 const kgMetadata = {
   title: 'Waste-to-Resource Knowledge Graph | EcoCode LLC',
   description: 'The W2RKG is EcoCode’s semantic engine: a knowledge graph mapping waste types, processes, resources, facilities, constraints and demand into real-time circularity intelligence.',
+};
+const partnersMetadata = {
+  title: 'Partners: EcoGreen Biotech | EcoCode LLC',
+  description: 'EcoGreen Biotech brings biotechnology, sustainable materials, environmental engineering and regenerative systems design to EcoCode’s Smart City platform.',
 };
 const navItems = [
   ['Approach', '#approach'],
@@ -254,7 +259,7 @@ function HomePage() {
         <div className="wrap footer-main">
           <div className="footer-brand"><Wordmark light /><p>Connected intelligence for environmental<br />and infrastructure operations.</p></div>
           <div className="footer-col"><span className="eyebrow">EXPLORE</span>{navItems.map(([label, href]) => <a key={href} href={href} data-testid={`link-footer-nav-${label.toLowerCase().replace(/\s+/g, '-')}`}>{label}</a>)}</div>
-          <div className="footer-col"><span className="eyebrow">PROJECT</span><Link href="/waste-intelligence" data-testid="link-footer-waste-intelligence">Waste Intelligence page <ArrowRight size={12} /></Link><Link href="/knowledge-graph" data-testid="link-footer-knowledge-graph">Knowledge Graph page <ArrowRight size={12} /></Link><a href={REPO_URL} target="_blank" rel="noreferrer" data-testid="link-footer-github">GitHub project <ArrowUpRight size={12} /></a><a href="#architecture" data-testid="link-footer-architecture">Shared architecture <ArrowRight size={12} /></a><a href="#applications" data-testid="link-footer-applications">Application concepts <ArrowRight size={12} /></a></div>
+          <div className="footer-col"><span className="eyebrow">PROJECT</span><Link href="/waste-intelligence" data-testid="link-footer-waste-intelligence">Waste Intelligence page <ArrowRight size={12} /></Link><Link href="/knowledge-graph" data-testid="link-footer-knowledge-graph">Knowledge Graph page <ArrowRight size={12} /></Link><Link href="/partners" data-testid="link-footer-partners">Partners page <ArrowRight size={12} /></Link><a href={REPO_URL} target="_blank" rel="noreferrer" data-testid="link-footer-github">GitHub project <ArrowUpRight size={12} /></a><a href="#architecture" data-testid="link-footer-architecture">Shared architecture <ArrowRight size={12} /></a><a href="#applications" data-testid="link-footer-applications">Application concepts <ArrowRight size={12} /></a></div>
           <div className="footer-note"><span className="eyebrow">ABOUT THIS PLATFORM</span><p>EcoCode brings common sensing, connectivity and analytics building blocks to diverse city and environmental systems.</p></div>
         </div>
         <div className="wrap footer-bottom"><span data-testid="text-copyright">© {new Date().getFullYear()} EcoCode LLC</span><span>Connected systems. Clearer decisions.</span><a href="#top" data-testid="link-back-to-top">Back to top <ChevronUp size={13} /></a></div>
@@ -273,8 +278,9 @@ function RouteMetadata({ pathname }: { pathname: string }) {
     const isHome = normalizedPath === '/';
     const isWastePage = normalizedPath === '/waste-intelligence';
     const isKgPage = normalizedPath === '/knowledge-graph';
-    const isPublicRoute = isHome || isWastePage || isKgPage;
-    const metadata = isWastePage ? wasteMetadata : isKgPage ? kgMetadata : homeMetadata;
+    const isPartnersPage = normalizedPath === '/partners';
+    const isPublicRoute = isHome || isWastePage || isKgPage || isPartnersPage;
+    const metadata = isWastePage ? wasteMetadata : isKgPage ? kgMetadata : isPartnersPage ? partnersMetadata : homeMetadata;
     const canonicalUrl = `${SITE_ORIGIN}${normalizedPath === '/' ? '/' : normalizedPath}`;
 
     document.title = isPublicRoute ? metadata.title : 'Page not found | EcoCode LLC';
@@ -309,6 +315,7 @@ function AppRoutes() {
       <Switch>
         <WouterRoute path="/waste-intelligence" component={WasteIntelligencePage} />
         <WouterRoute path="/knowledge-graph" component={KnowledgeGraphPage} />
+        <WouterRoute path="/partners" component={PartnersPage} />
         <WouterRoute path="/" component={HomePage} />
         <WouterRoute component={NotFound} />
       </Switch>
