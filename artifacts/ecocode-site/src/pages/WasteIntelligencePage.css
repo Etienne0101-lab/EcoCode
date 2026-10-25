@@ -444,3 +444,39 @@
 @media (prefers-reduced-motion: reduce) {
   .wi-page * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ---- Blend: light sections return (content unchanged) ----
+   Light: problem section, architecture, outcomes. Dark kept: hero, scale,
+   capabilities, collaborate. */
+.wi-page .wi-section { background: #f5f2e8 !important; }
+.wi-page .wi-section h2 { color: #29463f !important; }
+.wi-page .wi-section h2 em { color: #578171 !important; }
+.wi-page .wi-section .wi-section-index { color: #8b7552 !important; }
+.wi-page .wi-section .wi-intro-aside p { color: #68766c !important; }
+.wi-page .wi-section .wi-intro-aside .wi-aside-emphasis { color: #45695c !important; }
+.wi-page .wi-section .wi-problem-strip { border-color: #cbd2c5 !important; }
+.wi-page .wi-section .wi-problem-strip > div { border-color: #cbd2c5 !important; }
+.wi-page .wi-section .wi-problem-strip h3 { color: #36574d !important; }
+.wi-page .wi-section .wi-problem-strip p { color: #718076 !important; }
+.wi-page .wi-section .wi-problem-lead { background: #e8e9dd !important; }
+.wi-page .wi-section .wi-problem-lead strong { color: #31574c !important; }
+.wi-page .wi-architecture { background: #f5f2e8 !important; }
+.wi-page .wi-architecture h2 { color: #29463f !important; }
+.wi-page .wi-architecture h2 em { color: #578171 !important; }
+.wi-page .wi-architecture-board { background: #eeefe5 !important; border-color: #c8d1c5 !important; }
+.wi-page .wi-architecture .wi-layer-list button { color: #67776d !important; border-bottom-color: #d8ddd2 !important; }
+.wi-page .wi-architecture .wi-layer-list button:hover, .wi-page .wi-architecture .wi-layer-list button.is-active { color: #2c594d !important; background: #e2e8de !important; }
+.wi-page .wi-architecture .wi-layer-detail h3 { color: #29463f !important; }
+.wi-page .wi-architecture .wi-layer-detail p, .wi-page .wi-architecture .wi-layer-detail li { color: #68766c !important; }
+.wi-page .wi-architecture .wi-architecture-footnote { color: #68766c !important; }
+.wi-page .wi-outcomes { background: #f3f1e7 !important; }
+.wi-page .wi-outcomes h2 { color: #29463f !important; }
+.wi-page .wi-outcomes h2 em { color: #578171 !important; }
+.wi-page .wi-outcomes .wi-outcomes-list h3 { color: #29463f !important; }
+.wi-page .wi-outcomes .wi-outcomes-list p { color: #68766c !important; }
+.wi-page .wi-outcomes .wi-outcome-icon { background: #e5ebe1 !important; border-color: #cbd5c8 !important; color: #3d806a !important; }
+.wi-page .wi-outcomes .wi-material-flow { background: #e5e9df !important; border-top-color: #d2d8cb !important; }
+.wi-page .wi-outcomes .wi-material-flow span { color: #31594f !important; }
+.wi-page .wi-outcomes .wi-city-context { background: #e7ebe1 !important; border-color: #cbd4c8 !important; }
+.wi-page .wi-outcomes .wi-city-copy p, .wi-page .wi-outcomes .wi-city-copy h3 { color: #44584f !important; }
+.wi-page .wi-scale-section, .wi-page .wi-capabilities { border-top: 3px solid #d3a96c; }

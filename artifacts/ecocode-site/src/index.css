@@ -671,3 +671,71 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .home-dark .hero-art, .home-dark main > section:not(.hero), .home-dark footer { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
 }
+
+/* ---- Blend: light scheme returns as alternating sections (content unchanged) ----
+   Rhythm: dark hero -> light Approach -> dark Architecture -> light Applications
+   -> dark Pilot -> dark Open Project -> light About -> light Closing -> dark Footer.
+   Light sections restore their original paper/sage palette; dark sections keep
+   the vivid-green pilot. This breaks the all-green homogeneity without reverting. */
+.home-dark .approach { background: #f5f2e8 !important; }
+.home-dark .approach .display { color: #213f3b !important; }
+.home-dark .approach .display em { color: #538171 !important; }
+.home-dark .approach .section-kicker { color: #7a6950 !important; }
+.home-dark .approach .section-kicker span { color: #317262 !important; }
+.home-dark .approach-aside p { color: #65746c !important; }
+.home-dark .approach .arrow-link { color: #236555 !important; }
+.home-dark .approach .arrow-link:hover { color: #9c7140 !important; }
+.home-dark .principles { border-color: #cfd5c8 !important; }
+.home-dark .principle + .principle { border-color: #cfd5c8 !important; }
+.home-dark .principle { background: transparent !important; }
+.home-dark .principle:hover { background: rgba(233,236,227,.6) !important; transform: translateY(-4px); }
+.home-dark .principle-index { color: #8b8b78 !important; }
+.home-dark .principle-icon { color: #2e7667 !important; }
+.home-dark .principle h3 { color: #213f3b !important; }
+.home-dark .principle p { color: #68776f !important; }
+.home-dark .applications { background: #f2f0e6 !important; }
+.home-dark .applications .display { color: #213f3b !important; }
+.home-dark .applications .display em { color: #538171 !important; }
+.home-dark .applications .section-kicker { color: #7a6950 !important; }
+.home-dark .applications-heading > p { color: #64746b !important; }
+.home-dark .application-list { border-color: #cbd3c6 !important; }
+.home-dark .application-row { border-color: #cbd3c6 !important; }
+.home-dark .application-row:hover { background: rgba(224,231,220,.46) !important; }
+.home-dark .application-number { color: #94744a !important; }
+.home-dark .application-identity .eyebrow { color: #718177 !important; }
+.home-dark .application-main h3 { color: #294941 !important; }
+.home-dark .application-main p { color: #68776e !important; }
+.home-dark .application-row li { color: #5d7066 !important; }
+.home-dark .application-row li svg { color: #42816d !important; }
+.home-dark .application-meta span { color: #8a7658 !important; }
+.home-dark .application-meta b { color: #4f695d !important; }
+.home-dark .application-icon { color: #347665 !important; border-color: #c5d2c6 !important; background: rgba(249,248,240,.55) !important; }
+.home-dark .reuse-band { background: #e2e9de !important; border-color: #cbd4c7 !important; }
+.home-dark .reuse-band .eyebrow { color: #697d70 !important; }
+.home-dark .reuse-band p { color: #31594f !important; }
+.home-dark .reuse-band p b { color: #af8653 !important; }
+.home-dark .reuse-mark { background: #2e5e52 !important; color: #e8e8d9 !important; }
+.home-dark .about { background: #f6f4eb !important; }
+.home-dark .about .display { color: #213f3b !important; }
+.home-dark .about .display em { color: #538171 !important; }
+.home-dark .about .section-kicker { color: #7a6950 !important; }
+.home-dark .about-copy { border-color: #ccd4c8 !important; }
+.home-dark .about-copy p { color: #65736a !important; }
+.home-dark .about-copy .about-lede { color: #345950 !important; }
+.home-dark .about-values { border-color: #d2d9ce !important; }
+.home-dark .about-values span { color: #597469 !important; }
+.home-dark .about-values svg { color: #36806e !important; }
+.home-dark .closing { background: #dce5da !important; }
+.home-dark .closing .display { color: #213f3b !important; }
+.home-dark .closing .display em { color: #538171 !important; }
+.home-dark .closing .eyebrow { color: #7b6a4e !important; }
+.home-dark .closing-action p { color: #5e7268 !important; }
+.home-dark .closing-secondary { color: #326c5d !important; }
+.home-dark .closing-mark { background: #2b5b50 !important; color: #dcb578 !important; }
+.home-dark .closing .button-primary { background: #2b5b50 !important; color: #f4f1e6 !important; }
+.home-dark .closing .button-primary:hover { background: #38675c !important; }
+/* Dark sections get a thin ochre top accent so they read as distinct bands */
+.home-dark .infrastructure, .home-dark .pilot { border-top: 3px solid #d3a96c; }
+@media (max-width: 760px) {
+  .home-dark .principle + .principle { border-top-color: #cfd5c8 !important; }
+}

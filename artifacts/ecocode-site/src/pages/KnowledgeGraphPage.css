@@ -382,3 +382,54 @@
 @media (prefers-reduced-motion: reduce) {
   .kg-page * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ---- Blend: light sections return (content unchanged) ----
+   Light: inspiration / why / joint / platform-collaborations.
+   Dark kept: hero, model explorer, lashie/vision, beyond, collaborate. */
+.kg-page .kg-section { background: #f5f2e8 !important; }
+.kg-page .kg-section h2 { color: #29463f !important; }
+.kg-page .kg-section h2 em { color: #578171 !important; }
+.kg-page .kg-section .kg-section-index { color: #8b7552 !important; }
+.kg-page .kg-section .kg-intro-aside p { color: #68766c !important; }
+.kg-page .kg-section .kg-intro-aside .kg-aside-emphasis { color: #45695c !important; }
+.kg-page .kg-section .kg-signal-strip, .kg-page .kg-section .kg-city-strip { border-color: #cbd2c5 !important; }
+.kg-page .kg-section .kg-signal-strip > div, .kg-page .kg-section .kg-city-strip > div { border-color: #cbd2c5 !important; }
+.kg-page .kg-section .kg-signal-strip h3, .kg-page .kg-section .kg-city-strip h3 { color: #36574d !important; }
+.kg-page .kg-section .kg-signal-strip p, .kg-page .kg-section .kg-city-strip p { color: #718076 !important; }
+.kg-page .kg-section .kg-signal-lead, .kg-page .kg-section .kg-city-lead { background: #e8e9dd !important; }
+.kg-page .kg-section .kg-signal-lead strong, .kg-page .kg-section .kg-city-lead strong { color: #31574c !important; }
+.kg-page .kg-section .kg-inspiration-note { color: #59705f !important; }
+.kg-page .kg-section .kg-benefit-grid { border-color: #cbd3c6 !important; }
+.kg-page .kg-section .kg-benefit { background: rgba(248,248,240,.42) !important; border-color: #cbd3c6 !important; }
+.kg-page .kg-section .kg-benefit h3 { color: #31564b !important; }
+.kg-page .kg-section .kg-benefit p { color: #6e7b71 !important; }
+.kg-page .kg-section .kg-benefit-icon { background: #e6ebe0 !important; border-color: #cbd5c8 !important; color: #377462 !important; }
+.kg-page .kg-section .kg-platform-intro > p { color: #6b796f !important; }
+.kg-page .kg-section .kg-platform-list article { border-bottom-color: #cbd3c6 !important; }
+.kg-page .kg-section .kg-platform-list h3 { color: #34584d !important; }
+.kg-page .kg-section .kg-platform-list p { color: #718076 !important; }
+.kg-page .kg-section .kg-platform-icon { background: #e5ebe1 !important; border-color: #cbd5c8 !important; color: #3d806a !important; }
+.kg-page .kg-section .kg-platform-arrow { color: #a78657 !important; }
+.kg-page .kg-section .kg-why-caveat { background: rgba(246,245,235,.58) !important; }
+.kg-page .kg-section .kg-why-caveat p { color: #69786d !important; }
+/* Dark exceptions inside light-section rules: lashie/vision and beyond stay dark */
+.kg-page .kg-section.kg-lashie { background: #0a231a !important; }
+.kg-page .kg-section.kg-lashie h2 { color: #f2f7ef !important; }
+.kg-page .kg-section.kg-lashie h2 em { color: #8fd6a8 !important; }
+.kg-page .kg-section.kg-lashie .kg-intro-aside p { color: #a9c0b0 !important; }
+.kg-page .kg-section.kg-lashie .kg-intro-aside .kg-aside-emphasis { color: #d8e8da !important; }
+.kg-page .kg-beyond { background: #0a231a !important; }
+.kg-page .kg-beyond h2 { color: #f2f7ef !important; }
+.kg-page .kg-beyond h2 em { color: #8fd6a8 !important; }
+.kg-page .kg-beyond .kg-intro-aside p { color: #a9c0b0 !important; }
+.kg-page .kg-beyond .kg-intro-aside .kg-aside-emphasis { color: #d8e8da !important; }
+.kg-page .kg-beyond .kg-city-strip { border-color: rgba(180,220,190,.16) !important; }
+.kg-page .kg-beyond .kg-city-strip > div { border-color: rgba(180,220,190,.16) !important; }
+.kg-page .kg-beyond .kg-city-strip h3 { color: #f2f7ef !important; }
+.kg-page .kg-beyond .kg-city-strip p { color: #a9c0b0 !important; }
+.kg-page .kg-beyond .kg-city-lead { background: #102e22 !important; }
+.kg-page .kg-beyond .kg-city-lead strong { color: #e6f0e6 !important; }
+.kg-page .kg-beyond .kg-answer-row { background: #102e22 !important; border-color: rgba(180,220,190,.18) !important; }
+.kg-page .kg-beyond .kg-answer-row li { color: #d8e8da !important; }
+/* Light/dark section bands get a thin ochre rule for separation */
+.kg-page .kg-model-section, .kg-page .kg-lashie { border-top: 3px solid #d3a96c; }

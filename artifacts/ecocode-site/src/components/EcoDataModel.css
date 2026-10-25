@@ -1,27 +1,29 @@
-/* EcoDataModel: isometric 3D data scene in the EcoCode dark theme.
+/* EcoDataModel: isometric 3D data scene, now as a LIGHT contrast panel inside
+   the dark Architecture section — paper background, vivid green bars and an
+   ochre connector, so the 3D rendering is the visual accent of the page.
    Pure SVG + CSS — no WebGL, no external script, phone-safe legend fallback. */
-.eco3d { margin-top: 28px; padding: 22px 24px 20px; border: 1px solid rgba(180,220,190,.18); background: #0a2018; color: #eef5ec; }
+.eco3d { margin-top: 28px; padding: 22px 24px 20px; border: 1px solid #cbd3c6; border-top: 4px solid #d3a96c; background: #f5f2e8; color: #294941; box-shadow: 0 22px 45px rgba(0,0,0,.35); }
 .eco3d-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.eco3d-eyebrow { font: 500 9px/1.4 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #c9a86f; }
-.eco3d-note { font: 400 8px/1.5 'DM Mono', monospace; letter-spacing: .05em; color: #8fae98; text-align: right; }
-.eco3d-scene { perspective: 900px; margin-top: 8px; overflow: hidden; }
+.eco3d-eyebrow { font: 500 9px/1.4 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #8a7658; }
+.eco3d-note { font: 400 8px/1.5 'DM Mono', monospace; letter-spacing: .05em; color: #68766c; text-align: right; }
+.eco3d-scene { perspective: 900px; margin-top: 8px; overflow: hidden; background: linear-gradient(180deg, rgba(220,229,218,.55), rgba(245,242,232,0)); }
 .eco3d-scene svg { display: block; width: 100%; height: auto; transform: rotateX(var(--eco3d-tilt-x, 0deg)) rotateY(var(--eco3d-tilt-y, 0deg)); transition: transform .35s ease; transform-style: preserve-3d; }
-.eco3d-connector { fill: none; stroke: rgba(75,240,138,.45); stroke-width: 1; stroke-dasharray: 4 5; }
+.eco3d-connector { fill: none; stroke: #d3a96c; stroke-width: 1.5; stroke-dasharray: 4 5; }
 .eco3d-bar { opacity: 0; transform: translateY(14px); }
 .eco3d-in .eco3d-bar { animation: eco3d-rise .8s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes eco3d-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
-.eco3d-face-top { fill: #7ce8a8; fill-opacity: .95; }
+.eco3d-face-top { fill: #2ee06f; fill-opacity: .98; }
 .eco3d-face-left { fill: #1f7a4d; }
 .eco3d-face-right { fill: #14532d; }
 .eco3d-bar:hover .eco3d-face-top { fill: #4bf08a; }
-.eco3d-label { fill: #d8e8da; font: 600 10px 'DM Mono', monospace; letter-spacing: .06em; }
-.eco3d-panels rect { fill: rgba(180,220,190,.07); stroke: rgba(180,220,190,.28); stroke-width: 1; }
-.eco3d-panels line { stroke: rgba(180,220,190,.35); stroke-width: 1; }
-.eco3d-caption { margin: 10px 0 0; color: #a9c0b0; font-size: 11px; line-height: 1.7; }
-.eco3d-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; padding: 0; margin: 16px 0 0; list-style: none; border-top: 1px solid rgba(180,220,190,.14); padding-top: 14px; }
+.eco3d-label { fill: #294941; font: 600 10px 'DM Mono', monospace; letter-spacing: .06em; }
+.eco3d-panels rect { fill: rgba(255,255,255,.65); stroke: #cbd3c6; stroke-width: 1; }
+.eco3d-panels line { stroke: #9db8a4; stroke-width: 1; }
+.eco3d-caption { margin: 10px 0 0; color: #65746c; font-size: 11px; line-height: 1.7; }
+.eco3d-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; padding: 0; margin: 16px 0 0; list-style: none; border-top: 1px solid #d2d9ce; padding-top: 14px; }
 .eco3d-legend li { display: flex; gap: 8px; align-items: baseline; font-size: 10px; }
-.eco3d-legend strong { color: #f2f7ef; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .05em; text-transform: uppercase; }
-.eco3d-legend span { color: #a9c0b0; }
+.eco3d-legend strong { color: #294941; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .05em; text-transform: uppercase; }
+.eco3d-legend span { color: #68766c; }
 @media (max-width: 700px) {
   .eco3d { padding: 18px 16px; }
   .eco3d-note { text-align: left; }
