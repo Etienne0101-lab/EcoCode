@@ -443,52 +443,52 @@
 }
 .kg-page #kg-inspiration {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.07), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.14), transparent 70%),
     linear-gradient(180deg, #04140f 0, #f5f2e8 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page #kg-model {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
     linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page #kg-why {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
     linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page .kg-section.kg-lashie {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
     linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page #kg-platform {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
     linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page .kg-beyond {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
     linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 .kg-page #kg-collaborate {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%),
-    linear-gradient(180deg, #0a231a 0, #04140f 52px) !important;
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
+    linear-gradient(180deg, #0a231a 0, #123528 26px, #04140f 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
 }
 @media (prefers-reduced-motion: reduce) {
   .kg-page section { animation: none !important; }
@@ -501,3 +501,15 @@
 .kg-page .kg-step-detail-top { color: #c9a86f !important; }
 .kg-page .kg-step-detail-top svg { color: #4bf08a !important; }
 .kg-page .kg-mapping .kg-eyebrow { color: #c9a86f !important; }
+
+/* ---- Footer radiant transition (was missing on subpages) ----
+   The footer previously sat flat at #04100c with no fade or glow from the
+   dark section above it. Same dynamic language as the rest of the page:
+   a 52px fade through a green mid-tone, with the drifting ochre glow. */
+.kg-page .kg-footer {
+  background:
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #04140f 0, #0a231a 26px, #04100c 52px) !important;
+  background-size: 100% 160px, 100% 100%;
+  animation: kg-radiant-flow 11s ease-in-out infinite alternate;
+}

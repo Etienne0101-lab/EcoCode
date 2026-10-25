@@ -458,45 +458,45 @@
 }
 .pt-page #pt-who {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.07), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.14), transparent 70%),
     linear-gradient(180deg, #04140f 0, #f5f2e8 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-why {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
     linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-joint {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
     linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-vision {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.08), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
     linear-gradient(180deg, #f5f2e8 0, #0a231a 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-collab {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
     linear-gradient(180deg, #0a231a 0, #f5f2e8 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 .pt-page #pt-partner {
   background:
-    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.06), transparent 70%),
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(46,224,111,.12), transparent 70%),
     linear-gradient(180deg, #f5f2e8 0, #04140f 52px) !important;
   background-size: 100% 160px, 100% 100%;
-  animation: none;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
 }
 @media (prefers-reduced-motion: reduce) {
   .pt-page section { animation: none !important; }
@@ -509,3 +509,12 @@
 .pt-page .pt-step-detail-top { color: #c9a86f !important; }
 .pt-page .pt-step-detail-top svg { color: #4bf08a !important; }
 .pt-page .pt-mapping .pt-eyebrow { color: #c9a86f !important; }
+
+/* ---- Footer radiant transition (was missing on subpages) ---- */
+.pt-page .pt-footer {
+  background:
+    radial-gradient(ellipse 90% 140px at 50% 0, rgba(211,169,108,.16), transparent 70%),
+    linear-gradient(180deg, #04140f 0, #0a231a 26px, #04100c 52px) !important;
+  background-size: 100% 160px, 100% 100%;
+  animation: pt-radiant-flow 11s ease-in-out infinite alternate;
+}
