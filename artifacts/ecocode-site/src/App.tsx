@@ -7,7 +7,7 @@ import {
 import { Link, Route as WouterRoute, Router, Switch, useLocation } from 'wouter';
 import NotFound from './pages/not-found';
 import WasteIntelligencePage from './pages/WasteIntelligencePage';
-import EcoDataModel from './components/EcoDataModel';
+import EcoArchitectureInfographic from './components/EcoArchitectureInfographic';
 import LowerManhattanModel from './components/LowerManhattanModel';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 import PartnersPage from './pages/PartnersPage';
@@ -226,17 +226,17 @@ function HomePage() {
             <div className="architecture-flow" aria-label="Shared platform architecture" data-testid="status-platform-architecture">
               <span><Radio size={17} /> Sensors &amp; modules</span><i /><span><Signal size={17} /> Gateways</span><i /><span className="flow-connectivity">LoRaWAN / NB-IoT</span><i /><span><Cloud size={17} /> Cloud telemetry</span><i /><span><Activity size={17} /> Analytics &amp; GIS</span>
             </div>
-            <EcoDataModel
-              title="Systems in three dimensions / Illustrative model"
-              caption="The same seven connected systems from the platform map, rendered as a live isometric model: the scene is generated in the browser from this list, grows in on scroll, and tilts gently with the pointer. No measured values are shown — this is the structure of the platform, not a performance claim."
+            <EcoArchitectureInfographic
+              title="One platform, seven systems / Interactive infographic"
+              caption="The same seven connected systems from the platform map, shown as an interactive infographic: tap a system to explore it, or switch to the flow layers to follow a signal from field to analytics. No measured values are shown — this is the structure of the platform, not a performance claim."
               items={[
-                { label: 'WASTE', detail: 'Waste Intelligence Platform', tier: 3, gx: 0, gy: 0 },
-                { label: 'AIR', detail: 'Emissions monitoring', tier: 2, gx: 1, gy: 0 },
-                { label: 'WATER', detail: 'Stormwater & flood intelligence', tier: 2, gx: 2, gy: 0 },
-                { label: 'MOBILITY', detail: 'Traffic & mobility flow', tier: 1, gx: 0, gy: 1 },
-                { label: 'ASSETS', detail: 'Building & infrastructure health', tier: 2, gx: 1, gy: 1 },
-                { label: 'ENERGY', detail: 'Smart energy & microgrid', tier: 1, gx: 2, gy: 1 },
-                { label: 'GREEN SPACE', detail: 'Urban green space & biodiversity', tier: 2, gx: 1, gy: 2 },
+                { label: 'WASTE', detail: 'Waste Intelligence Platform', tier: 3 },
+                { label: 'AIR', detail: 'Emissions monitoring', tier: 2 },
+                { label: 'WATER', detail: 'Stormwater & flood intelligence', tier: 2 },
+                { label: 'MOBILITY', detail: 'Traffic & mobility flow', tier: 1 },
+                { label: 'ASSETS', detail: 'Building & infrastructure health', tier: 2 },
+                { label: 'ENERGY', detail: 'Smart energy & microgrid', tier: 1 },
+                { label: 'GREEN SPACE', detail: 'Urban green space & biodiversity', tier: 2 },
               ]}
             />
             <p className="architecture-family-list" data-testid="text-platform-module-families"><span>MODULE FAMILIES</span> EdgeSense · LoadTrack · FleetNode · EmisGuard · SiteBeacon</p>
