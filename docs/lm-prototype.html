@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype — Pilot loop player (EcoCode)</title>
+<meta name="robots" content="noindex">
+<style>
+  body{font-family:Manrope,system-ui,sans-serif;background:#f5f3e9;color:#16211a;margin:0;padding:1.5rem}
+  .wrap{max-width:980px;margin:0 auto}
+  .eyebrow{font-size:.75rem;letter-spacing:.08em;font-weight:700;color:#7b745f}
+  h1{font-size:clamp(26px,3vw,36px);margin:.4rem 0}
+  p{color:#5f7067;line-height:1.6;max-width:70ch}
+  .card{background:#f2f1e7;border:1px solid #cbd3c6;border-radius:20px;padding:1.4rem 1.5rem;margin-top:1.2rem}
+  .pickers{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.1rem 0 .4rem}
+  .pickers button{background:#fff;border:1px solid #cbd3c6;border-radius:999px;padding:.5rem .9rem;font-weight:700;cursor:pointer;color:#36564c}
+  .pickers button.active{background:#1d7a4f;color:#fff;border-color:#1d7a4f}
+  .note{color:#7b745f;font-size:.85rem}
+  .body{display:grid;grid-template-columns:1.4fr 1fr;gap:1.2rem;align-items:start;margin-top:.8rem}
+  svg{width:100%;height:auto;background:#e7e9df;border:1px solid #d2d8cb;border-radius:14px}
+  .edge{stroke:#2a9d8f;stroke-width:2;stroke-dasharray:8 6;opacity:.8;fill:none}
+  .node{cursor:pointer}
+  .node circle{fill:#fff;stroke:#1d7a4f;stroke-width:2}
+  .node.now circle{fill:#1d7a4f;stroke:#b7791f;stroke-width:3}
+  .node text{font-size:10px;font-weight:800;fill:#36564c;text-anchor:middle}
+  .node.now text{fill:#fff}
+  .node .nm{font-size:9px;font-weight:600}
+  .dot{fill:#ec4899;stroke:#fff;stroke-width:2}
+  .detail{background:#fff;border:1px solid #d2d8cb;border-radius:14px;padding:1rem}
+  .detail h2{font-size:1.3rem;margin:.3rem 0}
+  .metrics{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1rem 0}
+  .metrics>div{background:#f2f1e7;border-radius:10px;padding:.6rem}
+  .metrics b{display:block;font-size:1.15rem;color:#1d7a4f}
+  .metrics span{font-size:.8rem;color:#5f7067}
+  .controls{display:flex;gap:.5rem;flex-wrap:wrap}
+  .controls button,.speed select{background:#e6ebe0;border:1px solid #cbd3c6;border-radius:999px;padding:.5rem .8rem;font-weight:700;cursor:pointer;color:#36564c}
+  .controls button.play{background:#1d7a4f;color:#fff;border-color:#1d7a4f}
+  .speed{display:block;margin-top:.9rem;font-size:.85rem;font-weight:700;color:#36564c}
+  .speed select{margin-left:.5rem;border-radius:8px}
+  @media(max-width:760px){.body{grid-template-columns:1fr}body{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">UNLINKED PROTOTYPE — REPLACES THE OLD 3D PROTOTYPE</span>
+  <h1>From bin to resource, in one loop.</h1>
+  <p>Prototype of the pilot loop player: pick a waste stream, press Play, and follow it around. Tap any stage to jump to it. This page is not linked from the homepage. Illustrative pathways from the W2RKG sample — not live pilot telemetry. The old 3D prototype (real NYC footprints, flat roofs, 1.16 MB of geometry) is gone; this page is plain HTML/SVG/CSS with no WebGL and no data file.</p>
+  <div class="card">
+    <div class="pickers" id="pickers"></div>
+    <p class="note" id="wasteNote"></p>
+    <div class="body">
+      <svg viewBox="0 0 600 360" id="loopSvg" role="img" aria-label="Animated waste-to-resource loop"></svg>
+      <div class="detail">
+        <span class="eyebrow" id="stageLabel"></span>
+        <h2 id="stageName"></h2>
+        <p id="stageDetail"></p>
+        <div class="metrics" id="metrics"></div>
+        <div class="controls">
+          <button id="prevBtn">← Previous stage</button>
+          <button id="playBtn" class="play">❚❚ Pause loop</button>
+          <button id="nextBtn">Next stage →</button>
+        </div>
+        <label class="speed">Speed
+          <select id="speedSel"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+        </label>
+      </div>
+    </div>
+  </div>
+  <p class="note">Source data: Waste Intelligence Platform W2RKG sample (31 nodes / 55 edges), as used by the live web app. Pilot deployment is planned; coordination with local operators will shape rollout.</p>
+</div>
+<script>
+const STREAMS=[
+ {id:'food',label:'Restaurant food waste',note:'Downtown Manhattan · 80,000 t/yr in the sample · daily collection · 5% contamination in the sample',
+  stages:[
+   {role:'WASTE',name:'Restaurant food waste',detail:'Collected daily from 1,500 establishments in the sample. 95% food scraps, 5% fats, oils and grease.'},
+   {role:'PROCESS',name:'Anaerobic digestion',detail:'90% efficiency · 336 h · 45 kWh/t · 30 kg CO₂/t · 37 °C · pH 6.8–7.4 in the sample.'},
+   {role:'RESOURCE',name:'Biogas',detail:'150 m³ per tonne of waste · 60% methane in the sample. Used for electricity, heating and vehicle fuel.'},
+   {role:'DEMAND',name:'Waste processor / energy buyer',detail:'The demand actor that takes biogas in the sample pathway.'},
+   {role:'FACILITY',name:'Queens AD plant (sample)',detail:'200,000 t/yr capacity in the sample. The loop closes when the facility takes the next load.'}],
+  metrics:[['90%','Process efficiency'],['150 m³/t','Biogas yield'],['336 h','Processing time'],['45 kWh/t','Energy use']]},
+ {id:'organics',label:'Brooklyn residential organics',note:'Brooklyn · 150,000 t/yr in the sample · weekly collection · 45% participation · 85% diversion',
+  stages:[
+   {role:'WASTE',name:'Residential organics',detail:'70% food scraps, 30% yard waste in the sample stream.'},
+   {role:'PROCESS',name:'Aerobic composting',detail:'85% efficiency · 168 h · 25 kWh/t · 50 kg CO₂/t · 55 °C in the sample.'},
+   {role:'RESOURCE',name:'Compost amendment',detail:'0.4 t of compost per tonne of waste · high quality in the sample. Used as soil amendment and in urban agriculture.'},
+   {role:'DEMAND',name:'Urban farm',detail:'The demand actor that takes compost in the sample pathway.'},
+   {role:'FACILITY',name:'Brooklyn compost facility (sample)',detail:'The sample facility that closes this loop by taking the next load.'}],
+  metrics:[['85%','Process efficiency'],['0.4 t/t','Compost yield'],['168 h','Processing time'],['85%','Sample diversion']]},
+ {id:'coffee',label:'Coffee grounds',note:'Coffee shops, offices, households · 97% organic content in the sample',
+  stages:[
+   {role:'WASTE',name:'Coffee grounds',detail:'High nitrogen content — mixed with carbon-rich materials in the sample pathway.'},
+   {role:'PROCESS',name:'Black soldier fly larvae',detail:'75% efficiency · 720 h · 15 kWh/t · 20 kg CO₂/t · 27 °C in the sample.'},
+   {role:'RESOURCE',name:'Animal feed',detail:'150 kg per tonne of waste · high quality in the sample. Used for poultry, aquaculture and livestock feed.'},
+   {role:'DEMAND',name:'Waste processor',detail:'The demand actor that takes animal feed in the sample pathway.'},
+   {role:'FACILITY',name:'Bronx BSFL farm (sample)',detail:'The sample facility that closes this loop by taking the next load.'}],
+  metrics:[['75%','Process efficiency'],['150 kg/t','Larvae yield'],['720 h','Processing time'],['15 kWh/t','Energy use']]},
+ {id:'yard',label:'Yard waste',note:'Residential, parks, landscaping · 98% organic content in the sample',
+  stages:[
+   {role:'WASTE',name:'Yard waste',detail:'Woody yard waste, dried and size-reduced before processing in the sample pathway.'},
+   {role:'PROCESS',name:'Biochar production',detail:'80% efficiency · 2 h · 150 kWh/t · 100 kg CO₂/t · 500 °C pyrolysis in the sample. Syngas produced.'},
+   {role:'RESOURCE',name:'Biochar',detail:'30% yield in the sample. Used as soil amendment, for carbon sequestration and water filtration.'},
+   {role:'DEMAND',name:'Waste processor',detail:'The demand actor that takes biochar in the sample pathway.'},
+   {role:'FACILITY',name:'Staten Island biochar plant (sample)',detail:'The sample facility that closes this loop by taking the next load.'}],
+  metrics:[['80%','Process efficiency'],['30%','Biochar yield'],['2 h','Processing time'],['High (sample)','Carbon sequestration']]},
+];
+const POS=[[300,52],[500,150],[430,300],[170,300],[100,150]];
+let stream=STREAMS[0], stage=0, playing=!matchMedia('(prefers-reduced-motion: reduce)').matches, speed=1, progress=0;
+const svg=document.getElementById('loopSvg');
+function short(n){return n.length>18?n.slice(0,17)+'…':n;}
+function render(){
+  document.getElementById('wasteNote').textContent=stream.note;
+  document.getElementById('stageLabel').textContent='STAGE '+(stage+1)+' OF 5 — '+stream.stages[stage].role;
+  document.getElementById('stageName').textContent=stream.stages[stage].name;
+  document.getElementById('stageDetail').textContent=stream.stages[stage].detail;
+  document.getElementById('metrics').innerHTML=stream.metrics.map(m=>'<div><b>'+m[0]+'</b><span>'+m[1]+'</span></div>').join('');
+  document.getElementById('playBtn').textContent=playing?'❚❚ Pause loop':'▶ Play loop';
+  document.querySelectorAll('#pickers button').forEach(b=>b.classList.toggle('active',b.dataset.id===stream.id));
+  let edges='', nodes='';
+  POS.forEach((p,i)=>{const n=POS[(i+1)%5],mx=(p[0]+n[0])/2,my=(p[1]+n[1])/2-18;edges+='<path class="edge" d="M '+p[0]+' '+p[1]+' Q '+mx+' '+my+' '+n[0]+' '+n[1]+'"/>';});
+  POS.forEach((p,i)=>{nodes+='<g class="node'+(i===stage?' now':'')+'" data-i="'+i+'"><circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(i===stage?34:28)+'"/><text x="'+p[0]+'" y="'+(p[1]-4)+'">'+stream.stages[i].role+'</text><text class="nm" x="'+p[0]+'" y="'+(p[1]+14)+'">'+short(stream.stages[i].name)+'</text></g>';});
+  const seg=Math.floor(progress*5)%5, t=(progress*5)%1, f=POS[seg], to=POS[(seg+1)%5];
+  const dx=f[0]+(to[0]-f[0])*t, dy=f[1]+(to[1]-f[1])*t;
+  svg.innerHTML=edges+nodes+'<circle class="dot" cx="'+dx+'" cy="'+dy+'" r="9"/>';
+  svg.querySelectorAll('.node').forEach(g=>g.addEventListener('click',()=>{jump(+g.dataset.i);}));
+}
+function jump(i){progress=i/5;stage=i;render();}
+function tick(){if(!playing)return;progress=(progress+0.008*speed)%1;const n=Math.floor(progress*5)%5;if(n!==stage)stage=n;render();}
+document.getElementById('pickers').innerHTML=STREAMS.map(s=>'<button data-id="'+s.id+'">'+s.label+'</button>').join('');
+document.querySelectorAll('#pickers button').forEach(b=>b.addEventListener('click',()=>{stream=STREAMS.find(s=>s.id===b.dataset.id);progress=0;stage=0;render();}));
+document.getElementById('prevBtn').addEventListener('click',()=>jump((stage+4)%5));
+document.getElementById('nextBtn').addEventListener('click',()=>jump((stage+1)%5));
+document.getElementById('playBtn').addEventListener('click',()=>{playing=!playing;render();});
+document.getElementById('speedSel').addEventListener('change',e=>{speed=Number(e.target.value);});
+setInterval(tick,50);
+render();
+</script>
+</body>
+</html>
