@@ -98,6 +98,30 @@ function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
+  // Homepage dark pilot only: fade sections in as they scroll into view.
+  // No content is hidden by this — every section is rendered in full and
+  // becomes visible on entry (or immediately if IntersectionObserver is
+  // unavailable), so the pilot accentuates rather than condenses content.
+  useEffect(() => {
+    const root = document.querySelector('.home-dark');
+    if (!root) return;
+    const targets = Array.from(root.querySelectorAll('main > section:not(.hero), footer'));
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('dark-in'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('dark-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     const hash = window.location.hash.slice(1);
     const previousScrollBehavior = document.documentElement.style.scrollBehavior;
@@ -111,7 +135,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div id="top" className="site-shell">
+    <div id="top" className="site-shell home-dark">
       <div className="topline">
         <div className="wrap topline-inner">
           <span className="eyebrow"><span className="status-dot" /> Shared intelligence for the systems cities depend on</span>
