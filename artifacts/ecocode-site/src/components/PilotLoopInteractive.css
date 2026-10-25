@@ -1,0 +1,36 @@
+/* PilotLoopInteractive — 2D loop player for the homepage NYC Pilot section.
+   Plain HTML/SVG/CSS in the site's paper/forest/ochre palette. No WebGL. */
+.pilot-loop{background:#f2f1e7;border:1px solid #cbd3c6;border-radius:20px;padding:1.4rem 1.5rem;margin-top:1.2rem}
+.pilot-loop-eyebrow{font-size:.75rem;letter-spacing:.08em;font-weight:700;color:#7b745f}
+.pilot-loop-head h3{font:700 clamp(26px,3vw,36px)/1.1 'Manrope',sans-serif;margin:.4rem 0;color:#16211a}
+.pilot-loop-head p{color:#5f7067;font-size:.95rem;line-height:1.6;max-width:70ch;margin:0}
+.pilot-loop-pickers{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.1rem 0 .4rem}
+.pilot-loop-pickers button{background:#fff;border:1px solid #cbd3c6;border-radius:999px;padding:.5rem .9rem;font-weight:700;cursor:pointer;color:#36564c}
+.pilot-loop-pickers button.pilot-loop-active{background:#1d7a4f;color:#fff;border-color:#1d7a4f}
+.pilot-loop-waste-note{color:#7b745f;font-size:.85rem;margin:0 0 .8rem}
+.pilot-loop-body{display:grid;grid-template-columns:1.4fr 1fr;gap:1.2rem;align-items:start}
+.pilot-loop-svg{width:100%;height:auto;background:#e7e9df;border:1px solid #d2d8cb;border-radius:14px}
+.pilot-loop-edge{stroke:#2a9d8f;stroke-width:2;stroke-dasharray:8 6;opacity:.8}
+.pilot-loop-node{cursor:pointer}
+.pilot-loop-node circle{fill:#fff;stroke:#1d7a4f;stroke-width:2}
+.pilot-loop-node.pilot-loop-now circle{fill:#1d7a4f;stroke:#b7791f;stroke-width:3}
+.pilot-loop-node text{font-size:10px;font-weight:800;fill:#36564c}
+.pilot-loop-node.pilot-loop-now text{fill:#fff}
+.pilot-loop-node-name{font-size:9px !important;font-weight:600 !important}
+.pilot-loop-dot{fill:#ec4899;stroke:#fff;stroke-width:2}
+.pilot-loop-detail{background:#fff;border:1px solid #d2d8cb;border-radius:14px;padding:1rem}
+.pilot-loop-stage-label{font-size:.75rem;letter-spacing:.08em;font-weight:700;color:#7b745f}
+.pilot-loop-detail h4{font-size:1.3rem;margin:.3rem 0;color:#16211a}
+.pilot-loop-detail p{color:#5f7067;line-height:1.6;font-size:.95rem}
+.pilot-loop-metrics{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1rem 0}
+.pilot-loop-metrics>div{background:#f2f1e7;border-radius:10px;padding:.6rem}
+.pilot-loop-metrics b{display:block;font-size:1.15rem;color:#1d7a4f}
+.pilot-loop-metrics span{font-size:.8rem;color:#5f7067}
+.pilot-loop-controls{display:flex;gap:.5rem;flex-wrap:wrap}
+.pilot-loop-controls button{background:#e6ebe0;border:1px solid #cbd3c6;border-radius:999px;padding:.5rem .8rem;font-weight:700;cursor:pointer;color:#36564c}
+.pilot-loop-controls button.pilot-loop-play{background:#1d7a4f;color:#fff;border-color:#1d7a4f}
+.pilot-loop-speed{display:block;margin-top:.9rem;font-size:.85rem;font-weight:700;color:#36564c}
+.pilot-loop-speed select{margin-left:.5rem;padding:.4rem .6rem;border:1px solid #cbd3c6;border-radius:8px}
+.pilot-loop-foot{font-size:.85rem !important;margin-top:1rem}
+@media(max-width:760px){.pilot-loop-body{grid-template-columns:1fr}.pilot-loop{padding:1rem}}
+@media(prefers-reduced-motion:reduce){.pilot-loop-edge{stroke-dasharray:none}}
