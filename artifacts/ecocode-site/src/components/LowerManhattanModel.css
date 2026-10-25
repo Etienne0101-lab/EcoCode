@@ -1,0 +1,71 @@
+.lm3d { background: #f5f2e8; border-top: 4px solid #d3a96c; border-radius: 6px; box-shadow: 0 18px 40px rgba(4, 20, 15, .35); padding: 26px 26px 22px; margin-top: 34px; color: #213f3b; }
+.lm3d-head { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.lm3d-eyebrow { font: 700 12px 'Manrope', sans-serif; letter-spacing: .14em; color: #14573f; }
+.lm3d-note { font-size: 11px; color: #6b7a70; }
+.lm3d-scene { perspective: 900px; }
+.lm3d-scene svg { display: block; width: 100%; height: auto; transform: rotateX(var(--lm-tilt-x, 0deg)) rotateY(var(--lm-tilt-y, 0deg)); transition: transform .25s ease-out; }
+.lm-bench { fill: #04140f; }
+.lm-water { fill: #0d4f42; stroke: #2ee06f; stroke-opacity: .25; stroke-width: 1; }
+.lm-land { fill: #0a231a; stroke: #d3a96c; stroke-width: 1.5; }
+.lm-grid line { stroke: #3a5a4a; stroke-width: 1; opacity: .7; }
+.lm-piers line { stroke: #d3a96c; stroke-width: 3; stroke-linecap: round; opacity: .8; }
+.lm-footprint { fill: #061a12; stroke: #2ee06f; stroke-width: 1; stroke-opacity: .8; }
+.lm-face { stroke-width: 1; }
+.lm-spire { stroke: #2ee06f; stroke-width: 2; }
+
+/* 5-second loop: 0-20% flat, 20-60% extrude, 60-80% material, 80-100% reset/pan. */
+.lm-building { transform-box: fill-box; transform-origin: 50% 100%; animation: lm-extrude 5s ease-in-out infinite; }
+@keyframes lm-extrude {
+  0%, 20% { transform: scaleY(.02); }
+  60%, 80% { transform: scaleY(1); }
+  100% { transform: scaleY(.02); }
+}
+.lm-camera { animation: lm-pan 5s ease-in-out infinite; }
+@keyframes lm-pan {
+  0%, 80% { transform: translate(0, 0); }
+  90% { transform: translate(16px, -6px); }
+  100% { transform: translate(0, 0); }
+}
+/* Bone-white final material. */
+.lm-bone .lm-face-top { animation: lm-bone-top 5s linear infinite; }
+.lm-bone .lm-face-left { animation: lm-bone-left 5s linear infinite; }
+.lm-bone .lm-face-right { animation: lm-bone-right 5s linear infinite; }
+@keyframes lm-bone-top { 0%, 60% { fill: #061a12; stroke: #2ee06f; } 80%, 100% { fill: #f5f2e8; stroke: #213f3b; } }
+@keyframes lm-bone-left { 0%, 60% { fill: #061a12; stroke: #2ee06f; } 80%, 100% { fill: #d8d1ba; stroke: #213f3b; } }
+@keyframes lm-bone-right { 0%, 60% { fill: #061a12; stroke: #2ee06f; } 80%, 100% { fill: #efe9d6; stroke: #213f3b; } }
+/* Holographic final material: vivid green, translucent. */
+.lm-holo .lm-face-top { animation: lm-holo-top 5s linear infinite; }
+.lm-holo .lm-face-left { animation: lm-holo-left 5s linear infinite; }
+.lm-holo .lm-face-right { animation: lm-holo-right 5s linear infinite; }
+@keyframes lm-holo-top { 0%, 60% { fill: #061a12; stroke: #2ee06f; } 80%, 100% { fill: rgba(46, 224, 111, .38); stroke: #2ee06f; } }
+@keyframes lm-holo-left { 0%, 60% { fill: #061a12; stroke: #2ee06f; } 80%, 100% { fill: rgba(46, 224, 111, .18); stroke: #2ee06f; } }
+@keyframes lm-holo-right { 0%, 60% { fill: #061a12; stroke: #2ee06f; } 80%, 100% { fill: rgba(46, 224, 111, .27); stroke: #2ee06f; } }
+.lm-paused .lm-building, .lm-paused .lm-camera, .lm-paused .lm-face { animation-play-state: paused; }
+.lm-caption-text { fill: #8fa89c; font: 700 11px 'Manrope', sans-serif; letter-spacing: .28em; }
+.lm3d-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; }
+.lm3d-controls button { background: #0a231a; color: #f5f2e8; border: 1px solid #0a231a; border-radius: 999px; padding: 7px 14px; font: 700 12px 'Manrope', sans-serif; cursor: pointer; }
+.lm3d-controls button.lm-active { background: #2ee06f; color: #04140f; border-color: #2ee06f; }
+.lm3d-material-label { font-size: 12px; font-weight: 700; color: #14573f; margin-left: 6px; }
+.lm3d-phases { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 14px 0 0; padding: 0; }
+.lm3d-phases li { font-size: 12px; color: #6b7a70; background: #e9e4d2; border-radius: 999px; padding: 5px 11px; }
+.lm3d-phases li span { display: inline-block; width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 50%; background: #0a231a; color: #f5f2e8; font-size: 11px; margin-right: 5px; }
+.lm3d-phases li.lm-phase-now { background: #0a231a; color: #f5f2e8; }
+.lm3d-phases li.lm-phase-now span { background: #2ee06f; color: #04140f; }
+.lm3d-caption { font-size: 13px; line-height: 1.6; color: #43584f; margin: 14px 0 0; }
+.lm3d-legend { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 22px; list-style: none; margin: 14px 0 0; padding: 14px 0 0; border-top: 1px solid #d8d1ba; }
+.lm3d-legend li { font-size: 12px; line-height: 1.5; }
+.lm3d-legend strong { display: block; color: #14573f; }
+.lm3d-legend span { color: #6b7a70; }
+@media (max-width: 640px) {
+  .lm3d { padding: 18px 14px; }
+  .lm3d-legend { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lm-building, .lm-camera { animation: none; transform: none; }
+  .lm-bone .lm-face-top { animation: none; fill: #f5f2e8; stroke: #213f3b; }
+  .lm-bone .lm-face-left { animation: none; fill: #d8d1ba; stroke: #213f3b; }
+  .lm-bone .lm-face-right { animation: none; fill: #efe9d6; stroke: #213f3b; }
+  .lm-holo .lm-face-top { animation: none; fill: rgba(46, 224, 111, .38); stroke: #2ee06f; }
+  .lm-holo .lm-face-left { animation: none; fill: rgba(46, 224, 111, .18); stroke: #2ee06f; }
+  .lm-holo .lm-face-right { animation: none; fill: rgba(46, 224, 111, .27); stroke: #2ee06f; }
+}

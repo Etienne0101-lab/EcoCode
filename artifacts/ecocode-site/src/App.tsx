@@ -8,6 +8,7 @@ import { Link, Route as WouterRoute, Router, Switch, useLocation } from 'wouter'
 import NotFound from './pages/not-found';
 import WasteIntelligencePage from './pages/WasteIntelligencePage';
 import EcoDataModel from './components/EcoDataModel';
+import LowerManhattanModel from './components/LowerManhattanModel';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 import PartnersPage from './pages/PartnersPage';
 
@@ -267,6 +268,7 @@ function HomePage() {
             <div className="pilot-target" data-testid="status-pilot-operational-target"><span className="target-icon"><Activity size={19} /></span><span className="eyebrow">OPERATIONAL TARGET</span><strong>November 2026</strong><span className="target-note">Target milestone</span></div>
             <div className="pilot-steps">{pilotSteps.map(step => <article className="pilot-step" key={step.number} data-testid={`row-pilot-workflow-${step.number}`}><span className="step-num mono">{step.number}</span><div><h3>{step.title}</h3><p>{step.text}</p></div><ArrowDownRight className="step-arrow" size={17} /></article>)}</div>
             <div className="pilot-outcomes" data-testid="card-pilot-outcomes"><div className="outcome-intro"><span className="eyebrow">INTENDED OPERATING OUTCOMES</span><h3>Signals that support<br />day-to-day decisions.</h3></div><div className="outcome-item" data-testid="text-pilot-outcome-collection-visibility"><span className="outcome-index mono">A</span><div><b>Collection visibility</b><small>Surface bin status and service patterns for operational review.</small></div></div><div className="outcome-item" data-testid="text-pilot-outcome-coordinated-response"><span className="outcome-index mono">B</span><div><b>Coordinated response</b><small>Bring field alerts and fleet context into a shared view.</small></div></div><div className="outcome-item" data-testid="text-pilot-outcome-planning"><span className="outcome-index mono">C</span><div><b>Evidence for planning</b><small>Use accumulated signals to inform future service planning.</small></div></div></div>
+            <LowerManhattanModel />
           </div>
         </section>
 
