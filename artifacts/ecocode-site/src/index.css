@@ -813,14 +813,16 @@ a { color: inherit; }
 
 /* ---- Restored homepage city backdrop (2026-10-27) ----
    .hero-map: the real Lower Manhattan street grid as a faint backdrop,
-   from CARTO's token-free dark tiles (© OpenStreetMap contributors
-   © CARTO), 2x2 tiles centred on Manhattan at zoom 13. It sits under
-   the hero gradient and copy, like the earlier map-textured hero.
+   from Esri's token-free World Dark Gray tiles (Esri, © OpenStreetMap
+   contributors), 2x2 tiles centred on Manhattan at zoom 13. It sits
+   under the hero gradient and copy, like the earlier map-textured
+   hero. (CARTO was tried first; its tiles now render an API KEY
+   REQUIRED watermark without a key, so Esri replaced it.)
    .hero-silhouette / .closing-silhouette: the real skyline profile
    (tallest roof per east–west slice of the 7,209-building dataset),
    rendered by SkylineSilhouette. Both layers are aria-hidden decor. */
 .hero-map { position: absolute; inset: 0; opacity: .45; pointer-events: none;
-  background-image: url('https://basemaps.cartocdn.com/dark_all/13/2412/3079.png'), url('https://basemaps.cartocdn.com/dark_all/13/2413/3079.png'), url('https://basemaps.cartocdn.com/dark_all/13/2412/3080.png'), url('https://basemaps.cartocdn.com/dark_all/13/2413/3080.png');
+  background-image: url('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/13/3079/2412'), url('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/13/3079/2413'), url('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/13/3080/2412'), url('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/13/3080/2413');
   background-position: left top, right top, left bottom, right bottom;
   background-size: 50% 50%; background-repeat: no-repeat; }
 .hero-silhouette { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; opacity: .55; pointer-events: none; }

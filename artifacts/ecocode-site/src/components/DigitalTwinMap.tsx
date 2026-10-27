@@ -5,8 +5,8 @@ import './DigitalTwinMap.css';
  * DigitalTwinMap — the homepage 3D panel, rebuilt as a digital twin.
  *
  * What is real here, and what is not — stated in the panel itself:
- * - REAL: the street grid (CARTO dark basemap, © OpenStreetMap
- *   contributors © CARTO) and the building footprints + roof heights
+ * - REAL: the street grid (Esri World Dark Gray basemap, token-free,
+ *   © OpenStreetMap contributors) and the building footprints + roof heights
  *   (NYC Open Data, the same 7,209 Lower Manhattan buildings as the
  *   earlier prototype, rendered as MapLibre fill-extrusions).
  * - ILLUSTRATIVE: facility, bin-cluster and demand node locations, and
@@ -23,10 +23,12 @@ import './DigitalTwinMap.css';
  * The map library (MapLibre GL) and the building data are loaded only
  * when this panel scrolls into view (or the visitor presses Load), so
  * the homepage's first load is unaffected. No API key is needed
- * anywhere: CARTO's dark tiles and Nominatim are token-free, which is
- * why this uses MapLibre rather than kepler.gl — kepler.gl's built-in
- * styles need a Mapbox token, and its full analytics app would be
- * far heavier than this focused twin view for the same street grid.
+ * anywhere: Esri's dark-gray tiles and Nominatim are token-free, which
+ * is why this uses MapLibre rather than kepler.gl — kepler.gl's
+ * built-in styles need a Mapbox token, and its full analytics app
+ * would be far heavier than this focused twin view for the same
+ * street grid. (CARTO was the first choice and was dropped after its
+ * tiles rendered an API KEY REQUIRED watermark without a key.)
  */
 
 type TwinStream = {
@@ -179,20 +181,28 @@ export default function DigitalTwinMap() {
         await import('maplibre-gl/dist/maplibre-gl.css');
         if (cancelled) return;
         mlRef.current = ml;
-        if (!ml.supported()) { setMapError('This browser cannot run WebGL maps, so the twin map is unavailable here.'); return; }
         const map = new ml.Map({
           container: containerRef.current as HTMLElement,
           style: {
             version: 8,
             sources: {
-              carto: {
+              'esri-base': {
                 type: 'raster',
-                tiles: ['https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'],
+                tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'],
                 tileSize: 256,
-                attribution: '© OpenStreetMap contributors © CARTO',
+                attribution: 'Esri, © OpenStreetMap contributors',
+              },
+              'esri-ref': {
+                type: 'raster',
+                tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                attribution: 'Esri, © OpenStreetMap contributors',
               },
             },
-            layers: [{ id: 'carto', type: 'raster', source: 'carto' }],
+            layers: [
+              { id: 'esri-base', type: 'raster', source: 'esri-base' },
+              { id: 'esri-ref', type: 'raster', source: 'esri-ref' },
+            ],
           },
           center: BOROUGHS.manhattan.center,
           zoom: 13.5,
@@ -404,8 +414,9 @@ export default function DigitalTwinMap() {
         <span><i className="twin-swatch twin-swatch-dot" /> Travelling load</span>
       </p>
       <p className="twin-attribution">
-        Street grid: © OpenStreetMap contributors © CARTO. Buildings: NYC Open Data, Building Footprints (7,209 Lower
-        Manhattan buildings, roof heights). Nodes and trajectories are illustrative demo placements, not live operations.
+        Street grid: Esri World Dark Gray (Esri, © OpenStreetMap contributors). Buildings: NYC Open Data, Building
+        Footprints (7,209 Lower Manhattan buildings, roof heights). Nodes and trajectories are illustrative demo
+        placements, not live operations.
       </p>
     </div>
   );
