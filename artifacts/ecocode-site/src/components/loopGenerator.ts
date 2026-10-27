@@ -192,6 +192,13 @@ export function generateLoop(input: string, origin?: string): LoopStream {
   };
 }
 
+/** Classify a free-text stream to a pathway key (used by the twin's free-text routing). */
+export function classifyStream(input: string): string {
+  const text = input.trim();
+  const category = CATEGORIES.find((c) => c.match.test(text));
+  return category ? category.key : 'mixed';
+}
+
 /** Validate an externally produced loop (e.g. from a provider API) before it enters the player. */
 export function validateLoop(value: unknown): LoopStream | null {
   if (!value || typeof value !== 'object') return null;

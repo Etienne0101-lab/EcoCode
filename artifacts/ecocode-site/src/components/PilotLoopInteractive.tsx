@@ -227,7 +227,6 @@ export default function PilotLoopInteractive() {
               <option value={2}>2×</option>
             </select>
           </label>
-          <p className="pilot-loop-foot">The loop closes at the facility, which takes the next load — the same circular shape as the Knowledge Graph page, played here for one stream at a time.</p>
         </div>
       </div>
 

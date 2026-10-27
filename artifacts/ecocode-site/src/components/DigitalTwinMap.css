@@ -30,3 +30,13 @@
   .twin-map-wrap { height: 420px; }
   .twin-controls input[type="text"] { min-width: 0; width: 100%; }
 }
+
+/* ---- Pipeline itinerary + sources (2026-10-27 real-sites rebuild) ---- */
+.twin-itinerary { list-style: none; margin: 1rem 0; padding: 0; display: grid; gap: .6rem; }
+.twin-itinerary li { background: #173432; border: 1px solid rgba(205, 225, 206, .25); border-radius: 12px; padding: .7rem .9rem; display: grid; gap: 2px; }
+.twin-itinerary li b { color: #f4f1e6; }
+.twin-step-role { font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #d3a96c; }
+.twin-step-processor { color: #2ee06f; }
+.twin-step-demand { color: #ec4899; }
+.twin-step-address, .twin-step-note { color: #bdcfc3; font-size: .85rem; line-height: 1.5; }
+.twin-sources { color: #8fa89c; font-size: .78rem; line-height: 1.6; }
