@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { classifyStream } from './loopGenerator';
-import { chainFor, resolveRoute, DSNY_HUBS_UNPINNED, type Chain, type RouteKey } from './twinSites';
+import { chainFor, resolveRoute, DSNY_HUBS_UNPINNED, SITES, type Chain, type RouteKey } from './twinSites';
 import './DigitalTwinMap.css';
 
 /**
@@ -53,6 +53,24 @@ const BOROUGHS: Record<string, { label: string; center: [number, number]; zoom: 
   bronx: { label: 'Bronx', center: [-73.9, 40.85], zoom: 11, buildings: false },
   staten: { label: 'Staten Island', center: [-74.15, 40.58], zoom: 11, buildings: false },
 };
+
+// Documented throughput figures for the pinned sites (phase 3 layer).
+// Sims: 1,000 tons/day capacity (Columbia / facility coverage). Newtown
+// Creek: 500 tons/day food-waste capacity target (Waste360 / DEP coverage).
+// Pratt: ~75% of DSNY recycled paper (Curb-to-Market Challenge). Fresh
+// Kills compost: qualitative — NYC's largest permitted compost facility
+// (DSNY facility page). No figure is estimated or rounded beyond its source.
+const THROUGHPUT: { siteId: string; figure: string; source: string }[] = [
+  { siteId: 'sims', figure: '1,000 tons/day capacity', source: 'Facility coverage (Columbia CGEP tour; NAWIC walkthrough)' },
+  { siteId: 'newtown', figure: '500 tons/day food-waste capacity target', source: 'Waste360 / NYC DEP resource-recovery coverage' },
+  { siteId: 'pratt', figure: '~75% of DSNY recycled paper', source: 'NYC Curb-to-Market Challenge resources' },
+  { siteId: 'freshkills', figure: "NYC's largest permitted compost facility", source: 'DSNY Staten Island Compost Facility page' },
+];
+
+const TONNAGE_URL = 'https://data.cityofnewyork.us/resource/ebb7-mvp5.json?$select=month,borough,refusetonscollected,papertonscollected,mgptonscollected,resorganicstons,schoolorganictons&$limit=500&$order=month%20DESC';
+const DISTRICTS_URL = 'https://data.cityofnewyork.us/api/v3/views/i6mn-amj2/query.geojson?accessType=DOWNLOAD';
+
+type BoroughTonnage = { key: string; label: string; month: string; refuse: number; paper: number; mgp: number; organics: number; total: number; coord: [number, number] };
 
 // Lower Manhattan building-data bbox (for the lime highlight guard).
 const LM_BBOX = { lonMin: -74.022, lonMax: -73.985, latMin: 40.7, latMax: 40.732 };
@@ -151,6 +169,11 @@ export default function DigitalTwinMap({ studioSignal }: { studioSignal?: import
   const [playing, setPlaying] = useState(false);
   const [status, setStatus] = useState('Map loads when this panel scrolls into view.');
   const [routeMode, setRouteMode] = useState<'road' | 'straight' | ''>('');
+  const [layers, setLayers] = useState({ tonnage: false, throughput: false, districts: false });
+  const [layerNote, setLayerNote] = useState('');
+  const [tonnage, setTonnage] = useState<BoroughTonnage[] | null>(null);
+  const tonnageCache = useRef<BoroughTonnage[] | null>(null);
+  const districtsCache = useRef(false);
 
   // Phase 2: a studio build re-routes the twin to the same stream and
   // origin, once per build. The twin's own controls still work after —
@@ -297,6 +320,32 @@ export default function DigitalTwinMap({ studioSignal }: { studioSignal?: import
           map.addLayer({ id: 'trajectory-line', type: 'line', source: 'trajectory', paint: { 'line-color': '#2ee06f', 'line-width': 3, 'line-dasharray': [2, 1.5], 'line-opacity': 0.9 } });
           map.addSource('trajectory-dot', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'Point', coordinates: BOROUGHS.manhattan.center }, properties: {} } });
           map.addLayer({ id: 'trajectory-dot-layer', type: 'circle', source: 'trajectory-dot', paint: { 'circle-radius': 8, 'circle-color': '#ec4899', 'circle-stroke-color': '#ffffff', 'circle-stroke-width': 2 } });
+          // Phase 3 layers: all present but hidden until toggled on.
+          map.addSource('tonnage-points', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+          map.addLayer({ id: 'tonnage-circles', type: 'circle', source: 'tonnage-points', layout: { visibility: 'none' }, paint: { 'circle-radius': ['get', 'radius'], 'circle-color': '#2ee06f', 'circle-opacity': 0.55, 'circle-stroke-color': '#ffffff', 'circle-stroke-width': 1.5 } });
+          map.addSource('throughput-points', { type: 'geojson', data: { type: 'FeatureCollection', features: SITES.map((s) => { const t = THROUGHPUT.find((x) => x.siteId === s.id); return { type: 'Feature', geometry: { type: 'Point', coordinates: [s.lon, s.lat] }, properties: { name: s.name, figure: t?.figure ?? '', source: t?.source ?? '' } }; }) } });
+          map.addLayer({ id: 'throughput-circles', type: 'circle', source: 'throughput-points', layout: { visibility: 'none' }, paint: { 'circle-radius': 11, 'circle-color': '#d3a96c', 'circle-stroke-color': '#ffffff', 'circle-stroke-width': 1.5 } });
+          map.addSource('dsny-districts', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+          map.addLayer({ id: 'districts-fill', type: 'fill', source: 'dsny-districts', layout: { visibility: 'none' }, paint: { 'fill-color': '#2ee06f', 'fill-opacity': 0 } });
+          map.addLayer({ id: 'districts-line', type: 'line', source: 'dsny-districts', layout: { visibility: 'none' }, paint: { 'line-color': '#2ee06f', 'line-width': 1, 'line-opacity': 0.45 } });
+          map.on('click', 'tonnage-circles', (e: any) => {
+            const f = e.features?.[0];
+            if (!f) return;
+            const p = f.properties;
+            setLayerNote(`${p.label} — ${p.month}: ${Number(p.total).toLocaleString()} tons total (refuse ${Number(p.refuse).toLocaleString()}, paper ${Number(p.paper).toLocaleString()}, metal/glass/plastic ${Number(p.mgp).toLocaleString()}, organics ${Number(p.organics).toLocaleString()}). Source: DSNY Monthly Tonnage (NYC Open Data, ebb7-mvp5).`);
+          });
+          map.on('click', 'throughput-circles', (e: any) => {
+            const f = e.features?.[0];
+            if (!f) return;
+            setLayerNote(`${f.properties.name} — ${f.properties.figure}. Source: ${f.properties.source}.`);
+          });
+          map.on('click', 'districts-fill', (e: any) => {
+            const f = e.features?.[0];
+            if (!f) return;
+            const p = f.properties ?? {};
+            const id = p.district ?? p.DISTRICT ?? p.name ?? p.NAME ?? p.borough ?? 'DSNY district';
+            setLayerNote(`DSNY district boundary: ${id}. Source: DSNY Districts (NYC Open Data, i6mn-amj2) — boundaries only, congruent with community districts.`);
+          });
           setMapLoaded(true);
         });
       } catch (err) {
@@ -396,6 +445,74 @@ export default function DigitalTwinMap({ studioSignal }: { studioSignal?: import
     markersRef.current.forEach((m) => m.remove());
     if (mapRef.current) mapRef.current.remove();
   }, []);
+
+  const toggleLayer = async (key: 'tonnage' | 'throughput' | 'districts') => {
+    const map = mapRef.current;
+    const next = !layers[key];
+    setLayers((prev) => ({ ...prev, [key]: next }));
+    if (!map) return;
+    if (!next) {
+      const hide = (id: string) => { if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', 'none'); };
+      if (key === 'tonnage') hide('tonnage-circles');
+      if (key === 'throughput') hide('throughput-circles');
+      if (key === 'districts') { hide('districts-fill'); hide('districts-line'); }
+      return;
+    }
+    try {
+      if (key === 'tonnage') {
+        if (!tonnageCache.current) {
+          setLayerNote('Loading borough tonnage (DSNY Monthly Tonnage)…');
+          const res = await fetch(TONNAGE_URL);
+          if (!res.ok) throw new Error(`Tonnage data failed to load (HTTP ${res.status})`);
+          const rows = await res.json();
+          const latest = rows.length ? rows[0].month : '';
+          const byKey: Record<string, BoroughTonnage> = {};
+          for (const r of rows) {
+            if (r.month !== latest) continue;
+            const raw = String(r.borough ?? '').toLowerCase();
+            const bKey = raw.includes('staten') ? 'staten' : raw.includes('manhattan') ? 'manhattan' : raw.includes('brooklyn') ? 'brooklyn' : raw.includes('queens') ? 'queens' : raw.includes('bronx') ? 'bronx' : '';
+            if (!bKey || !BOROUGHS[bKey]) continue;
+            const num = (v: any) => { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; };
+            const refuse = num(r.refusetonscollected);
+            const paper = num(r.papertonscollected);
+            const mgp = num(r.mgptonscollected);
+            const organics = num(r.resorganicstons) + num(r.schoolorganictons);
+            const prev = byKey[bKey];
+            byKey[bKey] = prev
+              ? { ...prev, refuse: prev.refuse + refuse, paper: prev.paper + paper, mgp: prev.mgp + mgp, organics: prev.organics + organics, total: prev.total + refuse + paper + mgp + organics }
+              : { key: bKey, label: BOROUGHS[bKey].label, month: latest, refuse, paper, mgp, organics, total: refuse + paper + mgp + organics, coord: BOROUGHS[bKey].center };
+          }
+          tonnageCache.current = Object.values(byKey);
+          setTonnage(tonnageCache.current);
+        }
+        const features = (tonnageCache.current ?? []).map((b) => ({
+          type: 'Feature', geometry: { type: 'Point', coordinates: b.coord },
+          properties: { ...b, radius: Math.min(30, 6 + Math.sqrt(b.total / 1000)) },
+        }));
+        (map.getSource('tonnage-points') as any).setData({ type: 'FeatureCollection', features });
+        map.setLayoutProperty('tonnage-circles', 'visibility', 'visible');
+        setLayerNote(`Borough tonnage for ${(tonnageCache.current ?? [])[0]?.month ?? 'the latest month'} (DSNY Monthly Tonnage, ebb7-mvp5). Circle size = total tons. Tap a circle or a row below for the breakdown.`);
+      } else if (key === 'throughput') {
+        map.setLayoutProperty('throughput-circles', 'visibility', 'visible');
+        setLayerNote('Facility throughput — documented figures only, as cited per site. Tap a gold circle or a row below.');
+      } else {
+        if (!districtsCache.current) {
+          setLayerNote('Loading DSNY district boundaries…');
+          const res = await fetch(DISTRICTS_URL);
+          if (!res.ok) throw new Error(`District boundaries failed to load (HTTP ${res.status})`);
+          const geojson = await res.json();
+          (map.getSource('dsny-districts') as any).setData(geojson);
+          districtsCache.current = true;
+        }
+        map.setLayoutProperty('districts-fill', 'visibility', 'visible');
+        map.setLayoutProperty('districts-line', 'visibility', 'visible');
+        setLayerNote('DSNY district boundaries (59 districts, congruent with community districts). Outlines only — tap a district for its identifier. Source: DSNY Districts (i6mn-amj2).');
+      }
+    } catch (err) {
+      setLayers((prev) => ({ ...prev, [key]: false }));
+      setLayerNote(err instanceof Error ? err.message : 'Layer failed to load and was switched off.');
+    }
+  };
 
   const locateAddress = async () => {
     const query = address.trim();
@@ -499,6 +616,20 @@ export default function DigitalTwinMap({ studioSignal }: { studioSignal?: import
         </div>
       )}
 
+      <div className="twin-layers" role="group" aria-label="Map layers">
+        <span className="twin-layers-label">Map layers (off by default):</span>
+        <button type="button" className={layers.tonnage ? 'twin-layer-btn active' : 'twin-layer-btn'} aria-pressed={layers.tonnage} disabled={!mapLoaded} onClick={() => toggleLayer('tonnage')} data-testid="button-twin-layer-tonnage">
+          Borough tonnage
+        </button>
+        <button type="button" className={layers.throughput ? 'twin-layer-btn active' : 'twin-layer-btn'} aria-pressed={layers.throughput} disabled={!mapLoaded} onClick={() => toggleLayer('throughput')} data-testid="button-twin-layer-throughput">
+          Facility throughput
+        </button>
+        <button type="button" className={layers.districts ? 'twin-layer-btn active' : 'twin-layer-btn'} aria-pressed={layers.districts} disabled={!mapLoaded} onClick={() => toggleLayer('districts')} data-testid="button-twin-layer-districts">
+          DSNY district boundaries
+        </button>
+      </div>
+      {layerNote && <p className="twin-layer-note" aria-live="polite">{layerNote}</p>}
+
       <div className="twin-map-wrap" ref={containerRef}>
         {!started && (
           <div className="twin-placeholder">
@@ -508,6 +639,34 @@ export default function DigitalTwinMap({ studioSignal }: { studioSignal?: import
         )}
         {started && mapError && <div className="twin-error" role="alert">{mapError}</div>}
       </div>
+
+      {layers.tonnage && tonnage && (
+        <ul className="twin-layer-panel" data-testid="twin-tonnage-panel">
+          {tonnage.map((b) => (
+            <li key={b.key}>
+              <button type="button" onClick={() => { const m = mapRef.current; if (m) m.flyTo({ center: b.coord, zoom: 11, duration: 800 }); }}>
+                <b>{b.label}</b> — {b.total.toLocaleString()} tons ({b.month})
+              </button>
+              <span>refuse {b.refuse.toLocaleString()} · paper {b.paper.toLocaleString()} · metal/glass/plastic {b.mgp.toLocaleString()} · organics {b.organics.toLocaleString()}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {layers.throughput && (
+        <ul className="twin-layer-panel" data-testid="twin-throughput-panel">
+          {SITES.map((s) => {
+            const t = THROUGHPUT.find((x) => x.siteId === s.id);
+            return (
+              <li key={s.id}>
+                <button type="button" onClick={() => { const m = mapRef.current; if (m) m.flyTo({ center: [s.lon, s.lat], zoom: 13, duration: 800 }); }}>
+                  <b>{s.name}</b> — {t?.figure}
+                </button>
+                <span>{s.address} · {t?.source}</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
 
       <p className="twin-status" aria-live="polite">{status}</p>
       {addressLabel && <p className="twin-address">Located point: {addressLabel}</p>}
@@ -548,7 +707,7 @@ export default function DigitalTwinMap({ studioSignal }: { studioSignal?: import
         DSNY does not publish turn-by-turn collection routes — it publishes district/frequency boundaries,
         district-to-vendor assignments, and disposal facilities used by year (NYC Open Data). DSNY marine transfer
         stations with verified addresses but no map pin (address lookup failed during this build, so no coordinates
-        were guessed): {DSNY_HUBS_UNPINNED.map((h) => `${h.name} (${h.address})`).join('; ')}.
+        were guessed): {DSNY_HUBS_UNPINNED.map((h) => `${h.name} (${h.address})`).join('; ')}. Layers: borough tonnage — DSNY Monthly Tonnage (ebb7-mvp5), latest month, borough totals; district boundaries — DSNY Districts (i6mn-amj2), outlines only; throughput figures — as cited per site in the throughput panel.
       </p>
     </div>
   );

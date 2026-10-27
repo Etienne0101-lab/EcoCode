@@ -51,3 +51,15 @@
 .twin-stage-role { font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #d3a96c; }
 .twin-stage-name { color: #f4f1e6; font-size: .85rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .twin-stage.active .twin-stage-name { color: #ffffff; }
+
+/* ---- Phase 3: optional map layers (off by default) ---- */
+.twin-layers { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: .2rem 0 .4rem; }
+.twin-layers-label { color: #bdcfc3; font-size: .85rem; }
+.twin-layer-btn { background: #173432; color: #eaf2ec; border: 1px solid rgba(205, 225, 206, .3); border-radius: 999px; padding: .4rem .9rem; cursor: pointer; font-weight: 700; }
+.twin-layer-btn:disabled { opacity: .5; cursor: default; }
+.twin-layer-btn.active { background: #2ee06f; color: #06251a; border-color: #2ee06f; }
+.twin-layer-note { color: #d3a96c; font-size: .85rem; line-height: 1.6; }
+.twin-layer-panel { list-style: none; margin: .6rem 0; padding: 0; display: grid; gap: .5rem; }
+.twin-layer-panel li { background: #173432; border: 1px solid rgba(205, 225, 206, .25); border-radius: 12px; padding: .6rem .9rem; display: grid; gap: 2px; }
+.twin-layer-panel li button { background: none; border: 0; padding: 0; text-align: left; color: #f4f1e6; font-size: .9rem; cursor: pointer; }
+.twin-layer-panel li span { color: #bdcfc3; font-size: .82rem; line-height: 1.5; }
