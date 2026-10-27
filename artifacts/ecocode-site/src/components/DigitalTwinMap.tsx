@@ -151,6 +151,8 @@ export default function DigitalTwinMap() {
   const [status, setStatus] = useState('Map loads when this panel scrolls into view.');
   const [routeMode, setRouteMode] = useState<'road' | 'straight' | ''>('');
   const [chain, setChain] = useState<Chain | null>(null);
+  const [activeStage, setActiveStage] = useState<number | null>(null);
+  const stageRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const borough = BOROUGHS[boroughId] ?? BOROUGHS.manhattan;
   const origin: [number, number] = addressPoint ?? borough.center;
@@ -296,6 +298,7 @@ export default function DigitalTwinMap() {
     if (!map || !map.getSource('trajectory')) return;
     const nextChain = chainFor(activeRoute, origin, originLabel);
     setChain(nextChain);
+    setActiveStage(null);
     const stepCoords = nextChain.steps.map((s) => s.coord);
     const requestId = ++requestRef.current;
     setRouteMode('');
@@ -338,24 +341,40 @@ export default function DigitalTwinMap() {
     markersRef.current = [];
     const ml = mlRef.current;
     if (ml) {
-      for (const step of nextChain.steps) {
+      nextChain.steps.forEach((step, i) => {
         const el = document.createElement('div');
         el.className = 'twin-marker';
         el.innerHTML = `<span>${step.label}</span>`;
+        el.addEventListener('click', () => setActiveStage(i));
         markersRef.current.push(new ml.Marker({ element: el }).setLngLat(step.coord).addTo(map));
-      }
-    }
-    // Highlight the real Lower Manhattan buildings nearest the pipeline's
-    // in-Manhattan steps (only where the building data actually covers).
-    if (buildingsLoaded && featuresRef.current.length && map.getLayer('buildings-highlight')) {
-      const fids = nextChain.steps
-        .filter((s) => inLM(s.coord))
-        .map((s) => nearestFid(featuresRef.current, s.coord))
-        .filter((f): f is number => f !== null);
-      map.setFilter('buildings-highlight', ['in', ['get', 'fid'], ['literal', fids]]);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeRoute, originLabel, addressPoint, boroughId, buildingsLoaded, mapLoaded]);
+
+  // Stage sync: the selected stage's building glows lime (only where the
+  // building data covers it); with no selection, the whole pipeline's
+  // nearest buildings glow. The rail button scrolls into view.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !buildingsLoaded || !featuresRef.current.length || !map.getLayer('buildings-highlight') || !chain) return;
+    const steps = activeStage === null ? chain.steps : [chain.steps[activeStage]];
+    const fids = steps
+      .filter((s) => inLM(s.coord))
+      .map((s) => nearestFid(featuresRef.current, s.coord))
+      .filter((f): f is number => f !== null);
+    map.setFilter('buildings-highlight', ['in', ['get', 'fid'], ['literal', fids]]);
+    if (activeStage !== null) stageRefs.current[activeStage]?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+  }, [activeStage, chain, buildingsLoaded, mapLoaded]);
+
+  const selectStage = (i: number) => {
+    setActiveStage(i);
+    const map = mapRef.current;
+    const step = chain?.steps[i];
+    if (map && step) {
+      map.flyTo({ center: step.coord, zoom: Math.max(map.getZoom(), inLM(step.coord) ? 15.5 : 13), pitch: 60, duration: 900 });
+    }
+  };
 
   useEffect(() => () => {
     cancelAnimationFrame(rafRef.current);
@@ -443,6 +462,27 @@ export default function DigitalTwinMap() {
           {playing ? '❚❚ Pause pipeline' : '▶ Play pipeline'}
         </button>
       </div>
+
+      {chain && (
+        <div className="twin-stages" role="group" aria-label="Pipeline stages" data-testid="twin-stage-rail">
+          {chain.steps.map((step, i) => (
+            <span className="twin-stage-wrap" key={`${step.name}-${i}`}>
+              {i > 0 && <span className="twin-stage-sep" aria-hidden="true">→</span>}
+              <button
+                type="button"
+                ref={(el) => { stageRefs.current[i] = el; }}
+                className={activeStage === i ? 'twin-stage active' : 'twin-stage'}
+                aria-pressed={activeStage === i}
+                onClick={() => selectStage(i)}
+                data-testid={`twin-stage-${i}`}
+              >
+                <span className="twin-stage-role">{step.label}</span>
+                <span className="twin-stage-name">{step.kind === 'origin' ? 'Collection point' : step.name.replace(/^.* — /, '')}</span>
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
 
       <div className="twin-map-wrap" ref={containerRef}>
         {!started && (

@@ -40,3 +40,14 @@
 .twin-step-demand { color: #ec4899; }
 .twin-step-address, .twin-step-note { color: #bdcfc3; font-size: .85rem; line-height: 1.5; }
 .twin-sources { color: #8fa89c; font-size: .78rem; line-height: 1.6; }
+
+/* ---- Phase 1 merge: stage rail above the map, synced both ways ---- */
+.twin-stages { display: flex; align-items: center; gap: .35rem; overflow-x: auto; padding: .2rem .1rem .6rem; margin: .2rem 0 .6rem; scrollbar-width: thin; }
+.twin-stage-wrap { display: flex; align-items: center; gap: .35rem; flex: 0 0 auto; }
+.twin-stage-sep { color: #2ee06f; font-weight: 800; }
+.twin-stage { display: grid; gap: 1px; text-align: left; background: #173432; border: 1px solid rgba(205, 225, 206, .25); border-radius: 10px; padding: .45rem .7rem; cursor: pointer; min-width: 0; }
+.twin-stage:hover { border-color: rgba(46, 224, 111, .6); }
+.twin-stage.active { border-color: #2ee06f; box-shadow: 0 0 0 2px rgba(46, 224, 111, .35); background: #1d4a3a; }
+.twin-stage-role { font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #d3a96c; }
+.twin-stage-name { color: #f4f1e6; font-size: .85rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.twin-stage.active .twin-stage-name { color: #ffffff; }
