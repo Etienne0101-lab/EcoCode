@@ -810,3 +810,24 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .home-dark .approach, .home-dark .infrastructure, .home-dark .applications, .home-dark .pilot, .home-dark .repo-section, .home-dark .about, .home-dark .closing, .home-dark .footer { animation: none !important; }
 }
+
+/* ---- Restored homepage city backdrop (2026-10-27) ----
+   .hero-map: the real Lower Manhattan street grid as a faint backdrop,
+   from CARTO's token-free dark tiles (© OpenStreetMap contributors
+   © CARTO), 2x2 tiles centred on Manhattan at zoom 13. It sits under
+   the hero gradient and copy, like the earlier map-textured hero.
+   .hero-silhouette / .closing-silhouette: the real skyline profile
+   (tallest roof per east–west slice of the 7,209-building dataset),
+   rendered by SkylineSilhouette. Both layers are aria-hidden decor. */
+.hero-map { position: absolute; inset: 0; opacity: .45; pointer-events: none;
+  background-image: url('https://basemaps.cartocdn.com/dark_all/13/2412/3079.png'), url('https://basemaps.cartocdn.com/dark_all/13/2413/3079.png'), url('https://basemaps.cartocdn.com/dark_all/13/2412/3080.png'), url('https://basemaps.cartocdn.com/dark_all/13/2413/3080.png');
+  background-position: left top, right top, left bottom, right bottom;
+  background-size: 50% 50%; background-repeat: no-repeat; }
+.hero-silhouette { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; opacity: .55; pointer-events: none; }
+.hero-silhouette svg { width: 100%; height: 100%; display: block; }
+.hero-silhouette path { fill: #04140f; }
+.closing { position: relative; overflow: hidden; }
+.closing-layout { position: relative; z-index: 1; }
+.closing-silhouette { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; opacity: .12; pointer-events: none; }
+.closing-silhouette svg { width: 100%; height: 100%; display: block; }
+.closing-silhouette path { fill: #0a231a; }

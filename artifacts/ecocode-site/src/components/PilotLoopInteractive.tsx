@@ -1,4 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import {
+  Building2, Coffee, Factory, Leaf, Package, Store, Trash2, TreePine,
+  UtensilsCrossed, type LucideIcon,
+} from 'lucide-react';
+import LoopBuilderChat from './LoopBuilderChat';
+import type { LoopStream } from './loopGenerator';
 import './PilotLoopInteractive.css';
 
 /**
@@ -17,19 +23,13 @@ import './PilotLoopInteractive.css';
  * live bin, a live route, or a surveyed building.
  */
 
-type Stage = { role: string; name: string; detail: string };
-type Stream = {
-  id: string;
-  label: string;
-  wasteNote: string;
-  stages: Stage[];
-  metrics: { label: string; value: string }[];
-};
-
-const STREAMS: Stream[] = [
+// Built-in sample loops, now typed as LoopStream so generated loops from
+// the chat below slot into the same player unchanged.
+const STREAMS: LoopStream[] = [
   {
     id: 'food',
     label: 'Restaurant food waste',
+    icon: 'food',
     wasteNote: 'Downtown Manhattan · 80,000 t/yr in the sample · daily collection · 5% contamination in the sample',
     stages: [
       { role: 'WASTE', name: 'Restaurant food waste', detail: 'Collected daily from 1,500 establishments in the sample. 95% food scraps, 5% fats, oils and grease.' },
@@ -48,6 +48,7 @@ const STREAMS: Stream[] = [
   {
     id: 'organics',
     label: 'Brooklyn residential organics',
+    icon: 'leaf',
     wasteNote: 'Brooklyn · 150,000 t/yr in the sample · weekly collection · 45% participation · 85% diversion',
     stages: [
       { role: 'WASTE', name: 'Residential organics', detail: '70% food scraps, 30% yard waste in the sample stream.' },
@@ -66,6 +67,7 @@ const STREAMS: Stream[] = [
   {
     id: 'coffee',
     label: 'Coffee grounds',
+    icon: 'coffee',
     wasteNote: 'Coffee shops, offices, households · 97% organic content in the sample',
     stages: [
       { role: 'WASTE', name: 'Coffee grounds', detail: 'High nitrogen content — mixed with carbon-rich materials in the sample pathway.' },
@@ -84,6 +86,7 @@ const STREAMS: Stream[] = [
   {
     id: 'yard',
     label: 'Yard waste',
+    icon: 'yard',
     wasteNote: 'Residential, parks, landscaping · 98% organic content in the sample',
     stages: [
       { role: 'WASTE', name: 'Yard waste', detail: 'Woody yard waste, dried and size-reduced before processing in the sample pathway.' },
@@ -101,19 +104,39 @@ const STREAMS: Stream[] = [
   },
 ];
 
+// Themed icons for stage roles and stream kinds (lucide, already a site dep).
+const ROLE_ICONS: Record<string, LucideIcon> = {
+  WASTE: Trash2, PROCESS: Factory, RESOURCE: Package, DEMAND: Store, FACILITY: Building2,
+};
+const STREAM_ICONS: Record<string, LucideIcon> = {
+  food: UtensilsCrossed, leaf: Leaf, coffee: Coffee, yard: TreePine,
+  paper: Package, plastic: Package, glass: Package, metal: Factory,
+  ewaste: Factory, textiles: Package, construction: Building2, mixed: Trash2,
+};
+
 // Five nodes around a loop, in Waste → Process → Resource → Demand → Facility order.
 const NODE_POS: [number, number][] = [[300, 52], [500, 150], [430, 300], [170, 300], [100, 150]];
 
 export default function PilotLoopInteractive() {
   const [streamId, setStreamId] = useState<string>('food');
+  const [customStreams, setCustomStreams] = useState<LoopStream[]>([]);
+  const allStreams = [...STREAMS, ...customStreams];
+  const isCustom = (id: string) => customStreams.some((s) => s.id === id);
   const [stage, setStage] = useState(0);
   const [playing, setPlaying] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [speed, setSpeed] = useState(1);
   const progressRef = useRef(0);
   const [, setTick] = useState(0);
 
-  const stream = STREAMS.find((s) => s.id === streamId) ?? STREAMS[0];
+  const stream = allStreams.find((s) => s.id === streamId) ?? STREAMS[0];
   const current = stream.stages[stage];
+  const StageIcon = ROLE_ICONS[current.role] ?? Trash2;
+
+  const handleGenerate = (generated: LoopStream) => {
+    setCustomStreams((prev) => [...prev.filter((s) => s.id !== generated.id), generated]);
+    setStreamId(generated.id);
+    setPlaying(true);
+  };
 
   useEffect(() => {
     progressRef.current = 0;
@@ -153,11 +176,15 @@ export default function PilotLoopInteractive() {
       </div>
 
       <div className="pilot-loop-pickers" role="group" aria-label="Choose a waste stream">
-        {STREAMS.map((s) => (
-          <button key={s.id} type="button" className={s.id === streamId ? 'pilot-loop-active' : ''} onClick={() => setStreamId(s.id)}>
-            {s.label}
-          </button>
-        ))}
+        {allStreams.map((s) => {
+          const StreamIcon = STREAM_ICONS[s.icon] ?? Trash2;
+          return (
+            <button key={s.id} type="button" className={s.id === streamId ? 'pilot-loop-active' : ''} onClick={() => setStreamId(s.id)}>
+              <StreamIcon size={15} /> {s.label}
+              {isCustom(s.id) && <span className="pilot-loop-gen-tag">Generated</span>}
+            </button>
+          );
+        })}
       </div>
       <p className="pilot-loop-waste-note">{stream.wasteNote}</p>
 
@@ -180,7 +207,7 @@ export default function PilotLoopInteractive() {
         </svg>
 
         <div className="pilot-loop-detail">
-          <span className="pilot-loop-stage-label">STAGE {stage + 1} OF 5 — {current.role}</span>
+          <span className="pilot-loop-stage-label"><StageIcon size={15} className="pilot-loop-stage-icon" /> STAGE {stage + 1} OF 5 — {current.role}</span>
           <h4>{current.name}</h4>
           <p>{current.detail}</p>
           <div className="pilot-loop-metrics">
@@ -203,6 +230,8 @@ export default function PilotLoopInteractive() {
           <p className="pilot-loop-foot">The loop closes at the facility, which takes the next load — the same circular shape as the Knowledge Graph page, played here for one stream at a time.</p>
         </div>
       </div>
+
+      <LoopBuilderChat onGenerate={handleGenerate} />
     </div>
   );
 }

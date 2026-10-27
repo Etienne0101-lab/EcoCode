@@ -1,0 +1,27 @@
+/* LoopBuilderChat — AI assistant box under the playable pilot loop. */
+.loop-chat { margin-top: 1.4rem; border: 1px solid #cbd3c6; border-radius: 14px; background: #fff; padding: 1.1rem 1.2rem; }
+.loop-chat-eyebrow { font-size: .72rem; letter-spacing: .08em; font-weight: 700; color: #7b745f; }
+.loop-chat-head h4 { font-size: 1.15rem; margin: .3rem 0; color: #16211a; }
+.loop-chat-head p { color: #5f7067; line-height: 1.6; font-size: .92rem; margin: 0; }
+.loop-chat-messages { display: grid; gap: .6rem; margin: 1rem 0; max-height: 240px; overflow-y: auto; }
+.loop-chat-msg { border-radius: 10px; padding: .6rem .8rem; font-size: .92rem; line-height: 1.55; }
+.loop-chat-user { background: #e6ebe0; margin-left: 12%; }
+.loop-chat-assistant { background: #f2f1e7; margin-right: 12%; }
+.loop-chat-who { display: block; font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #7b745f; margin-bottom: 2px; }
+.loop-chat-msg p { margin: 0; color: #36564c; }
+.loop-chat-label { display: block; font-size: .82rem; font-weight: 800; color: #36564c; margin: .7rem 0 .3rem; }
+.loop-chat input[type="text"], .loop-chat input[type="password"] { width: 100%; box-sizing: border-box; padding: .6rem .8rem; border: 1px solid #cbd3c6; border-radius: 8px; font-size: .95rem; color: #16211a; }
+.loop-chat-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
+.loop-chat-actions button, .loop-chat-error button { background: #e6ebe0; border: 1px solid #cbd3c6; border-radius: 999px; padding: .5rem .9rem; font-weight: 700; cursor: pointer; color: #36564c; }
+.loop-chat-actions button:disabled { opacity: .55; cursor: default; }
+.loop-chat-actions button:first-child { background: #1d7a4f; border-color: #1d7a4f; color: #fff; }
+.loop-chat-error { background: #fbe9e9; border: 1px solid #e5b4b4; border-radius: 10px; padding: .7rem .9rem; color: #7a2e2e; font-size: .9rem; line-height: 1.55; }
+.loop-chat-key { margin-top: 1rem; border-top: 1px solid #e3e5da; padding-top: .8rem; }
+.loop-chat-key summary { cursor: pointer; font-weight: 800; font-size: .9rem; color: #36564c; }
+.loop-chat-key p { color: #5f7067; font-size: .88rem; line-height: 1.6; }
+.loop-chat-saved { color: #1d7a4f !important; font-weight: 700; }
+@media (max-width: 760px) {
+  .loop-chat { padding: 1rem; }
+  .loop-chat-user { margin-left: 4%; }
+  .loop-chat-assistant { margin-right: 4%; }
+}

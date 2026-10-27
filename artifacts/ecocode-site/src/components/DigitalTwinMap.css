@@ -1,0 +1,32 @@
+/* DigitalTwinMap — street-level twin panel in the homepage NYC Pilot section. */
+.twin { background: #0f2a24; border: 1px solid rgba(205, 225, 206, .25); border-radius: 20px; padding: 1.4rem 1.5rem; margin-top: 1.2rem; color: #eaf2ec; }
+.twin-eyebrow { font-size: .75rem; letter-spacing: .08em; font-weight: 700; color: #d3a96c; }
+.twin-head h3 { font: 700 clamp(24px, 3vw, 34px)/1.15 'Manrope', sans-serif; margin: .4rem 0; color: #f4f1e6; }
+.twin-head p { color: #bdcfc3; line-height: 1.6; font-size: .95rem; max-width: 78ch; margin: 0; }
+.twin-controls { display: flex; gap: .7rem; flex-wrap: wrap; align-items: end; margin: 1.1rem 0; }
+.twin-controls label { font-size: .82rem; font-weight: 800; color: #bdcfc3; display: grid; gap: 4px; }
+.twin-controls select, .twin-controls input[type="text"] { background: #173432; border: 1px solid rgba(205, 225, 206, .35); border-radius: 8px; color: #f4f1e6; padding: .55rem .7rem; font-size: .92rem; min-width: 150px; }
+.twin-controls input[type="text"] { min-width: 230px; }
+.twin-controls button { background: #e6ebe0; border: 1px solid #cbd3c6; border-radius: 999px; padding: .55rem .95rem; font-weight: 700; cursor: pointer; color: #36564c; }
+.twin-controls button:disabled { opacity: .55; cursor: default; }
+.twin-controls button.twin-play { background: #2ee06f; border-color: #2ee06f; color: #06251a; }
+.twin-map-wrap { position: relative; height: 520px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(205, 225, 206, .25); background: #0b1f1b; }
+.twin-placeholder { position: absolute; inset: 0; display: grid; place-content: center; gap: .8rem; text-align: center; padding: 1rem; background: #0b1f1b; z-index: 2; }
+.twin-placeholder p { color: #bdcfc3; max-width: 46ch; margin: 0; line-height: 1.6; }
+.twin-placeholder button { justify-self: center; background: #2ee06f; border: none; border-radius: 999px; padding: .6rem 1.1rem; font-weight: 800; cursor: pointer; color: #06251a; }
+.twin-error { position: absolute; inset: 0; display: grid; place-content: center; padding: 1rem; text-align: center; color: #f3c2c2; background: #0b1f1b; z-index: 2; line-height: 1.6; }
+.twin-marker { pointer-events: none; }
+.twin-marker span { display: inline-block; transform: translate(-50%, -190%); background: rgba(6, 37, 26, .92); color: #eaf2ec; border: 1px solid #2ee06f; border-radius: 999px; padding: 3px 9px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.twin-status, .twin-address, .twin-note { color: #bdcfc3; font-size: .88rem; line-height: 1.6; }
+.twin-address { color: #eaf2ec; }
+.twin-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; color: #bdcfc3; font-size: .85rem; }
+.twin-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.twin-swatch { display: inline-block; width: 22px; height: 4px; border-radius: 2px; background: #2ee06f; }
+.twin-swatch-lime { height: 14px; background: #2ee06f; border-radius: 3px; }
+.twin-swatch-dot { width: 12px; height: 12px; border-radius: 50%; background: #ec4899; border: 2px solid #fff; }
+.twin-attribution { color: #8fa89c; font-size: .78rem; line-height: 1.6; }
+@media (max-width: 760px) {
+  .twin { padding: 1rem; }
+  .twin-map-wrap { height: 420px; }
+  .twin-controls input[type="text"] { min-width: 0; width: 100%; }
+}

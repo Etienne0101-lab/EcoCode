@@ -9,7 +9,8 @@ import NotFound from './pages/not-found';
 import WasteIntelligencePage from './pages/WasteIntelligencePage';
 import EcoArchitectureInfographic from './components/EcoArchitectureInfographic';
 import PilotLoopInteractive from './components/PilotLoopInteractive';
-import LowerManhattanSkyline from './components/LowerManhattanSkyline';
+import DigitalTwinMap from './components/DigitalTwinMap';
+import SkylineSilhouette from './components/SkylineSilhouette';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 import PartnersPage from './pages/PartnersPage';
 import SiteNav, { HOME_SECTIONS } from './components/SiteNav';
@@ -139,6 +140,8 @@ function HomePage() {
       <main id="main-content" tabIndex={-1}>
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-art grid-lines" aria-hidden="true" />
+          <div className="hero-map" aria-hidden="true" />
+          <div className="hero-silhouette" aria-hidden="true"><SkylineSilhouette /></div>
           <div className="wrap hero-layout">
             <div className="hero-copy">
               <div className="eyebrow hero-kicker reveal"><span className="kicker-rule" /> One platform. Many city systems.</div>
@@ -245,7 +248,7 @@ function HomePage() {
             <div className="pilot-target" data-testid="status-pilot-operational-target"><span className="target-icon"><Activity size={19} /></span><span className="eyebrow">OPERATIONAL TARGET</span><strong>November 2026</strong><span className="target-note">Target milestone</span></div>
             <div className="pilot-steps">{pilotSteps.map(step => <article className="pilot-step" key={step.number} data-testid={`row-pilot-workflow-${step.number}`}><span className="step-num mono">{step.number}</span><div><h3>{step.title}</h3><p>{step.text}</p></div><ArrowDownRight className="step-arrow" size={17} /></article>)}</div>
             <div className="pilot-outcomes" data-testid="card-pilot-outcomes"><div className="outcome-intro"><span className="eyebrow">INTENDED OPERATING OUTCOMES</span><h3>Signals that support<br />day-to-day decisions.</h3></div><div className="outcome-item" data-testid="text-pilot-outcome-collection-visibility"><span className="outcome-index mono">A</span><div><b>Collection visibility</b><small>Surface bin status and service patterns for operational review.</small></div></div><div className="outcome-item" data-testid="text-pilot-outcome-coordinated-response"><span className="outcome-index mono">B</span><div><b>Coordinated response</b><small>Bring field alerts and fleet context into a shared view.</small></div></div><div className="outcome-item" data-testid="text-pilot-outcome-planning"><span className="outcome-index mono">C</span><div><b>Evidence for planning</b><small>Use accumulated signals to inform future service planning.</small></div></div></div>
-            <LowerManhattanSkyline />
+            <DigitalTwinMap />
             <PilotLoopInteractive />
           </div>
         </section>
@@ -269,6 +272,7 @@ function HomePage() {
         </section>
 
         <section className="closing">
+          <div className="closing-silhouette" aria-hidden="true"><SkylineSilhouette /></div>
           <div className="wrap closing-layout"><div className="closing-mark"><Leaf size={22} /></div><div><div className="eyebrow">A SHARED PLATFORM FOR REAL-WORLD SYSTEMS</div><h2 className="display">Start with the<br /><em>right question.</em></h2></div><div className="closing-action"><p>Explore the platform architecture, compare application concepts or open the public GitHub project.</p><a className="button button-primary" href="#applications" data-testid="link-closing-applications">Explore applications <ArrowRight size={15} /></a><a className="closing-secondary" href={REPO_URL} target="_blank" rel="noreferrer" data-testid="link-closing-github">Open the GitHub project <ArrowUpRight size={14} /></a></div></div>
         </section>
       </main>

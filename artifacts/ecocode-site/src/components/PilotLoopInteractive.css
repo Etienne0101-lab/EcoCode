@@ -34,3 +34,18 @@
 .pilot-loop-foot{font-size:.85rem !important;margin-top:1rem}
 @media(max-width:760px){.pilot-loop-body{grid-template-columns:1fr}.pilot-loop{padding:1rem}}
 @media(prefers-reduced-motion:reduce){.pilot-loop-edge{stroke-dasharray:none}}
+
+/* ---- Themed loop panel (content unchanged) ----
+   The panel keeps its paper background but gains the site's radiant
+   language: a drifting green glow at the top edge and a faint map-grid
+   texture behind the diagram, so the loop reads as part of the pilot
+   map rather than a flat card. Stage and stream icons are lucide
+   glyphs (no emoji), coloured by role. */
+.pilot-loop { position: relative; overflow: hidden; }
+.pilot-loop::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 70px; pointer-events: none; background: radial-gradient(ellipse 90% 90px at 50% 0, rgba(46, 224, 111, .22), transparent 70%); }
+.pilot-loop-svg { background-image: linear-gradient(rgba(29, 122, 79, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(29, 122, 79, .07) 1px, transparent 1px); background-size: 30px 30px; }
+.pilot-loop-pickers button { display: inline-flex; align-items: center; gap: 6px; }
+.pilot-loop-pickers button svg { flex: none; }
+.pilot-loop-gen-tag { font-size: .68rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; background: #d3a96c; color: #16211a; border-radius: 999px; padding: 2px 7px; }
+.pilot-loop-stage-label { display: flex; align-items: center; gap: 6px; }
+.pilot-loop-stage-icon { color: #1d7a4f; flex: none; }
