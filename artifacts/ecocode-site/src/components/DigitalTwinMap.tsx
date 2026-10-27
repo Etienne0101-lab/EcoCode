@@ -121,7 +121,8 @@ async function roadGeometry(points: [number, number][]): Promise<[number, number
   }
 }
 
-export default function DigitalTwinMap() {
+export default function DigitalTwinMap({ studioSignal }: { studioSignal?: import('./PipelineStudio').StudioSignal | null }) {
+  const appliedStudioNonce = useRef(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
@@ -150,6 +151,20 @@ export default function DigitalTwinMap() {
   const [playing, setPlaying] = useState(false);
   const [status, setStatus] = useState('Map loads when this panel scrolls into view.');
   const [routeMode, setRouteMode] = useState<'road' | 'straight' | ''>('');
+
+  // Phase 2: a studio build re-routes the twin to the same stream and
+  // origin, once per build. The twin's own controls still work after —
+  // the next studio build overrides again.
+  useEffect(() => {
+    if (!studioSignal || studioSignal.nonce === appliedStudioNonce.current) return;
+    appliedStudioNonce.current = studioSignal.nonce;
+    setCustomInput(studioSignal.streamText);
+    setCustomActive(studioSignal.streamText);
+    setBoroughId(studioSignal.boroughId);
+    setAddressPoint(studioSignal.addressPoint);
+    setAddressLabel(studioSignal.addressLabel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [studioSignal]);
   const [chain, setChain] = useState<Chain | null>(null);
   const [activeStage, setActiveStage] = useState<number | null>(null);
   const stageRefs = useRef<(HTMLButtonElement | null)[]>([]);

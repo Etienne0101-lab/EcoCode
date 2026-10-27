@@ -117,7 +117,8 @@ const STREAM_ICONS: Record<string, LucideIcon> = {
 // Five nodes around a loop, in Waste → Process → Resource → Demand → Facility order.
 const NODE_POS: [number, number][] = [[300, 52], [500, 150], [430, 300], [170, 300], [100, 150]];
 
-export default function PilotLoopInteractive() {
+export default function PilotLoopInteractive({ studioSignal }: { studioSignal?: import('./PipelineStudio').StudioSignal | null }) {
+  const appliedStudioNonce = useRef(0);
   const [streamId, setStreamId] = useState<string>('food');
   const [customStreams, setCustomStreams] = useState<LoopStream[]>([]);
   const allStreams = [...STREAMS, ...customStreams];
@@ -137,6 +138,16 @@ export default function PilotLoopInteractive() {
     setStreamId(generated.id);
     setPlaying(true);
   };
+
+  // Phase 2: a studio build joins the picker and starts playing, once per
+  // build (guarded by nonce — the generated id is fresh every time, so
+  // the nonce, not the id, is the dedupe key).
+  useEffect(() => {
+    if (!studioSignal || studioSignal.nonce === appliedStudioNonce.current) return;
+    appliedStudioNonce.current = studioSignal.nonce;
+    if (studioSignal.loop) handleGenerate(studioSignal.loop);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [studioSignal]);
 
   useEffect(() => {
     progressRef.current = 0;

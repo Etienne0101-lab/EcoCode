@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Activity, ArrowDownRight, ArrowRight, ArrowUpRight, BarChart3, Building2,
   Check, Cloud, Code2, Github, Layers3, Leaf,
@@ -10,6 +10,7 @@ import WasteIntelligencePage from './pages/WasteIntelligencePage';
 import EcoArchitectureInfographic from './components/EcoArchitectureInfographic';
 import PilotLoopInteractive from './components/PilotLoopInteractive';
 import DigitalTwinMap from './components/DigitalTwinMap';
+import PipelineStudio, { type StudioSignal, type StudioView } from './components/PipelineStudio';
 import SkylineSilhouette from './components/SkylineSilhouette';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 import PartnersPage from './pages/PartnersPage';
@@ -87,6 +88,11 @@ const pilotSteps = [
 ];
 
 function HomePage() {
+  // Phase 2 merge: one studio signal drives both the loop diagram and the
+  // twin map; the Diagram/Map toggle only hides a panel, never unmounts
+  // it, so each view keeps its own stage while the stream stays shared.
+  const [studioSignal, setStudioSignal] = useState<StudioSignal | null>(null);
+  const [studioView, setStudioView] = useState<StudioView>('diagram');
 
   // Homepage dark pilot only: fade sections in as they scroll into view.
   // No content is hidden by this — every section is rendered in full and
@@ -248,8 +254,20 @@ function HomePage() {
             <div className="pilot-target" data-testid="status-pilot-operational-target"><span className="target-icon"><Activity size={19} /></span><span className="eyebrow">OPERATIONAL TARGET</span><strong>November 2026</strong><span className="target-note">Target milestone</span></div>
             <div className="pilot-steps">{pilotSteps.map(step => <article className="pilot-step" key={step.number} data-testid={`row-pilot-workflow-${step.number}`}><span className="step-num mono">{step.number}</span><div><h3>{step.title}</h3><p>{step.text}</p></div><ArrowDownRight className="step-arrow" size={17} /></article>)}</div>
             <div className="pilot-outcomes" data-testid="card-pilot-outcomes"><div className="outcome-intro"><span className="eyebrow">INTENDED OPERATING OUTCOMES</span><h3>Signals that support<br />day-to-day decisions.</h3></div><div className="outcome-item" data-testid="text-pilot-outcome-collection-visibility"><span className="outcome-index mono">A</span><div><b>Collection visibility</b><small>Surface bin status and service patterns for operational review.</small></div></div><div className="outcome-item" data-testid="text-pilot-outcome-coordinated-response"><span className="outcome-index mono">B</span><div><b>Coordinated response</b><small>Bring field alerts and fleet context into a shared view.</small></div></div><div className="outcome-item" data-testid="text-pilot-outcome-planning"><span className="outcome-index mono">C</span><div><b>Evidence for planning</b><small>Use accumulated signals to inform future service planning.</small></div></div></div>
-            <DigitalTwinMap />
-            <PilotLoopInteractive />
+            <PipelineStudio
+              view={studioView}
+              onViewChange={(v) => {
+                setStudioView(v);
+                if (v === 'map') window.setTimeout(() => window.dispatchEvent(new Event('resize')), 120);
+              }}
+              onBuild={(signal) => setStudioSignal(signal)}
+            />
+            <div className={studioView === 'diagram' ? 'studio-view' : 'studio-view studio-hidden'}>
+              <PilotLoopInteractive studioSignal={studioSignal} />
+            </div>
+            <div className={studioView === 'map' ? 'studio-view' : 'studio-view studio-hidden'}>
+              <DigitalTwinMap studioSignal={studioSignal} />
+            </div>
           </div>
         </section>
 
