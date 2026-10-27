@@ -15,7 +15,7 @@
 .twin-placeholder p { color: #bdcfc3; max-width: 46ch; margin: 0; line-height: 1.6; }
 .twin-placeholder button { justify-self: center; background: #2ee06f; border: none; border-radius: 999px; padding: .6rem 1.1rem; font-weight: 800; cursor: pointer; color: #06251a; }
 .twin-error { position: absolute; inset: 0; display: grid; place-content: center; padding: 1rem; text-align: center; color: #f3c2c2; background: #0b1f1b; z-index: 2; line-height: 1.6; }
-.twin-marker { pointer-events: none; }
+.twin-marker { pointer-events: auto; cursor: pointer; }
 .twin-marker span { display: inline-block; transform: translate(-50%, -190%); background: rgba(6, 37, 26, .92); color: #eaf2ec; border: 1px solid #2ee06f; border-radius: 999px; padding: 3px 9px; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .twin-status, .twin-address, .twin-note { color: #bdcfc3; font-size: .88rem; line-height: 1.6; }
 .twin-address { color: #eaf2ec; }
