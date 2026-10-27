@@ -72,6 +72,10 @@
     "vaul": "^1.1.2",
     "vite": "catalog:",
     "wouter": "^3.3.5",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "three": "^0.180.0",
+    "earcut": "2.2.4",
+    "@types/three": "^0.180.0",
+    "@types/earcut": "^2.1.4"
   }
 }

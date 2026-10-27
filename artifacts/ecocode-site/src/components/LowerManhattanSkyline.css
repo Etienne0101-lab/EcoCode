@@ -1,0 +1,123 @@
+/* LowerManhattanSkyline — dark 3D panel for the homepage pilot section.
+   Scoped lm- classes only, so nothing here leaks into the rest of the site.
+   NOTE (Kepler lesson): the main app's styles.css paints EVERY canvas pale
+   (#fbfdfb). The override below keeps this panel's canvases transparent so
+   the WebGL scene, not the stylesheet, decides what the stage looks like. */
+.lm-skyline {
+  margin: 1.2rem 0 0;
+  border: 1px solid #1d403b;
+  border-radius: 14px;
+  background: #04140f;
+  color: #f2f7ef;
+  padding: 1rem;
+}
+.lm-skyline-label {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+}
+.lm-skyline-caption {
+  color: #a9c0b0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.3rem 0 0.8rem;
+  max-width: 72ch;
+}
+.lm-stage {
+  position: relative;
+  height: 560px;
+  min-height: 420px;
+  border: 1px solid #1d403b;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0a231a;
+}
+.lm-stage canvas {
+  display: block;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  touch-action: none;
+}
+.lm-stage-note {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  color: #a9c0b0;
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+.lm-stage-error {
+  flex-direction: column;
+  gap: 0.8rem;
+  pointer-events: auto;
+  color: #f2f7ef;
+}
+.lm-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin: 0.8rem 0 0;
+}
+.lm-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #2ee06f;
+  border-radius: 999px;
+  background: #1d7a4f;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.lm-btn:not(.primary) {
+  background: transparent;
+  color: #f2f7ef;
+  border-color: #3a5a4a;
+}
+.lm-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.lm-orbit {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #a9c0b0;
+}
+.lm-hint {
+  font-size: 0.85rem;
+  color: #a9c0b0;
+}
+.lm-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem;
+  margin: 0.8rem 0 0;
+}
+.lm-stats > div {
+  border: 1px solid #1d403b;
+  border-radius: 8px;
+  padding: 0.7rem 0.8rem;
+  background: #0a231a;
+}
+.lm-stats b {
+  display: block;
+  font-size: 1.1rem;
+  color: #4bf08a;
+}
+.lm-stats span {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a9c0b0;
+}
+@media (max-width: 760px) {
+  .lm-stage {
+    height: 440px;
+  }
+}
