@@ -42,7 +42,7 @@ type Category = {
 
 const CATEGORIES: Category[] = [
   {
-    key: 'organics', icon: 'leaf', match: /\b(food|organic|kitchen|restaurant|cafeteria|grocery|produce|bread|fruit|vegetable)\b/i,
+    key: 'organics', icon: 'leaf', match: /\b(food|organic|kitchen|restaurant|cafeteria|grocery|produce|bread|fruit|vegetable|cooking|grease|fats|fog)\b/i,
     process: 'Anaerobic digestion', resource: 'Biogas', demand: 'Energy buyer', facility: 'AD plant (illustrative)',
     processNote: 'Illustrative digestion pathway for organic material.',
     resourceNote: 'Biogas captured for heat, power or vehicle fuel in this illustrative pathway.',

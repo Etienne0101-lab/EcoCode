@@ -82,7 +82,8 @@ export default function PipelineStudio({
         geoNote = ' Address lookup failed, so the pipeline starts at the borough centre instead.';
       }
     }
-    const loop = generateLoop(text);
+    const boroughLabel = BOROUGHS.find((b) => b.id === boroughId)?.label ?? boroughId;
+    const loop = generateLoop(text, query || boroughLabel);
     onBuild({
       nonce: Date.now(),
       streamText: text,
