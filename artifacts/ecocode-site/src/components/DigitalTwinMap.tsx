@@ -456,6 +456,8 @@ export default function DigitalTwinMap({ studioSignal }: { studioSignal?: import
       if (key === 'tonnage') hide('tonnage-circles');
       if (key === 'throughput') hide('throughput-circles');
       if (key === 'districts') { hide('districts-fill'); hide('districts-line'); }
+      // No layer left on: clear the caption so it can't describe a hidden layer.
+      if (!Object.entries(layers).some(([k, v]) => k !== key && v)) setLayerNote('');
       return;
     }
     try {
