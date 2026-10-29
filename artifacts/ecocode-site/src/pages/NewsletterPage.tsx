@@ -317,7 +317,7 @@ export default function NewsletterPage() {
         </section>
       </main>
 
-      <SiteFooter onHome={false} topHref="#nl-top" lightAbove />
+      <SiteFooter onHome={false} topHref="#nl-top" />
     </div>
   );
 }
