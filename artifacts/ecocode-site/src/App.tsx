@@ -14,6 +14,7 @@ import PipelineStudio, { type StudioSignal, type StudioView } from './components
 import SkylineSilhouette from './components/SkylineSilhouette';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 import PartnersPage from './pages/PartnersPage';
+import NewsletterPage from './pages/NewsletterPage';
 import SiteNav, { HOME_SECTIONS } from './components/SiteNav';
 import SiteFooter from './components/SiteFooter';
 
@@ -30,6 +31,10 @@ const wasteMetadata = {
 const kgMetadata = {
   title: 'Waste-to-Resource Knowledge Graph | EcoCode LLC',
   description: 'The W2RKG is EcoCode’s semantic engine: a knowledge graph mapping waste types, processes, resources, facilities, constraints and demand into real-time circularity intelligence.',
+};
+const newsletterMetadata = {
+  title: 'What It Can Become — The EcoCode Newsletter | EcoCode LLC',
+  description: 'Issue 001 and the archive of the EcoCode newsletter: milestones from the platform, the Waste Intelligence Platform and the Waste-to-Resource Knowledge Graph, each linked to the thing itself.',
 };
 const partnersMetadata = {
   title: 'Partners: EcoGreen Biotech | EcoCode LLC',
@@ -311,8 +316,9 @@ function RouteMetadata({ pathname }: { pathname: string }) {
     const isWastePage = normalizedPath === '/waste-intelligence';
     const isKgPage = normalizedPath === '/knowledge-graph';
     const isPartnersPage = normalizedPath === '/partners';
-    const isPublicRoute = isHome || isWastePage || isKgPage || isPartnersPage;
-    const metadata = isWastePage ? wasteMetadata : isKgPage ? kgMetadata : isPartnersPage ? partnersMetadata : homeMetadata;
+    const isNewsletterPage = normalizedPath === '/newsletter';
+    const isPublicRoute = isHome || isWastePage || isKgPage || isPartnersPage || isNewsletterPage;
+    const metadata = isWastePage ? wasteMetadata : isKgPage ? kgMetadata : isPartnersPage ? partnersMetadata : isNewsletterPage ? newsletterMetadata : homeMetadata;
     const canonicalUrl = `${SITE_ORIGIN}${normalizedPath === '/' ? '/' : normalizedPath}`;
 
     document.title = isPublicRoute ? metadata.title : 'Page not found | EcoCode LLC';
@@ -348,6 +354,7 @@ function AppRoutes() {
         <WouterRoute path="/waste-intelligence" component={WasteIntelligencePage} />
         <WouterRoute path="/knowledge-graph" component={KnowledgeGraphPage} />
         <WouterRoute path="/partners" component={PartnersPage} />
+        <WouterRoute path="/newsletter" component={NewsletterPage} />
         <WouterRoute path="/" component={HomePage} />
         <WouterRoute component={NotFound} />
       </Switch>

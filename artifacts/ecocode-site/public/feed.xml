@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>What It Can Become — The EcoCode Newsletter</title>
+    <link>https://etienne0101-lab.github.io/EcoCode/newsletter</link>
+    <description>Milestones from the EcoCode platform, the Waste Intelligence Platform, and the Waste-to-Resource Knowledge Graph — each one linked to the thing itself.</description>
+    <language>en-us</language>
+    <item>
+      <title>Issue 001 — What it can become.</title>
+      <link>https://etienne0101-lab.github.io/EcoCode/newsletter</link>
+      <guid>https://etienne0101-lab.github.io/EcoCode/newsletter#issue-001</guid>
+      <pubDate>Wed, 28 Oct 2026 12:00:00 GMT</pubDate>
+      <description>Everything the platform became in its first ten days on the open web: a site, a graph, a twin, and the machinery underneath. Ten days, five threads, thirteen milestones — from the GitHub Pages launch to the Pipeline Studio and the three data layers.</description>
+    </item>
+  </channel>
+</rss>

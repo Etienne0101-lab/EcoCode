@@ -5,7 +5,7 @@ import './SiteFooter.css';
 
 /**
  * Shared site footer — the same three columns on every page, mirroring
- * the integrated header: EXPLORE (homepage sections), PAGES (all four
+ * the integrated header: EXPLORE (homepage sections), PAGES (all five
  * pages), PROJECT (GitHub, live web app, EcoGreen Biotech). On subpages,
  * EXPLORE links are wouter Links to "/#section" (same landing behaviour
  * as the header); on the homepage they are plain in-page anchors.
@@ -30,6 +30,7 @@ export default function SiteFooter({ onHome, topHref, lightAbove = false }: { on
           <Link href="/waste-intelligence" data-testid="link-footer-waste-intelligence">Waste Intelligence page <ArrowRight size={12} /></Link>
           <Link href="/knowledge-graph" data-testid="link-footer-knowledge-graph">Knowledge Graph page <ArrowRight size={12} /></Link>
           <Link href="/partners" data-testid="link-footer-partners">Partners page <ArrowRight size={12} /></Link>
+          <Link href="/newsletter" data-testid="link-footer-newsletter">Newsletter <ArrowRight size={12} /></Link>
         </div>
         <div className="sn-footer-col">
           <span className="sn-footer-eyebrow">Project</span>

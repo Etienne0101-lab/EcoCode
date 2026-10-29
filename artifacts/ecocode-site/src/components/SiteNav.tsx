@@ -8,6 +8,7 @@ import './SiteNav.css';
  *
  * Two tiers, one bar:
  *   1. Site pages: Home, Waste Intelligence, Knowledge Graph, Partners,
+ *      Newsletter,
  *      plus the public GitHub project (the live web app lives in the
  *      footer and on the Waste Intelligence page, so the bar stays short).
  *   2. On this page: the current page's sections, so every titled section
@@ -28,7 +29,7 @@ export const REPO_URL = 'https://github.com/EcoCode-Smart-City-Infrastructure/wa
 export const WEB_APP_URL = 'https://ecocode-smart-city-infrastructure.github.io/waste-intelligence-platform/';
 export const ECOGREEN_URL = 'https://ecogreenbiotech.com/';
 
-export type SitePageId = 'home' | 'waste' | 'knowledge' | 'partners';
+export type SitePageId = 'home' | 'waste' | 'knowledge' | 'partners' | 'newsletter';
 
 export const HOME_SECTIONS: ReadonlyArray<readonly [string, string]> = [
   ['Approach', '#approach'],
@@ -44,6 +45,7 @@ const SITE_PAGES: ReadonlyArray<readonly [string, string, SitePageId]> = [
   ['Waste Intelligence', '/waste-intelligence', 'waste'],
   ['Knowledge Graph', '/knowledge-graph', 'knowledge'],
   ['Partners', '/partners', 'partners'],
+  ['Newsletter', '/newsletter', 'newsletter'],
 ];
 
 export function SiteWordmark({ light = false }: { light?: boolean }) {
