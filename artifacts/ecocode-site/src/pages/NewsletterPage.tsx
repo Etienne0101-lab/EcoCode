@@ -64,7 +64,48 @@ const GROUPS: { id: string; index: string; title: string; intro: string; items: 
   },
 ];
 
+
+type WireItem = { date: string; title: string; copy: string; tag?: string; source?: string; link?: { label: string; href: string; external?: boolean } };
+
+const WIRE_RECENT: WireItem[] = [
+  { date: '28 Oct 2026', title: 'This newsletter launches — with a real signup', copy: 'Issue 001 goes live with its archive, and the Subscribe section actually subscribes: signups arrive as email to EcoCode’s public contact inbox, with an RSS feed alongside.', link: { label: 'Subscribe below', href: '#nl-subscribe' } },
+  { date: '28 Oct 2026', title: 'Nexus dashboard overhaul verified live', copy: 'The Waste Intelligence web app’s overhaul33b is confirmed live: the AI Insights rail, the five-KPI row and the workspace sidebar, with no desktop defects found.', link: { label: 'Open the live web app', href: WEB_APP_URL, external: true } },
+  { date: '27 Oct 2026', title: 'Twin data layers go live', copy: 'Three optional layers, all off by default: live borough tonnage for September 2026, documented facility throughput, and all 59 DSNY district boundaries — each labelled with its dataset.', link: { label: 'Try the twin', href: '/#pilot' } },
+  { date: '27 Oct 2026', title: 'Pipeline Studio: one build, two views', copy: 'A single builder now drives both the loop diagram and the twin map from one waste stream and one address — the loop and the map can no longer disagree about what stream they show.', link: { label: 'Try the twin', href: '/#pilot' } },
+  { date: '27 Oct 2026', title: 'EcoCode page published on ecogreenbiotech.com', copy: 'The EcoCode page goes live on the EcoGreen Biotech site with its header navigation and buttons verified from the public page.', link: { label: 'See it on ecogreenbiotech.com', href: ECOGREEN_ECOCODE_URL, external: true } },
+  { date: '28 Oct 2026', title: 'EcoGreen social relaunch posts go live', copy: 'Welcome and Biomass posts publish on the EcoGreen Innovations page, the first pinned — while the page rename still waits on a password Facebook will accept.', link: { label: 'The partner story', href: '/partners' } },
+];
+
+const WIRE_WORKS: WireItem[] = [
+  { date: 'Next', tag: 'Next', title: 'A backend with a public address', copy: 'The web app’s Connect panel already accepts a backend URL, so the day a hosted backend exists, no app change is needed. Hosting on a free platform is the next tangible step.' },
+  { date: '29 Oct 2026', tag: 'In progress', title: 'The Oley meeting — and whatever it decides', copy: 'Stephen meets Jeffrey Brooks in Oley, Pennsylvania to discuss a proposed EcoGreen × Oley partnership. Issue 002 reports the outcome as it happened, proposed or agreed.' },
+  { date: 'Nov 2026', tag: 'Target', title: 'The NYC pilot operational target', copy: 'November 2026 remains an operational target for the pilot — not a promised launch date. The letter will say when it moves from target to plan.' },
+  { date: 'Awaiting verification', tag: 'Awaiting verification', title: 'Five marine transfer station pins', copy: 'North Shore, Hamilton Avenue, East 91st, Southwest Brooklyn and the Staten Island compost site all have verified addresses and no verified coordinates yet. They stay as addresses in print until a source pins them.' },
+  { date: 'Awaiting check', tag: 'Awaiting check', title: 'Phone-width proof for the newest releases', copy: 'The studio, the twin layers and the newsletter are desktop-verified; their phone-width behaviour still awaits a real phone check.' },
+  { date: 'One click', tag: 'Awaiting action', title: 'Newsletter signup activation', copy: 'The signup form is live and inspected, but delivery waits on one activation click in the contact inbox — the first test signup triggers it.' },
+];
+
+const WIRE_TRENDING: WireItem[] = [
+  { date: '26 Oct 2026', title: 'PET bottles, upcycled in one step', copy: 'Researchers in South Korea and Taiwan report a single-atom catalyst that converts ethylene glycol — a PET breakdown byproduct — directly into formate, an industrial feedstock, skipping costly purification.', source: 'Polyester Time, 26 Oct 2026', link: { label: 'Read the report', href: 'https://www.polyestertime.com/pet-plastic-upcycling-catalyst/', external: true } },
+  { date: '27 Oct 2026', title: 'Organic waste becomes fish feed — via biogas', copy: 'University of Queensland researchers patent a process that ferments organic waste into biogas, then grows single-cell protein from the CO₂ and methane as a fishmeal alternative for aquaculture.', source: 'Phys.org, Oct 2026', link: { label: 'Read the report', href: 'https://phys.org/news/2026-10-fishmeal-alternative-aims-marine-wildlife.html', external: true } },
+  { date: '23 Oct 2026', title: 'An embodied-AI robot sorts real mixed waste', copy: 'DataBeyond’s dual-arm PICKINGMAN runs on a live sorting line in Dongguan at up to 3,600 picks per hour — PET, PP, PE, aluminium and glass — with the full line cutting waste about 35% and recovering about 25%.', source: 'TNGlobal, 23 Oct 2026', link: { label: 'Read the report', href: 'https://technode.global/prnasia/databeyond-showcases-pickingman-in-global-livestream-from-operating-waste-sorting-facility/', external: true } },
+  { date: '13 Oct 2026', title: 'Kubota’s full material recovery hub', copy: 'Kubota launches a prefecture-scale system that sorts food waste and plastics out of combustible waste — food to bioenergy and compost, plastics to recycled material, ash to slag and metals — aiming for zero final disposal.', source: 'Circular Economy Hub Japan, 13 Oct 2026', link: { label: 'Read the report', href: 'https://cehub.jp/en/news-en/kubota-to-sort-food-waste-and-plastics-from-combustible-waste-for-full-material-recovery-exploring-regional-models-in-yokohama-city-and-tokushima-prefecture/', external: true } },
+  { date: '8 Oct 2026', title: 'Waste to jet fuel, via AI and microbes', copy: 'Cambridge’s Neela Biotech raises £2.1m to turn food, agricultural and forestry waste into sustainable aviation fuel feedstock, designed to bolt onto existing anaerobic digestion plants.', source: 'Big Up Britain, 8 Oct 2026', link: { label: 'Read the report', href: 'https://bigupbritain.co.uk/2026/10/08/cambridge-biotech-secures-2-1m-to-turn-everyday-waste-into-jet-fuel/', external: true } },
+  { date: '30 Sep 2026', title: 'A first solvent route for PPS plastic', copy: 'Toray reports the industry’s first solvent-based recycling for polyphenylene sulfide — a super-engineering plastic previously near-impossible to recover — dissolving and re-crystallising it without breaking the polymer down.', source: 'Chemical Engineering, 30 Sep 2026', link: { label: 'Read the report', href: 'https://www.chemengonline.com/toray-industries-develops-first-solvent-based-recycling-technology-for-recovering-pps-from-waste/', external: true } },
+  { date: '21 Oct 2026', title: 'Hemp seed waste makes stronger bioplastic', copy: 'Modified hemp protein films gain up to 86% in strength and cut water-vapour permeability about 38% — and over 60% disintegrated in a 40-day soil burial test. Lab results so far, not yet commercial proof.', source: 'The Marijuana Herald, 21 Oct 2026', link: { label: 'Read the report', href: 'https://themarijuanaherald.com/2026/10/study-finds-hemp-seed-waste-can-be-turned-into-stronger-biodegradable-plastic-boosting-strength-by-86/', external: true } },
+];
+
+const WIRE_TABS = [
+  { id: 'recent' as const, label: 'Recent developments', note: 'From EcoCode’s own releases — every item links to the thing itself.' },
+  { id: 'works' as const, label: 'What’s in the works', note: 'Statuses as of 28 October 2026. Targets are labelled targets; unverified items stay unverified.' },
+  { id: 'trending' as const, label: 'Trending', note: 'Outside EcoCode: cutting-edge developments across the eco-technology sphere, curated 28 October 2026 from public reporting. Links leave this site; nothing here is EcoCode’s work.' },
+];
+
 export default function NewsletterPage() {
+  const [wireTab, setWireTab] = useState<'recent' | 'works' | 'trending'>('recent');
+  const wireItems = wireTab === 'recent' ? WIRE_RECENT : wireTab === 'works' ? WIRE_WORKS : WIRE_TRENDING;
+  const wireNote = WIRE_TABS.find((t) => t.id === wireTab)?.note ?? '';
+
   const [subscribed] = useState(
     () => typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('subscribed') === '1',
   );
@@ -77,7 +118,7 @@ export default function NewsletterPage() {
           <a href="/feed.xml" data-testid="link-nl-top-rss">Follow via RSS <Rss size={13} /></a>
         </div>
       </div>
-      <SiteNav current="newsletter" sections={[['Issue 001', '#nl-issue'], ['Milestones', '#nl-timeline'], ['Deep dive', '#nl-deepdive'], ["What's next", '#nl-next'], ['Archive', '#nl-archive'], ['Subscribe', '#nl-subscribe']]} />
+      <SiteNav current="newsletter" sections={[['Issue 001', '#nl-issue'], ['The Wire', '#nl-wire'], ['Milestones', '#nl-timeline'], ['Deep dive', '#nl-deepdive'], ["What's next", '#nl-next'], ['Archive', '#nl-archive'], ['Subscribe', '#nl-subscribe']]} />
 
       <main id="main-content" tabIndex={-1}>
         <header className="nl-hero" id="nl-issue">
@@ -112,6 +153,39 @@ export default function NewsletterPage() {
               what shipped, what it is for, and what we are deliberately not claiming yet.
               If a milestone matters, it links to the thing itself.
             </p>
+          </div>
+        </section>
+
+        <section className="nl-section nl-wire" id="nl-wire">
+          <div className="nl-wrap">
+            <span className="nl-eyebrow nl-section-index">The Wire · Updated 28 Oct 2026</span>
+            <h2>Three feeds, <em>one page.</em></h2>
+            <div className="nl-tabs" role="tablist" aria-label="Newsletter feeds">
+              {WIRE_TABS.map((tab) => (
+                <button key={tab.id} type="button" role="tab" aria-selected={wireTab === tab.id}
+                  className={wireTab === tab.id ? 'nl-tab active' : 'nl-tab'}
+                  onClick={() => setWireTab(tab.id)} data-testid={`button-nl-tab-${tab.id}`}>
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            <p className="nl-wire-note">{wireNote}</p>
+            <div className="nl-feed" data-testid={`feed-nl-${wireTab}`}>
+              {wireItems.map((item) => (
+                <article className="nl-feed-item" key={item.title}>
+                  <div className="nl-feed-head">
+                    <span className="nl-feed-date">{item.date}</span>
+                    {item.tag && <span className="nl-feed-tag">{item.tag}</span>}
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                  {item.source && <span className="nl-feed-source">Source: {item.source}</span>}
+                  {item.link && (item.link.external
+                    ? <a className="nl-inline-link" href={item.link.href} target="_blank" rel="noreferrer">{item.link.label} <ArrowUpRight size={14} /></a>
+                    : <Link className="nl-inline-link" href={item.link.href}>{item.link.label} <ArrowRight size={14} /></Link>)}
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 

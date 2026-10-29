@@ -107,3 +107,19 @@
   .nl-items { margin-left: 12px; padding-left: 22px; }
   .nl-item-dot { left: -28px; }
 }
+
+/* ---- The Wire: three independent feeds under one tab bar ---- */
+.nl-wire { border-bottom: 1px solid var(--nl-line); }
+.nl-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.nl-tab { min-height: 44px; padding: 0 20px; border: 1px solid var(--nl-line); border-radius: 999px; background: transparent; color: var(--nl-forest); font-weight: 700; font-size: 14px; cursor: pointer; }
+.nl-tab.active { background: var(--nl-forest); color: #f5f2e8; border-color: var(--nl-forest); }
+.nl-wire-note { color: var(--nl-muted); line-height: 1.65; max-width: 720px; margin: 18px 0 0; }
+.nl-feed { display: grid; gap: 16px; margin-top: 24px; }
+.nl-feed-item { background: #fffdf6; border: 1px solid var(--nl-line); border-radius: 16px; padding: 24px 28px; }
+.nl-feed-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.nl-feed-date { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--nl-green); }
+.nl-feed-tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--nl-forest); background: var(--nl-sage); border-radius: 999px; padding: 3px 10px; }
+.nl-feed-item h3 { font: 700 20px/1.3 'DM Sans', sans-serif; color: var(--nl-forest); margin: 10px 0 0; }
+.nl-feed-item p { line-height: 1.65; color: var(--nl-muted); margin: 8px 0 0; max-width: 760px; }
+.nl-feed-source { display: block; margin-top: 10px; font-size: 12px; color: var(--nl-muted); }
+.nl-feed-item .nl-inline-link { margin-top: 12px; }
