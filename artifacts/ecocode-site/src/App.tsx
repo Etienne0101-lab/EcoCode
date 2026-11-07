@@ -290,7 +290,7 @@ function HomePage() {
         <section className="about section-pad" id="about">
           <div className="wrap about-layout">
             <div><div className="eyebrow section-kicker"><span>06</span> / WHO WE ARE</div><h2 className="display">Built around<br /><em>public systems.</em></h2></div>
-            <div className="about-copy"><p className="about-lede">EcoCode LLC is an environmental technology company founded by EcoGreen Biotech LLC, led by CEO Charles Craun, in collaboration with NGHI.</p><p>Its mission is to help municipalities and operators make environmental and infrastructure operations more measurable through modular connected sensing, open software, cloud telemetry, analytics and reporting designed to be auditable.</p><div className="about-values"><span><Waves size={15} /> Practical field context</span><span><Cloud size={15} /> Connected by design</span><span><ShieldCheck size={15} /> Evidence before claims</span></div></div>
+            <div className="about-copy"><p className="about-lede">EcoCode LLC is an environmental technology company founded by Charles Craun, CEO of EcoGreen Biotech, in collaboration with Travis Cockerham, President of New Green Hemp, Inc. (NGHI).</p><p>Its mission is to help municipalities and operators make environmental and infrastructure operations more measurable through modular connected sensing, open software, cloud telemetry, analytics and reporting designed to be auditable.</p><div className="about-values"><span><Waves size={15} /> Practical field context</span><span><Cloud size={15} /> Connected by design</span><span><ShieldCheck size={15} /> Evidence before claims</span></div></div>
           </div>
         </section>
 

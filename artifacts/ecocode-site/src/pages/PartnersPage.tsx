@@ -133,7 +133,7 @@ export default function PartnersPage() {
               <div className="pt-signal-lead"><span className="pt-mono">FOCUS AREAS</span><strong>Five fields,<br />one direction.</strong></div>
               {focusAreas.map((area) => <div key={area.index}><span className="pt-small-index">{area.index}</span><h3>{area.title}</h3><p>{area.text}</p></div>)}
             </div>
-            <p className="pt-inspiration-note">EcoCode LLC was founded by EcoGreen Biotech LLC, led by CEO Charles Craun, in collaboration with NGHI — the partnership on this page is foundational, not decorative.</p>
+            <p className="pt-inspiration-note">EcoCode LLC was founded by Charles Craun, CEO of EcoGreen Biotech, in collaboration with Travis Cockerham, President of New Green Hemp, Inc. (NGHI) — the partnership on this page is foundational, not decorative.</p>
           </div>
         </section>
 
@@ -226,7 +226,7 @@ export default function PartnersPage() {
               <div className="pt-repo-name">EcoGreen<br />Biotech</div>
               <p>Biotechnology, sustainable materials, environmental engineering and regenerative systems design — the scientific foundation behind EcoCode’s Smart City systems.</p>
               <div className="pt-repo-rule" />
-              <div className="pt-repo-detail"><span>Founded by</span><b>ECOGREEN BIOTECH LLC</b></div>
+              <div className="pt-repo-detail"><span>Founded by</span><b>CHARLES CRAUN & TRAVIS COCKERHAM</b></div>
               <div className="pt-repo-detail"><span>Leadership</span><b>CEO CHARLES CRAUN</b></div>
               <a href={ECOGREEN_URL} target="_blank" rel="noopener noreferrer" data-testid="link-pt-partner-card">Visit ecogreenbiotech.com <ArrowUpRight size={14} /></a>
             </aside>
